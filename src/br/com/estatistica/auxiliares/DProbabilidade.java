@@ -51,7 +51,7 @@ public class DProbabilidade extends javax.swing.JDialog {
         btCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Probabilidade");
+        setTitle("Probabilidade (P)");
         setModal(true);
 
         plCampos.setBackground(new java.awt.Color(255, 255, 255));

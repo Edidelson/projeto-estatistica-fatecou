@@ -53,10 +53,17 @@ public class FLogin extends javax.swing.JFrame {
                 DAOUsuario.setUsuarioAtual(usuario);
                 dispose();
                 logger.log(Level.INFO, "Usuário {0}, entrou no sistema", usuario.getNome());
-            } else {
+                JOptionPane.showMessageDialog(null, "Usuário logado");
+            } 
+            else if (tfUsuario.getText().equals("") && String.valueOf(pfSenha.getPassword()).isEmpty()){
+               JOptionPane.showMessageDialog(null, "Entre com usuário e senha"); 
+            
+            } 
+            else {
                 JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
                 tfUsuario.requestFocus();
             }
+            
         } catch (Exception ex) {
             ex.printStackTrace();
             Util.logException(ex);
