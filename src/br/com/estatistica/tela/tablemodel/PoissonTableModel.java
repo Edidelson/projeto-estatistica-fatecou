@@ -5,6 +5,7 @@
 package br.com.estatistica.tela.tablemodel;
 
 import br.com.estatistica.modelo.Poisson;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -57,7 +58,7 @@ public class PoissonTableModel extends RowTableModel{
             case 3:
                 return String.class;
             case 4:
-                return Double.class;
+                return BigDecimal.class;
                 default:
                     return null;
         }

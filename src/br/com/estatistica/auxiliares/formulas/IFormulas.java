@@ -11,4 +11,8 @@ package br.com.estatistica.auxiliares.formulas;
 public interface IFormulas {
  
     int fatorial(int x);
+    
+    double Px(int x, double k);
+    
+    double binomial (int n, int x, int k, double p);
 }

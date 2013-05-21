@@ -19,4 +19,20 @@ public class Calculo implements IFormulas {
         return fat;
     }
     
+    @Override
+    public double Px(int x, double k) {
+        double e = 2.718281828459045235360287;
+
+        double px = (Math.pow(e, -k) * Math.pow(k, x)) / fatorial(x);
+        return px;
+    }
+    
+    @Override
+    public double binomial (int n, int x, int k, double p){
+        
+        double bin = (double) (((fatorial(n)/ fatorial(k)) * fatorial(n-k))*(Math.pow(p,k) * Math.pow(1-p,n-k)));
+        return bin;
+    }
+    
 }
+
