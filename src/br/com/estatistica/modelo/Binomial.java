@@ -41,6 +41,16 @@ public class Binomial implements Serializable, IModelo {
     private Condicao condicao;
     @Column(name="vl_resultado")
     private Double resultado;
+    @Column(name="tx_observação")
+    private String observacao;
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
     
     @Override
     public Object getCodigo() {

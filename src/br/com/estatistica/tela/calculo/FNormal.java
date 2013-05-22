@@ -10,13 +10,12 @@ import javax.swing.event.ListSelectionListener;
 /**
  * @author Edidelson
  */
-public class FNormal extends FrameGenerico{
+public class FNormal extends FrameGenerico {
 
     public FNormal() {
         initComponents();
         setLocationRelativeTo(null);
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -717,23 +716,18 @@ public class FNormal extends FrameGenerico{
 
     @Override
     public void iniciar() {
-        
     }
 
-    
     @Override
     public void inserirOuAlterar() {
-    
     }
 
     @Override
     public void preencherCampos(IModelo m) {
-    
     }
 
     @Override
     public void preencherTabela(int linha, IModelo i) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
 }

@@ -4,6 +4,9 @@
  */
 package br.com.estatistica.auxiliares.formulas;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 /**
  *
  * @author Edidelson
@@ -11,28 +14,28 @@ package br.com.estatistica.auxiliares.formulas;
 public class Calculo implements IFormulas {
 
     @Override
-    public int fatorial(int x) {
-        int fat = 1;
-        for (int i = 1; i <= x; i++) {
-            fat *= i;
+    public BigInteger fatorial(int x) {
+        BigInteger fat = BigInteger.ONE;
+        BigInteger bigInteger = BigInteger.valueOf(x);
+        for (int i = 1; i <= bigInteger.intValue(); i++) {
+            fat = fat.multiply(BigInteger.valueOf(i));
         }
         return fat;
     }
-    
+
     @Override
     public double Px(int x, double k) {
-        double e = 2.718281828459045235360287;
-
-        double px = (Math.pow(e, -k) * Math.pow(k, x)) / fatorial(x);
+        double e = StrictMath.E;
+        double fatorial = fatorial(x).doubleValue();
+        double px = (Math.pow(e, -k) * Math.pow(k, x)) / fatorial;
         return px;
     }
-    
+
     @Override
-    public double binomial (int n, int x, int k, double p){
-        
-        double bin = (double) (((fatorial(n)/ fatorial(k)) * fatorial(n-k))*(Math.pow(p,k) * Math.pow(1-p,n-k)));
+    public double binomial(int n, int k, double p) {
+        BigDecimal combinacao = new BigDecimal((fatorial(n).divide((fatorial(k)).multiply(fatorial(n - k)))));
+        BigDecimal calc = new BigDecimal(Math.pow(p, k) * Math.pow(1 - p, n - k));
+        double bin = combinacao.multiply(calc).doubleValue();
         return bin;
     }
-    
 }
-

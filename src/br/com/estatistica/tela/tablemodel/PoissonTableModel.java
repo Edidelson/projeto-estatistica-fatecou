@@ -40,7 +40,7 @@ public class PoissonTableModel extends RowTableModel{
             case 3:
                 return poisson.getCondicao();
             case 4:
-                return poisson.getResultado();
+                return poisson.getResultado().doubleValue();
                 default:
                     return "";
         }

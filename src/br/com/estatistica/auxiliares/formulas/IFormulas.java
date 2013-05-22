@@ -4,15 +4,17 @@
  */
 package br.com.estatistica.auxiliares.formulas;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author Edidelson
  */
 public interface IFormulas {
- 
-    int fatorial(int x);
-    
+
+    BigInteger fatorial(int x);
+
     double Px(int x, double k);
-    
-    double binomial (int n, int x, int k, double p);
+
+    double binomial(int n, int k, double p);
 }

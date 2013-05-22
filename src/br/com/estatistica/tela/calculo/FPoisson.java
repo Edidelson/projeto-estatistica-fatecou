@@ -3,6 +3,7 @@ package br.com.estatistica.tela.calculo;
 import br.com.estatistica.auxiliares.DMedia;
 import br.com.estatistica.auxiliares.IValores;
 import br.com.estatistica.auxiliares.formulas.Calculo;
+import br.com.estatistica.dao.DAOGenerico;
 import br.com.estatistica.dao.DAOPoisson;
 import br.com.estatistica.modelo.Binomial;
 import br.com.estatistica.modelo.IModelo;
@@ -89,6 +90,9 @@ public class FPoisson extends FrameGenerico implements IValores {
         tfNumeroTentativas = new com.zap.arca.JATextField(10,0);
         tfMedia = new com.zap.arca.JADecimalFormatField();
         jButton1 = new javax.swing.JButton();
+        tfPercentual = new com.zap.arca.JADecimalFormatField();
+        lbResultado1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         mbPrincipal = new javax.swing.JMenuBar();
@@ -315,11 +319,24 @@ public class FPoisson extends FrameGenerico implements IValores {
         tfNumeroTentativas.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jButton1.setText("CALCULAR");
+        jButton1.setOpaque(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        tfPercentual.setEnabled(false);
+        tfPercentual.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tfPercentual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPercentualActionPerformed(evt);
+            }
+        });
+
+        lbResultado1.setText("Percentual:");
+
+        jLabel3.setText("%");
 
         javax.swing.GroupLayout plCamposLayout = new javax.swing.GroupLayout(plCampos);
         plCampos.setLayout(plCamposLayout);
@@ -329,27 +346,34 @@ public class FPoisson extends FrameGenerico implements IValores {
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plCamposLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(lbResultado)))
-                    .addComponent(jLabel4)
-                    .addGroup(plCamposLayout.createSequentialGroup()
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(plCamposLayout.createSequentialGroup()
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7)
                                 .addComponent(lbCodigo)
-                                .addGap(91, 91, 91))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel4)
+                                .addComponent(lbResultado))
+                            .addGroup(plCamposLayout.createSequentialGroup()
+                                .addComponent(lbResultado1)
+                                .addGap(72, 72, 72)))
                         .addGap(10, 10, 10)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(plCamposLayout.createSequentialGroup()
-                                .addComponent(tfMedia, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(tfNumeroTentativas, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(tfNumeroTentativas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tfMedia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbCondicao, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tfResultado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
+                                .addGap(0, 0, 0)
+                                .addComponent(btProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(plCamposLayout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(147, 147, 147)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
@@ -362,7 +386,8 @@ public class FPoisson extends FrameGenerico implements IValores {
                     .addComponent(lbCodigo)
                     .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(plCamposLayout.createSequentialGroup()
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfNumeroTentativas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,14 +399,18 @@ public class FPoisson extends FrameGenerico implements IValores {
                                 .addComponent(jLabel4)
                                 .addComponent(tfMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbResultado)))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbResultado))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbResultado1)
+                            .addComponent(jLabel3))))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -578,12 +607,11 @@ public class FPoisson extends FrameGenerico implements IValores {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOkActionPerformed
-       if (verificarCampos(camposVerificar)) {
+        if (verificarCampos(camposVerificar)) {
             inserirOuAlterar();
             limparCampos();
         }
         actionMenu(INCLUSAO);
-        JOptionPane.showMessageDialog(null, "Salvo com sucesso");
     }//GEN-LAST:event_btOkActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
@@ -643,14 +671,13 @@ public class FPoisson extends FrameGenerico implements IValores {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         tfResultado.setValue(calcular().doubleValue());
+        tfPercentual.setValue(calcular()*100);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tfResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfResultadoActionPerformed
-
     }//GEN-LAST:event_tfResultadoActionPerformed
 
     private void cbCondicaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbCondicaoFocusLost
-
     }//GEN-LAST:event_cbCondicaoFocusLost
 
     private void cbCondicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCondicaoActionPerformed
@@ -660,6 +687,10 @@ public class FPoisson extends FrameGenerico implements IValores {
     private void btProbabilidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProbabilidadeActionPerformed
         new DMedia(this, true).setVisible(true);
     }//GEN-LAST:event_btProbabilidadeActionPerformed
+
+    private void tfPercentualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPercentualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfPercentualActionPerformed
 
     /**
      * @param args the command line arguments
@@ -682,6 +713,7 @@ public class FPoisson extends FrameGenerico implements IValores {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -695,6 +727,7 @@ public class FPoisson extends FrameGenerico implements IValores {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbCodigo;
     private javax.swing.JLabel lbResultado;
+    private javax.swing.JLabel lbResultado1;
     private javax.swing.JMenuBar mbPrincipal;
     private com.zap.arca.JAMenuItem miAjudaConteudo;
     private com.zap.arca.JAMenuItem miAjudaSobre;
@@ -724,6 +757,7 @@ public class FPoisson extends FrameGenerico implements IValores {
     private com.zap.arca.JATextField tfCodigo;
     private com.zap.arca.JADecimalFormatField tfMedia;
     private com.zap.arca.JATextField tfNumeroTentativas;
+    private com.zap.arca.JADecimalFormatField tfPercentual;
     private com.zap.arca.JADecimalFormatField tfResultado;
     // End of variables declaration//GEN-END:variables
 
@@ -773,30 +807,26 @@ public class FPoisson extends FrameGenerico implements IValores {
         double media = tfMedia.getValue().doubleValue();
         double resultado = 0.0;
         if (cbCondicao.getSelectedIndex() == 0) {
-            for (int i = tentativas-1; i >= 0; i--) {
-                System.out.println(i);
+            for (int i = tentativas; i >= 0; i--) {
                 resultado += c.Px(i, media);
             }
-            return 1-resultado;
+            return 1 - resultado;
         } else if (cbCondicao.getSelectedIndex() == 1) {
-            for (int i = tentativas-1; i >= 0; i--){
-                System.out.println(i);
+            for (int i = tentativas - 1; i >= 0; i--) {
                 resultado += c.Px(i, media);
             }
             return resultado;
         } else if (cbCondicao.getSelectedIndex() == 2) {
-            for (int i = tentativas; i >= 0; i--){
-                System.out.println(i);
+            for (int i = tentativas; i >= 0; i--) {
                 resultado += c.Px(i, media);
             }
-            return 1-resultado;    
+            return 1 - resultado;
         } else if (cbCondicao.getSelectedIndex() == 3) {
-            for (int i = tentativas; i >= 0; i--){
-                System.out.println(i);
+            for (int i = tentativas; i >= 0; i--) {
                 resultado += c.Px(i, media);
             }
-            return resultado; 
-        } else if (cbCondicao.getSelectedIndex() == 4){
+            return resultado;
+        } else if (cbCondicao.getSelectedIndex() == 4) {
             return c.Px(tentativas, media);
         }
         return null;
@@ -833,8 +863,10 @@ public class FPoisson extends FrameGenerico implements IValores {
             if (tbAlterar.isSelected()) {
                 poisson.setCodigo(Integer.valueOf(tfCodigo.getText()));
                 dao.alterar(poisson);
+                JOptionPane.showMessageDialog(null, DAOGenerico.M_ALTERAR);
             } else {
                 dao.adicionar(poisson);
+                JOptionPane.showMessageDialog(null, DAOGenerico.M_ADICIONAR); 
             }
         } catch (RuntimeException ex) {
             LoggerEx.log(ex);

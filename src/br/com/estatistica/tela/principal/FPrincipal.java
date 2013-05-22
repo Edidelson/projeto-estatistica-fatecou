@@ -12,7 +12,10 @@ import br.com.estatistica.modelo.Usuario;
 import br.com.estatistica.tela.cadastro.FUsuarios;
 import br.com.estatistica.tela.calculo.FBinomial;
 import br.com.estatistica.tela.calculo.FCalculo;
+import br.com.estatistica.tela.calculo.FExponencial;
+import br.com.estatistica.tela.calculo.FNormal;
 import br.com.estatistica.tela.calculo.FPoisson;
+import br.com.estatistica.tela.calculo.FUniforme;
 import br.com.util.Util;
 import com.zap.arca.LoggerEx;
 import com.zap.arca.util.WindowUtils;
@@ -89,6 +92,9 @@ public class FPrincipal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         menuBinomial = new javax.swing.JMenuItem();
         menuPoisson = new javax.swing.JMenuItem();
+        menuNormal = new javax.swing.JMenuItem();
+        menuExponencial = new javax.swing.JMenuItem();
+        menuUniforme = new javax.swing.JMenuItem();
         mnMovimentos = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
@@ -201,6 +207,30 @@ public class FPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(menuPoisson);
 
+        menuNormal.setText("Normal...");
+        menuNormal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuNormalActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuNormal);
+
+        menuExponencial.setText("Exponencial...");
+        menuExponencial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuExponencialActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuExponencial);
+
+        menuUniforme.setText("Uniforme...");
+        menuUniforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuUniformeActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuUniforme);
+
         mbPrincipal.add(jMenu1);
 
         mnMovimentos.setMnemonic('M');
@@ -273,6 +303,19 @@ public class FPrincipal extends javax.swing.JFrame {
     private void menuPoissonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPoissonActionPerformed
         new FPoisson().setVisible(true);
     }//GEN-LAST:event_menuPoissonActionPerformed
+
+    private void menuNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNormalActionPerformed
+        new FNormal().setVisible(true); 
+    }//GEN-LAST:event_menuNormalActionPerformed
+
+    private void menuExponencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuExponencialActionPerformed
+        new FExponencial().setVisible(true); 
+    }//GEN-LAST:event_menuExponencialActionPerformed
+
+    private void menuUniformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUniformeActionPerformed
+        new FUniforme().setVisible(true); 
+    }//GEN-LAST:event_menuUniformeActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgButtonPrincipal;
     private javax.swing.JButton btSair;
@@ -291,7 +334,10 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lbUsuarioLogado;
     private javax.swing.JMenuBar mbPrincipal;
     private javax.swing.JMenuItem menuBinomial;
+    private javax.swing.JMenuItem menuExponencial;
+    private javax.swing.JMenuItem menuNormal;
     private javax.swing.JMenuItem menuPoisson;
+    private javax.swing.JMenuItem menuUniforme;
     private javax.swing.JMenuItem menuUsuario;
     private javax.swing.JMenuItem miBackup;
     private javax.swing.JMenuItem miSair;
