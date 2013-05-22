@@ -34,8 +34,6 @@ public class FPoisson extends FrameGenerico implements IValores {
         iniciar();
         actionMenu(INCLUSAO);
         formatarCampos();
-
-
     }
 
     @Override
@@ -211,6 +209,8 @@ public class FPoisson extends FrameGenerico implements IValores {
 
         jSplitPane1.setTopComponent(jScrollPane1);
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(600, 300));
+
         btOk.setText("OK");
         btOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -328,11 +328,6 @@ public class FPoisson extends FrameGenerico implements IValores {
 
         tfPercentual.setEnabled(false);
         tfPercentual.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        tfPercentual.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfPercentualActionPerformed(evt);
-            }
-        });
 
         lbResultado1.setText("Percentual:");
 
@@ -343,19 +338,15 @@ public class FPoisson extends FrameGenerico implements IValores {
         plCamposLayout.setHorizontalGroup(
             plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plCamposLayout.createSequentialGroup()
+                .addGap(13, 13, 13)
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plCamposLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7)
-                                .addComponent(lbCodigo)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel4)
-                                .addComponent(lbResultado))
-                            .addGroup(plCamposLayout.createSequentialGroup()
-                                .addComponent(lbResultado1)
-                                .addGap(72, 72, 72)))
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(lbCodigo)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(lbResultado))
                         .addGap(10, 10, 10)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -368,13 +359,17 @@ public class FPoisson extends FrameGenerico implements IValores {
                                 .addGap(0, 0, 0)
                                 .addComponent(btProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(plCamposLayout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(plCamposLayout.createSequentialGroup()
+                                .addGap(134, 134, 134)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(plCamposLayout.createSequentialGroup()
+                                .addComponent(lbResultado1)
+                                .addGap(79, 79, 79)
+                                .addComponent(tfPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, 0)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(147, 147, 147)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
         );
@@ -474,7 +469,7 @@ public class FPoisson extends FrameGenerico implements IValores {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(plBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,7 +478,7 @@ public class FPoisson extends FrameGenerico implements IValores {
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(plBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(jPanel1);
@@ -587,17 +582,15 @@ public class FPoisson extends FrameGenerico implements IValores {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tbAtalhos, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addComponent(jSplitPane1)
+            .addComponent(tbAtalhos, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tbAtalhos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE))
         );
 
         pack();
@@ -687,10 +680,6 @@ public class FPoisson extends FrameGenerico implements IValores {
     private void btProbabilidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProbabilidadeActionPerformed
         new DMedia(this, true).setVisible(true);
     }//GEN-LAST:event_btProbabilidadeActionPerformed
-
-    private void tfPercentualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPercentualActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfPercentualActionPerformed
 
     /**
      * @param args the command line arguments

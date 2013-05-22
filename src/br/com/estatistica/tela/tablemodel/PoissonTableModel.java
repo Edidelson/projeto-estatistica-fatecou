@@ -5,6 +5,7 @@
 package br.com.estatistica.tela.tablemodel;
 
 import br.com.estatistica.modelo.Poisson;
+import br.com.util.Util;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -12,11 +13,12 @@ import java.util.List;
  *
  * @author Edidelson
  */
-public class PoissonTableModel extends RowTableModel{
+public class PoissonTableModel extends RowTableModel {
 
     {
         columns = new String[]{"Código", "Tentativas", "Média", "Condição", "Resultado"};
     }
+
     @Override
     public Poisson getRow(int index) {
         return (Poisson) cache.get(index);
@@ -30,8 +32,8 @@ public class PoissonTableModel extends RowTableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Poisson poisson = (Poisson) cache.get(rowIndex);
-        switch(columnIndex){
-            case 0 :
+        switch (columnIndex) {
+            case 0:
                 return poisson.getCodigo();
             case 1:
                 return poisson.getTentativas();
@@ -40,15 +42,15 @@ public class PoissonTableModel extends RowTableModel{
             case 3:
                 return poisson.getCondicao();
             case 4:
-                return poisson.getResultado().doubleValue();
-                default:
-                    return "";
+                return Util.formatarValores(8, new BigDecimal(poisson.getResultado()));
+            default:
+                return "";
         }
     }
 
     @Override
     public Class getColumnClass(int col) {
-        switch(col){
+        switch (col) {
             case 0:
                 return Integer.class;
             case 1:
@@ -58,9 +60,9 @@ public class PoissonTableModel extends RowTableModel{
             case 3:
                 return String.class;
             case 4:
-                return BigDecimal.class;
-                default:
-                    return null;
+                return Object.class;
+            default:
+                return null;
         }
     }
 }
