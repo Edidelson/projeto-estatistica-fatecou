@@ -19,6 +19,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import sun.nio.cs.ext.Big5;
 
 /**
  * @author Edidelson
@@ -879,8 +880,7 @@ public class FPoisson extends FrameGenerico implements IValores {
         tfNumeroTentativas.setText(poisson.getTentativas() + "");
         tfMedia.setValue(poisson.getMedia().doubleValue());
         tfResultado.setValue(poisson.getResultado().doubleValue());
-        
-        tfPercentual.setValue(poisson.getPercentual().doubleValue());
+        tfPercentual.setValue(poisson.getPercentual()!=null?poisson.getPercentual().doubleValue():BigDecimal.ZERO.doubleValue());
         setCondicao(poisson.getCondicao());
     }
 

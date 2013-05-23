@@ -38,13 +38,13 @@ public class PoissonTableModel extends RowTableModel {
             case 1:
                 return poisson.getTentativas();
             case 2:
-                return poisson.getMedia();
+                return poisson.getMedia().doubleValue();
             case 3:
                 return poisson.getCondicao();
             case 4:
                 return Util.formatarValores(8, new BigDecimal(poisson.getResultado()));
             case 5:
-                return poisson.getPercentual();
+                return poisson.getPercentual()!=null?poisson.getPercentual().doubleValue():BigDecimal.ZERO.doubleValue();
             default:
                 return "";
         }
