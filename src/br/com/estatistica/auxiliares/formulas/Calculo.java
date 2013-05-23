@@ -6,6 +6,7 @@ package br.com.estatistica.auxiliares.formulas;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 import java.util.Random;
 
 /**
@@ -13,6 +14,8 @@ import java.util.Random;
  * @author Edidelson
  */
 public class Calculo implements IFormulas {
+
+    private int fx;
 
     @Override
     public BigInteger fatorial(int x) {
@@ -38,16 +41,21 @@ public class Calculo implements IFormulas {
         double bin = combinacao.multiply(calc).doubleValue();
         return bin;
     }
-    
-//    @Override
-//    public double uniforme (int a, int b, double x) {
-//        if (a <= x && x <= b){
-//        double uni = 1 / (b-a);
-//        return uni;
-//        } else {
-//        return 0;    
-//        }
-//              
-//    }
-  
+
+    @Override
+    public BigDecimal densidade(BigDecimal a, BigDecimal b) {
+            BigDecimal dens = BigDecimal.ONE.divide(b, MathContext.DECIMAL128); 
+            return dens;
+    }
+
+    @Override
+    public double intervaloUniforme(int a, int b, double x) {
+        double inter = (b - a) * fx;
+        return inter;
+    }
+
+    public static void main(String[] args) {
+        Calculo c = new Calculo();
+        System.out.println(c.densidade(BigDecimal.ZERO, BigDecimal.valueOf(120))); 
+    }
 }

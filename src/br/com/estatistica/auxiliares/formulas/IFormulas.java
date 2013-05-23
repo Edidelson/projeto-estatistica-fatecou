@@ -4,6 +4,7 @@
  */
 package br.com.estatistica.auxiliares.formulas;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
@@ -17,4 +18,8 @@ public interface IFormulas {
     double Px(int x, double k);
 
     double binomial(int n, int k, double p);
+    
+    BigDecimal densidade (BigDecimal a, BigDecimal b);
+    
+    double intervaloUniforme (int a, int b, double p);
 }

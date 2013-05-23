@@ -1,12 +1,17 @@
 package br.com.estatistica.tela.calculo;
 
-import br.com.estatistica.dao.DAOBinomial;
+import br.com.estatistica.auxiliares.IValores;
+import br.com.estatistica.auxiliares.formulas.Calculo;
+import br.com.estatistica.dao.DAOUniforme;
 import br.com.estatistica.modelo.Binomial;
 import br.com.estatistica.modelo.IModelo;
+import br.com.estatistica.modelo.Uniforme;
 import br.com.estatistica.tela.generico.FrameGenerico;
-import br.com.estatistica.tela.tablemodel.BinomialTableModel;
+import br.com.estatistica.tela.tablemodel.UniformeTableModel;
+import com.zap.arca.LoggerEx;
 import com.zap.arca.util.WindowUtils;
 import java.awt.Component;
+import java.math.BigDecimal;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
@@ -15,16 +20,19 @@ import javax.swing.event.ListSelectionListener;
 /**
  * @author Edidelson
  */
-public class FUniforme extends FrameGenerico {
+public class FUniforme extends FrameGenerico implements IValores {
 
-    private BinomialTableModel binomialTableModel = new BinomialTableModel();
-    private Binomial binomial;
-
+    private UniformeTableModel uniformeTableModel = new UniformeTableModel();
+    private Uniforme uniforme;
+    
+    private Calculo calculo = new Calculo();
+    
     public FUniforme() {
         initComponents();
         setLocationRelativeTo(null);
         iniciar();
         actionMenu(INCLUSAO);
+        
     }
 
     /**
@@ -40,6 +48,7 @@ public class FUniforme extends FrameGenerico {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         jATextField1 = new com.zap.arca.JATextField();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         tbAtalhos = new javax.swing.JToolBar();
         tbIncluir = new javax.swing.JToggleButton();
         tbAlterar = new javax.swing.JToggleButton();
@@ -49,7 +58,7 @@ public class FUniforme extends FrameGenerico {
         tbFiltrar = new javax.swing.JToggleButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbBinomial = new com.zap.arca.JATable();
+        tbUniforme = new com.zap.arca.JATable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         plBotoes = new javax.swing.JPanel();
@@ -57,9 +66,6 @@ public class FUniforme extends FrameGenerico {
         btCancelar = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         plCampos = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cbCondicao = new javax.swing.JComboBox();
@@ -68,11 +74,16 @@ public class FUniforme extends FrameGenerico {
         tfResultado = new com.zap.arca.JADecimalFormatField();
         lbCodigo = new javax.swing.JLabel();
         tfCodigo = new com.zap.arca.JATextField();
-        tfConstanteA = new com.zap.arca.JATextField(10,0);
         tfNumeroTentativas = new com.zap.arca.JATextField(10,0);
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        tfConstanteB = new com.zap.arca.JATextField();
+        tfPercentual = new com.zap.arca.JADecimalFormatField();
+        lbResultado1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        rbDensidade = new javax.swing.JRadioButton();
+        rbAcumulada = new javax.swing.JRadioButton();
+        tfConstanteA = new com.zap.arca.JADecimalFormatField();
+        tfConstanteB = new com.zap.arca.JADecimalFormatField();
         mbPrincipal = new javax.swing.JMenuBar();
         mnArquivo = new javax.swing.JMenu();
         miArquivoSair = new com.zap.arca.JAMenuItem();
@@ -161,11 +172,11 @@ public class FUniforme extends FrameGenerico {
         });
         tbAtalhos.add(tbFiltrar);
 
-        jSplitPane1.setDividerLocation(110);
+        jSplitPane1.setDividerLocation(120);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        tbBinomial.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tbBinomial.setModel(new javax.swing.table.DefaultTableModel(
+        tbUniforme.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbUniforme.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -182,10 +193,10 @@ public class FUniforme extends FrameGenerico {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tbBinomial);
-        tbBinomial.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        jScrollPane1.setViewportView(tbUniforme);
+        tbUniforme.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
-                alterar(tbBinomial);
+                alterar(tbUniforme);
             }
         });
 
@@ -229,32 +240,6 @@ public class FUniforme extends FrameGenerico {
         plCampos.setBackground(new java.awt.Color(255, 255, 255));
         plCampos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Fórmula"));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/combinação.png"))); // NOI18N
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/binomial.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addContainerGap(124, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
         jLabel5.setText("Variável (T):");
 
         jLabel7.setText("Intervalo :");
@@ -262,18 +247,56 @@ public class FUniforme extends FrameGenerico {
         lbResultado.setText("Resultado:");
 
         tfResultado.setEnabled(false);
+        tfResultado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfResultadoActionPerformed(evt);
+            }
+        });
 
         lbCodigo.setText("Código:");
 
         tfCodigo.setEnabled(false);
-
-        tfConstanteA.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         tfNumeroTentativas.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel6.setText("Constante (a):");
 
         jLabel8.setText("Constante (b):");
+
+        tfPercentual.setEnabled(false);
+        tfPercentual.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tfPercentual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPercentualActionPerformed(evt);
+            }
+        });
+
+        lbResultado1.setText("Percentual:");
+
+        jButton1.setText("CALCULAR");
+        jButton1.setOpaque(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(rbDensidade);
+        rbDensidade.setText("Densidade");
+        rbDensidade.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rbDensidadeItemStateChanged(evt);
+                rbDensidadeItemStateChanged1(evt);
+            }
+        });
+
+        buttonGroup3.add(rbAcumulada);
+        rbAcumulada.setText("Acumulada");
+        rbAcumulada.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rbAcumuladaItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout plCamposLayout = new javax.swing.GroupLayout(plCampos);
         plCampos.setLayout(plCamposLayout);
@@ -282,35 +305,53 @@ public class FUniforme extends FrameGenerico {
             .addGroup(plCamposLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel5)
-                    .addComponent(lbCodigo)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7)
-                    .addComponent(lbResultado))
-                .addGap(18, 18, 18)
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfNumeroTentativas, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfConstanteA, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfConstanteB, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                    .addGroup(plCamposLayout.createSequentialGroup()
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel5)
+                            .addComponent(lbCodigo)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel7)
+                            .addComponent(lbResultado1)
+                            .addComponent(rbDensidade))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfNumeroTentativas, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(plCamposLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(rbAcumulada))
+                            .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfConstanteA, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfConstanteB, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(470, Short.MAX_VALUE))
+                    .addGroup(plCamposLayout.createSequentialGroup()
+                        .addComponent(lbResultado)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         plCamposLayout.setVerticalGroup(
             plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plCamposLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(plCamposLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbCodigo)
+                            .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(plCamposLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addComponent(jLabel4)
-                        .addGap(9, 9, 9)
+                        .addGap(8, 8, 8)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbDensidade)
+                            .addComponent(rbAcumulada))
+                        .addGap(26, 26, 26)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(tfConstanteA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -318,25 +359,25 @@ public class FUniforme extends FrameGenerico {
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(tfConstanteB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(tfNumeroTentativas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbResultado)
-                            .addComponent(tfResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
-                .addContainerGap()
+                            .addComponent(tfNumeroTentativas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbCondicao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbCodigo)
-                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(248, 248, 248))
+                    .addComponent(lbResultado)
+                    .addComponent(tfResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbResultado1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         tfCodigo.getDocument().addDocumentListener(new DocumentListener() {
@@ -383,10 +424,10 @@ public class FUniforme extends FrameGenerico {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(plBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(jPanel1);
@@ -500,7 +541,7 @@ public class FUniforme extends FrameGenerico {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tbAtalhos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
         );
 
         pack();
@@ -572,6 +613,35 @@ public class FUniforme extends FrameGenerico {
         actionMenu(FILTRAR);
     }//GEN-LAST:event_tbFiltrarActionPerformed
 
+    private void tfPercentualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPercentualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfPercentualActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (rbDensidade.isSelected()){
+            BigDecimal resultado = calculo.densidade(tfConstanteA.getValue(), tfConstanteB.getValue());
+            tfResultado.setValue(resultado.doubleValue());
+        }
+           
+//        tfPercentual.setValue(calcular()*100);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tfResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfResultadoActionPerformed
+       
+    }//GEN-LAST:event_tfResultadoActionPerformed
+
+    private void rbDensidadeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbDensidadeItemStateChanged
+        cbCondicao.setEnabled(false);
+    }//GEN-LAST:event_rbDensidadeItemStateChanged
+
+    private void rbAcumuladaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbAcumuladaItemStateChanged
+        cbCondicao.setEnabled(true);
+    }//GEN-LAST:event_rbAcumuladaItemStateChanged
+
+    private void rbDensidadeItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbDensidadeItemStateChanged1
+        tfNumeroTentativas.setEnabled(false);
+    }//GEN-LAST:event_rbDensidadeItemStateChanged1
+
     /**
      * @param args the command line arguments
      */
@@ -588,23 +658,23 @@ public class FUniforme extends FrameGenerico {
     private javax.swing.JButton btOk;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JComboBox cbCondicao;
     private com.zap.arca.JATextField jATextField1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbCodigo;
     private javax.swing.JLabel lbResultado;
+    private javax.swing.JLabel lbResultado1;
     private javax.swing.JMenuBar mbPrincipal;
     private com.zap.arca.JAMenuItem miAjudaConteudo;
     private com.zap.arca.JAMenuItem miAjudaSobre;
@@ -621,33 +691,36 @@ public class FUniforme extends FrameGenerico {
     private javax.swing.JMenu mnExibir;
     private javax.swing.JPanel plBotoes;
     private javax.swing.JPanel plCampos;
+    private javax.swing.JRadioButton rbAcumulada;
+    private javax.swing.JRadioButton rbDensidade;
     private javax.swing.JPopupMenu.Separator spAjuda;
     private javax.swing.JToolBar.Separator spBar;
     private javax.swing.JPopupMenu.Separator spExibir;
     private javax.swing.JToggleButton tbAlterar;
     private javax.swing.JToolBar tbAtalhos;
-    private com.zap.arca.JATable tbBinomial;
     private javax.swing.JToggleButton tbExcluir;
     private javax.swing.JToggleButton tbFiltrar;
     private javax.swing.JToggleButton tbIncluir;
     private javax.swing.JToggleButton tbPesquisar;
+    private com.zap.arca.JATable tbUniforme;
     private com.zap.arca.JATextField tfCodigo;
-    private com.zap.arca.JATextField tfConstanteA;
-    private com.zap.arca.JATextField tfConstanteB;
+    private com.zap.arca.JADecimalFormatField tfConstanteA;
+    private com.zap.arca.JADecimalFormatField tfConstanteB;
     private com.zap.arca.JATextField tfNumeroTentativas;
+    private com.zap.arca.JADecimalFormatField tfPercentual;
     private com.zap.arca.JADecimalFormatField tfResultado;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void iniciar() {
-        dao = new DAOBinomial();
+        dao = new DAOUniforme();
 
-        tbPrincipal = tbBinomial;
+        tbPrincipal = tbUniforme;
         toggleButton = tbIncluir;
         ctChave = tfCodigo;
 
-        tbBinomial.setName("TB_FBINOMIAL");
-        tbBinomial.setModel(binomialTableModel);
+        tbUniforme.setName("TB_FUNIFORME");
+        tbUniforme.setModel(uniformeTableModel);
 
         camposVerificar = new Component[]{tfConstanteA, tfNumeroTentativas};
         camposLimpar = new Component[]{tfConstanteA, tfNumeroTentativas,
@@ -655,31 +728,31 @@ public class FUniforme extends FrameGenerico {
 
         WindowUtils.nextEnter(plCampos);
         WindowUtils.exitEsc(this);
-        configurarSincronizacao(dao, tbBinomial);
+        configurarSincronizacao(dao, tbUniforme);
         carregarCombo();
     }
 
     public void carregarCombo() {
-        for (Binomial.Condicao condicao : Binomial.Condicao.values()) {
+        for (Uniforme.Condicao condicao : Uniforme.Condicao.values()) {
             cbCondicao.addItem(condicao.toString());
         }
     }
 
-    public Binomial.Condicao getCondicao() {
+    public Uniforme.Condicao getCondicao() {
         if (cbCondicao.getSelectedIndex() == 0) {
-            return Binomial.Condicao.MAIOR;
+            return Uniforme.Condicao.MAIOR;
         } else if (cbCondicao.getSelectedIndex() == 1) {
-            return Binomial.Condicao.MENOR;
+            return Uniforme.Condicao.MENOR;
         } else if (cbCondicao.getSelectedIndex() == 2) {
-            return Binomial.Condicao.MAIOR_E_IGUAL;
+            return Uniforme.Condicao.MAIOR_E_IGUAL;
         } else if (cbCondicao.getSelectedIndex() == 3) {
-            return Binomial.Condicao.MENOR_E_IGUAL;
+            return Uniforme.Condicao.MENOR_E_IGUAL;
         } else {
-            return Binomial.Condicao.IGUAL;
+            return Uniforme.Condicao.IGUAL;
         }
     }
 
-    public void setCondicao(Binomial.Condicao condicao) {
+    public void setCondicao(Uniforme.Condicao condicao) {
         switch (condicao) {
             case MAIOR:
                 cbCondicao.setSelectedIndex(0);
@@ -698,14 +771,63 @@ public class FUniforme extends FrameGenerico {
                 break;
         }
     }
+    
+//     public Double calcular() {
+//        int constA = tfConstanteA.intValue();
+//        int constB = tfConstanteB.intValue();
+//        double t = tfNumeroTentativas.getValue().doubleValue();
+//        double resultado = 0.0;
+//        Calculo c = new Calculo();
+//        if (cbCondicao.getSelectedIndex() == 0) {
+//            resultado += c.Px(i, media);
+//            return 1 - resultado;
+//        } else if (cbCondicao.getSelectedIndex() == 1) {
+//            resultado += c.Px(i, media);
+//            return resultado;
+//        } else if (cbCondicao.getSelectedIndex() == 2) {
+//            resultado += c.Px(i, media);
+//            return 1 - resultado;
+//        } else if (cbCondicao.getSelectedIndex() == 3) {
+//            resultado += c.Px(i, media);
+//            return resultado;
+//        } else if (cbCondicao.getSelectedIndex() == 4) {
+//            return c.Px(tentativas, media);
+//        }
+//        return null;
+//    }
 
     @Override
     public void inserirOuAlterar() {
+        uniforme = new Uniforme();
+        uniforme.setConstanteA(tfConstanteA.doubleValue());
+        uniforme.setConstanteB(tfConstanteB.doubleValue());
+        uniforme.setTentativa(tfNumeroTentativas.intValue());
+        uniforme.setResultado(tfResultado.getValue().doubleValue());
+        uniforme.setPercentual(tfPercentual.getValue().doubleValue());
+        uniforme.setCondicao(getCondicao());
+        try {
+            if (tbAlterar.isSelected()) {
+                uniforme.setCodigo(Integer.valueOf(tfCodigo.getText()));
+                dao.alterar(uniforme);
+            } else {
+                dao.adicionar(uniforme);
+            }
+        } catch (RuntimeException ex) {
+            LoggerEx.log(ex);
+        }
        
     }
 
     @Override
     public void preencherCampos(IModelo m) {
+//        uniforme = (Uniforme) m;
+//        tfCodigo.setText(uniforme.getCodigo() + "");
+//        tfNumeroElementos.setText(binomial.getNuElementos() + "");
+//        tfNumeroTentativas.setText(binomial.getTentativas() + "");
+//        tfProbabilidade.setValue(binomial.getProbabilidade().doubleValue());
+//        tfResultado.setValue(binomial.getResultado().doubleValue());
+//        tfPercentual.setValue(binomial.getPercentual().doubleValue());
+//        setCondicao(binomial.getCondicao());
        
     }
 
