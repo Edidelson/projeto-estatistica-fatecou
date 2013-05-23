@@ -247,12 +247,12 @@ public class FNormal extends FrameGenerico {
 
         tfCodigo.setEnabled(false);
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
         btgNormal.add(jRadioButton2);
         jRadioButton2.setText("P( X = A )");
         jRadioButton2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jRadioButton2ItemStateChanged1(evt);
+                jRadioButton2ItemStateChanged(evt);
             }
         });
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -266,28 +266,41 @@ public class FNormal extends FrameGenerico {
         jRadioButton3.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jRadioButton3ItemStateChanged(evt);
+                jRadioButton3ItemStateChanged1(evt);
             }
         });
 
         btgNormal.add(jRadioButton1);
         jRadioButton1.setText("P( X ≤  A )");
+        jRadioButton1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton1ItemStateChanged(evt);
+            }
+        });
 
         btgNormal.add(jRadioButton4);
         jRadioButton4.setText("P( X >  A )");
         jRadioButton4.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jRadioButton4ItemStateChanged(evt);
+                jRadioButton4ItemStateChanged1(evt);
             }
         });
 
         btgNormal.add(jRadioButton5);
         jRadioButton5.setText("P( X ≥  A )");
+        jRadioButton5.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton5ItemStateChanged(evt);
+            }
+        });
 
         btgNormal.add(jRadioButton6);
         jRadioButton6.setText("P( A ≤ X ≤ B )");
         jRadioButton6.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jRadioButton6ItemStateChanged(evt);
+                jRadioButton6ItemStateChanged1(evt);
             }
         });
 
@@ -326,9 +339,10 @@ public class FNormal extends FrameGenerico {
                     .addComponent(jRadioButton6, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(126, 126, 126)
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(plCamposLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jADecimalFormatField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(plCamposLayout.createSequentialGroup()
@@ -357,40 +371,44 @@ public class FNormal extends FrameGenerico {
                 .addGap(24, 24, 24)
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plCamposLayout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 70, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addContainerGap())
+                    .addGroup(plCamposLayout.createSequentialGroup()
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRadioButton2)
                             .addComponent(jLabel1)
                             .addComponent(jADecimalFormatField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jLabel4)
-                            .addComponent(jADecimalFormatField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jRadioButton1)
-                                .addComponent(jLabel5))
-                            .addComponent(jADecimalFormatField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel4)
+                                .addComponent(jADecimalFormatField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jRadioButton3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(jADecimalFormatField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRadioButton4)
                             .addComponent(jLabel6)
                             .addComponent(jADecimalFormatField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(plCamposLayout.createSequentialGroup()
-                        .addGap(0, 26, Short.MAX_VALUE)
-                        .addComponent(jLabel7))
-                    .addComponent(jADecimalFormatField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(plCamposLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jRadioButton5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jADecimalFormatField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))))
         );
 
         tfCodigo.getDocument().addDocumentListener(new DocumentListener() {
@@ -642,6 +660,30 @@ public class FNormal extends FrameGenerico {
     private void jRadioButton4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton4ItemStateChanged
         jADecimalFormatField5.setEnabled(false);
     }//GEN-LAST:event_jRadioButton4ItemStateChanged
+
+    private void jRadioButton2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton2ItemStateChanged
+        jADecimalFormatField5.setEnabled(false);
+    }//GEN-LAST:event_jRadioButton2ItemStateChanged
+
+    private void jRadioButton3ItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton3ItemStateChanged1
+        jADecimalFormatField5.setEnabled(false);
+    }//GEN-LAST:event_jRadioButton3ItemStateChanged1
+
+    private void jRadioButton4ItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton4ItemStateChanged1
+        jADecimalFormatField5.setEnabled(false);
+    }//GEN-LAST:event_jRadioButton4ItemStateChanged1
+
+    private void jRadioButton5ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton5ItemStateChanged
+        jADecimalFormatField5.setEnabled(false);
+    }//GEN-LAST:event_jRadioButton5ItemStateChanged
+
+    private void jRadioButton6ItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton6ItemStateChanged1
+        jADecimalFormatField5.setEnabled(true);
+    }//GEN-LAST:event_jRadioButton6ItemStateChanged1
+
+    private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton1ItemStateChanged
+        jADecimalFormatField5.setEnabled(false);
+    }//GEN-LAST:event_jRadioButton1ItemStateChanged
 
     /**
      * @param args the command line arguments

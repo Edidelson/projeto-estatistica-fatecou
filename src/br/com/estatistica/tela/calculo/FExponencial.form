@@ -4,6 +4,8 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="bgEditar">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="mbPrincipal">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="FP_mbPrincipal"/>
@@ -133,7 +135,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Binomial"/>
+    <Property name="title" type="java.lang.String" value="Exponencial"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="mbPrincipal"/>
@@ -402,8 +404,8 @@
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                          <JTabbedPaneConstraints tabName="Binomial">
-                            <Property name="tabTitle" type="java.lang.String" value="Binomial"/>
+                          <JTabbedPaneConstraints tabName="Exponencial">
+                            <Property name="tabTitle" type="java.lang.String" value="Exponencial"/>
                           </JTabbedPaneConstraints>
                         </Constraint>
                       </Constraints>
@@ -591,36 +593,70 @@
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioButton2">
                           <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroup1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="P( X = A )"/>
                           </Properties>
                           <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButton2ItemStateChanged"/>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton2ActionPerformed"/>
                           </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioButton3">
                           <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroup1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="P( X &lt; A )"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButton3ItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioButton1">
                           <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroup1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="P( X &#x2264;  A )"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButton1ItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioButton4">
                           <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroup1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="P( X &gt;  A )"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButton4ItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioButton5">
                           <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroup1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="P( X &#x2265;  A )"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButton5ItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioButton6">
                           <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroup1"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="P( A &#x2264; X &#x2264; B )"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jRadioButton6ItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel1">
                           <Properties>

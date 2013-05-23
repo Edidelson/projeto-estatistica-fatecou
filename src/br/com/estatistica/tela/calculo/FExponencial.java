@@ -45,6 +45,7 @@ public class FExponencial extends FrameGenerico implements IValores {
     private void initComponents() {
 
         bgEditar = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         tbAtalhos = new javax.swing.JToolBar();
         tbIncluir = new javax.swing.JToggleButton();
         tbAlterar = new javax.swing.JToggleButton();
@@ -100,7 +101,7 @@ public class FExponencial extends FrameGenerico implements IValores {
         miAjudaSobre = new com.zap.arca.JAMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Binomial");
+        setTitle("Exponencial");
 
         tbAtalhos.setFloatable(false);
         tbAtalhos.setRollover(true);
@@ -265,22 +266,58 @@ public class FExponencial extends FrameGenerico implements IValores {
 
         tfCodigo.setEnabled(false);
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("P( X = A )");
+        jRadioButton2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton2ItemStateChanged(evt);
+            }
+        });
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
             }
         });
 
+        buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("P( X < A )");
+        jRadioButton3.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton3ItemStateChanged(evt);
+            }
+        });
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("P( X ≤  A )");
+        jRadioButton1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton1ItemStateChanged(evt);
+            }
+        });
 
+        buttonGroup1.add(jRadioButton4);
         jRadioButton4.setText("P( X >  A )");
+        jRadioButton4.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton4ItemStateChanged(evt);
+            }
+        });
 
+        buttonGroup1.add(jRadioButton5);
         jRadioButton5.setText("P( X ≥  A )");
+        jRadioButton5.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton5ItemStateChanged(evt);
+            }
+        });
 
+        buttonGroup1.add(jRadioButton6);
         jRadioButton6.setText("P( A ≤ X ≤ B )");
+        jRadioButton6.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton6ItemStateChanged(evt);
+            }
+        });
 
         jLabel1.setText("Média ( µ ):");
 
@@ -407,7 +444,7 @@ public class FExponencial extends FrameGenerico implements IValores {
             }
         });
 
-        jTabbedPane1.addTab("Binomial", plCampos);
+        jTabbedPane1.addTab("Exponencial", plCampos);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -617,6 +654,30 @@ public class FExponencial extends FrameGenerico implements IValores {
         actionMenu(INCLUSAO);
     }//GEN-LAST:event_btOkActionPerformed
 
+    private void jRadioButton2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton2ItemStateChanged
+        tfVariavelB.setEnabled(false);
+    }//GEN-LAST:event_jRadioButton2ItemStateChanged
+
+    private void jRadioButton6ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton6ItemStateChanged
+        tfVariavelB.setEnabled(true);
+    }//GEN-LAST:event_jRadioButton6ItemStateChanged
+
+    private void jRadioButton3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton3ItemStateChanged
+        tfVariavelB.setEnabled(false);
+    }//GEN-LAST:event_jRadioButton3ItemStateChanged
+
+    private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton1ItemStateChanged
+        tfVariavelB.setEnabled(false);
+    }//GEN-LAST:event_jRadioButton1ItemStateChanged
+
+    private void jRadioButton4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton4ItemStateChanged
+        tfVariavelB.setEnabled(false);
+    }//GEN-LAST:event_jRadioButton4ItemStateChanged
+
+    private void jRadioButton5ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton5ItemStateChanged
+        tfVariavelB.setEnabled(false);
+    }//GEN-LAST:event_jRadioButton5ItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -631,6 +692,7 @@ public class FExponencial extends FrameGenerico implements IValores {
     private javax.swing.ButtonGroup bgEditar;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btOk;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
