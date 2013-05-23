@@ -38,6 +38,8 @@ public class Poisson implements Serializable, IModelo {
     private Double media;
     @Column(name = "vl_resultado")
     private Double resultado;
+    @Column (name = "vl_percentual")
+    private Double percentual;
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
@@ -74,6 +76,15 @@ public class Poisson implements Serializable, IModelo {
     public void setResultado(Double resultado) {
         this.resultado = resultado;
     }
+    
+      public Double getPercentual() {
+        return percentual;
+    }
+
+    public void setPercentual(Double Percentual) {
+        this.percentual = percentual;
+    }
+    
 
     @Override
     public Object getCodigo() {

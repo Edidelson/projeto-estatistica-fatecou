@@ -5,6 +5,8 @@
 package br.com.estatistica.tela.tablemodel;
 
 import br.com.estatistica.modelo.Binomial;
+import br.com.util.Util;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -43,7 +45,7 @@ public class BinomialTableModel extends RowTableModel {
             case 4:
                 return binomial.getCondicao();
             case 5:
-                return binomial.getResultado();
+                return Util.formatarValores(8, new BigDecimal(binomial.getResultado()));
             default:
                 return "";
         }
@@ -63,7 +65,7 @@ public class BinomialTableModel extends RowTableModel {
             case 4:
                 return String.class;
             case 5:
-                return Double.class;
+                return Object.class;
             default:
                 return null;
         }

@@ -328,6 +328,11 @@ public class FPoisson extends FrameGenerico implements IValores {
 
         tfPercentual.setEnabled(false);
         tfPercentual.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tfPercentual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPercentualActionPerformed(evt);
+            }
+        });
 
         lbResultado1.setText("Percentual:");
 
@@ -681,6 +686,10 @@ public class FPoisson extends FrameGenerico implements IValores {
         new DMedia(this, true).setVisible(true);
     }//GEN-LAST:event_btProbabilidadeActionPerformed
 
+    private void tfPercentualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPercentualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfPercentualActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -762,7 +771,7 @@ public class FPoisson extends FrameGenerico implements IValores {
         tbPoisson.setModel(poissonTableModel);
 
         camposVerificar = new Component[]{tfNumeroTentativas, tfMedia};
-        camposLimpar = new Component[]{tfNumeroTentativas, tfMedia, tfCodigo, tfResultado};
+        camposLimpar = new Component[]{tfNumeroTentativas, tfMedia, tfCodigo, tfResultado, tfPercentual};
 
         WindowUtils.nextEnter(plCampos);
         WindowUtils.exitEsc(this);
@@ -848,6 +857,7 @@ public class FPoisson extends FrameGenerico implements IValores {
         poisson.setTentativas(tfNumeroTentativas.intValue());
         poisson.setResultado(tfResultado.getValue().doubleValue());
         poisson.setCondicao(getCondicao());
+        poisson.setPercentual(tfPercentual.getValue().doubleValue());
         try {
             if (tbAlterar.isSelected()) {
                 poisson.setCodigo(Integer.valueOf(tfCodigo.getText()));
@@ -869,6 +879,8 @@ public class FPoisson extends FrameGenerico implements IValores {
         tfNumeroTentativas.setText(poisson.getTentativas() + "");
         tfMedia.setValue(poisson.getMedia().doubleValue());
         tfResultado.setValue(poisson.getResultado().doubleValue());
+        
+        tfPercentual.setValue(poisson.getPercentual().doubleValue());
         setCondicao(poisson.getCondicao());
     }
 

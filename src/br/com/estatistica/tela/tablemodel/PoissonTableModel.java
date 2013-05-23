@@ -16,7 +16,7 @@ import java.util.List;
 public class PoissonTableModel extends RowTableModel {
 
     {
-        columns = new String[]{"Código", "Tentativas", "Média", "Condição", "Resultado"};
+        columns = new String[]{"Código", "Tentativas", "Média", "Condição", "Resultado", "Percentual"};
     }
 
     @Override
@@ -43,6 +43,8 @@ public class PoissonTableModel extends RowTableModel {
                 return poisson.getCondicao();
             case 4:
                 return Util.formatarValores(8, new BigDecimal(poisson.getResultado()));
+            case 5:
+                return poisson.getPercentual();
             default:
                 return "";
         }
@@ -61,6 +63,8 @@ public class PoissonTableModel extends RowTableModel {
                 return String.class;
             case 4:
                 return Object.class;
+            case 5:
+                return Double.class;
             default:
                 return null;
         }

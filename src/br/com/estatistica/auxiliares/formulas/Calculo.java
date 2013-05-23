@@ -6,6 +6,7 @@ package br.com.estatistica.auxiliares.formulas;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Random;
 
 /**
  *
@@ -15,12 +16,11 @@ public class Calculo implements IFormulas {
 
     @Override
     public BigInteger fatorial(int x) {
-        BigInteger fat = BigInteger.ONE;
-        BigInteger bigInteger = BigInteger.valueOf(x);
-        for (int i = 1; i <= bigInteger.intValue(); i++) {
-            fat = fat.multiply(BigInteger.valueOf(i));
+        long fat = 1;
+        for (int i = 1; i <= x; i++) {
+            fat *= i;
         }
-        return fat;
+        return BigInteger.valueOf(fat);
     }
 
     @Override
@@ -38,4 +38,5 @@ public class Calculo implements IFormulas {
         double bin = combinacao.multiply(calc).doubleValue();
         return bin;
     }
+  
 }
