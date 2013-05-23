@@ -17,7 +17,7 @@ public class BinomialTableModel extends RowTableModel {
 
     {
         columns = new String[]{"Código", "Número de Elementos", "Número de Tentativas",
-            "Probabilidade", "Condição", "Resultado"};
+            "Probabilidade", "Condição", "Resultado", "Percentual"};
     }
 
     @Override
@@ -46,6 +46,8 @@ public class BinomialTableModel extends RowTableModel {
                 return binomial.getCondicao();
             case 5:
                 return Util.formatarValores(8, new BigDecimal(binomial.getResultado()));
+            case 6:
+                return binomial.getPercentual()!=null?binomial.getPercentual().doubleValue():BigDecimal.ZERO.doubleValue();
             default:
                 return "";
         }
@@ -66,6 +68,8 @@ public class BinomialTableModel extends RowTableModel {
                 return String.class;
             case 5:
                 return Object.class;
+            case 6:
+                return Double.class;
             default:
                 return null;
         }

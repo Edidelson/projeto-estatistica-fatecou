@@ -43,6 +43,8 @@ public class Binomial implements Serializable, IModelo {
     private Double resultado;
     @Column(name="tx_observação")
     private String observacao;
+    @Column(name="vl_percentual")
+    private Double percentual;
 
     public String getObservacao() {
         return observacao;
@@ -99,6 +101,14 @@ public class Binomial implements Serializable, IModelo {
 
     public void setResultado(Double resultado) {
         this.resultado = resultado;
+    }
+    
+    public Double getPercentual() {
+        return percentual;
+    }
+    
+    public void setPercentual(Double percentual) {
+        this.percentual = percentual;
     }
 
     @Override

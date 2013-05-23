@@ -816,7 +816,7 @@ public class FPoisson extends FrameGenerico implements IValores {
             }
             return resultado;
         } else if (cbCondicao.getSelectedIndex() == 2) {
-            for (int i = tentativas; i >= 0; i--) {
+            for (int i = tentativas-1; i >= 0; i--) {
                 resultado += c.Px(i, media);
             }
             return 1 - resultado;

@@ -45,8 +45,6 @@ public class FExponencial extends FrameGenerico implements IValores {
     private void initComponents() {
 
         bgEditar = new javax.swing.ButtonGroup();
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
         tbAtalhos = new javax.swing.JToolBar();
         tbIncluir = new javax.swing.JToggleButton();
         tbAlterar = new javax.swing.JToggleButton();
@@ -633,8 +631,6 @@ public class FExponencial extends FrameGenerico implements IValores {
     private javax.swing.ButtonGroup bgEditar;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btOk;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

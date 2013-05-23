@@ -38,5 +38,16 @@ public class Calculo implements IFormulas {
         double bin = combinacao.multiply(calc).doubleValue();
         return bin;
     }
+    
+//    @Override
+//    public double uniforme (int a, int b, double x) {
+//        if (a <= x && x <= b){
+//        double uni = 1 / (b-a);
+//        return uni;
+//        } else {
+//        return 0;    
+//        }
+//              
+//    }
   
 }
