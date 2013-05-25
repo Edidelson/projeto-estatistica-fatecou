@@ -18,8 +18,12 @@ public interface IFormulas {
     double Px(int x, double k);
 
     double binomial(int n, int k, double p);
-    
-    BigDecimal densidade (BigDecimal a, BigDecimal b);
-    
-    double intervaloUniforme (int a, int b, double p);
+
+    BigDecimal densidade(BigDecimal intervalorInicial, BigDecimal intervalorFinal);
+
+    double intervaloUniformeMaior(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao);
+
+    double intervaloUniformeMenor(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao);
+
+    double intervaloUniformeEntre(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao, BigDecimal densidade);
 }

@@ -286,37 +286,7 @@ public abstract class FrameGenerico extends javax.swing.JFrame implements IFunci
             if (c.equals(ctChave) && OPERACAO == LIMPAR) {
                 continue;
             }
-            if (c instanceof JATextField) {
-                JATextField tf = (JATextField) c;
-                tf.setText("");
-            } else if (c instanceof JADecimalFormatField) {
-                JADecimalFormatField ftf = (JADecimalFormatField) c;
-                ftf.setValue(BigDecimal.ZERO);
-            } else if (c instanceof JANumberFormatField) {
-                JANumberFormatField ftf = (JANumberFormatField) c;
-                ftf.setValue(BigDecimal.ZERO);
-            } else if (c instanceof JCheckBox) {
-                JCheckBox cb = (JCheckBox) c;
-                cb.setSelected(false);
-            } else if (c instanceof JLabel) {
-                JLabel lb = (JLabel) c;
-                lb.setText(" ");
-            } else if (c instanceof JXDatePicker) {
-                JXDatePicker dp = (JXDatePicker) c;
-                dp.setDate(null);
-            } else if (c instanceof JComboBox) {
-                JComboBox cb = (JComboBox) c;
-                cb.setSelectedIndex(0);
-            } else if (c instanceof JPasswordField) {
-                JPasswordField jp = (JPasswordField) c;
-                jp.setText("");
-            } else if (c instanceof JASelectPicker) {
-                JASelectPicker jxsp = (JASelectPicker) c;
-                jxsp.setValue(null, "");
-            } else if (c instanceof JTextArea) {
-                JTextArea jta = (JTextArea) c;
-                jta.setText("");
-            }
+            WindowUtils.cleanFields(camposLimpar);
         }
         camposLimpar[0].requestFocus();
     }

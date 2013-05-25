@@ -45,6 +45,12 @@ public class FPoisson extends FrameGenerico implements IValores {
         return true;
     }
 
+    @Override
+    public void limparCampos() {
+        super.limparCampos();
+        exibirDados(dao, tbPoisson); 
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -610,7 +616,6 @@ public class FPoisson extends FrameGenerico implements IValores {
             inserirOuAlterar();
             limparCampos();
         }
-        actionMenu(INCLUSAO);
     }//GEN-LAST:event_btOkActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
@@ -859,7 +864,7 @@ public class FPoisson extends FrameGenerico implements IValores {
         poisson.setResultado(tfResultado.getValue().doubleValue());
         poisson.setCondicao(getCondicao());
         poisson.setPercentual(tfPercentual.getValue().doubleValue());
-        try {
+        try { 
             if (tbAlterar.isSelected()) {
                 poisson.setCodigo(Integer.valueOf(tfCodigo.getText()));
                 dao.alterar(poisson);

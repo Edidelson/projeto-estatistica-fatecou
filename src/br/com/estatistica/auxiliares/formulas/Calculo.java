@@ -7,15 +7,12 @@ package br.com.estatistica.auxiliares.formulas;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
-import java.util.Random;
 
 /**
  *
  * @author Edidelson
  */
 public class Calculo implements IFormulas {
-
-    private int fx;
 
     @Override
     public BigInteger fatorial(int x) {
@@ -43,19 +40,30 @@ public class Calculo implements IFormulas {
     }
 
     @Override
-    public BigDecimal densidade(BigDecimal a, BigDecimal b) {
-            BigDecimal dens = BigDecimal.ONE.divide(b, MathContext.DECIMAL128); 
+    public BigDecimal densidade(BigDecimal intervalorInicial, BigDecimal intervalorFinal) {
+            BigDecimal dens = BigDecimal.ONE.divide(intervalorFinal.subtract(intervalorInicial), MathContext.DECIMAL128);  
             return dens;
     }
 
     @Override
-    public double intervaloUniforme(int a, int b, double x) {
-        double inter = (b - a) * fx;
-        return inter;
+    public double intervaloUniformeMaior(BigDecimal intervalorInicial,BigDecimal intervalorFinal, BigDecimal condicao) {
+        BigDecimal inter = intervalorFinal.subtract(condicao) 
+                .multiply(densidade(intervalorFinal, intervalorInicial), MathContext.DECIMAL64);
+        return inter.doubleValue();
     }
 
-    public static void main(String[] args) {
-        Calculo c = new Calculo();
-        System.out.println(c.densidade(BigDecimal.ZERO, BigDecimal.valueOf(120))); 
+    @Override
+    public double intervaloUniformeMenor(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao) {
+        BigDecimal inter = condicao.subtract(intervalorInicial) 
+                .multiply(densidade(intervalorFinal, intervalorInicial), MathContext.DECIMAL64);
+        return inter.doubleValue();
     }
+
+    @Override
+    public double intervaloUniformeEntre(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao,BigDecimal  densidade) {
+        BigDecimal inter = intervalorFinal.subtract(intervalorInicial) 
+                .multiply(densidade, MathContext.DECIMAL64); 
+        return inter.doubleValue();
+    }
+    
 }

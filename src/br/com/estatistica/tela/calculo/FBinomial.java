@@ -57,6 +57,12 @@ public class FBinomial extends FrameGenerico implements IValores {
         return true;
     }
 
+    @Override
+    public void limparCampos() {
+        super.limparCampos();
+        exibirDados(dao, tbBinomial); 
+    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -612,7 +618,6 @@ public class FBinomial extends FrameGenerico implements IValores {
             inserirOuAlterar();
             limparCampos();
         }
-        actionMenu(INCLUSAO);
     }//GEN-LAST:event_btOkActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed

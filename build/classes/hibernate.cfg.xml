@@ -16,5 +16,6 @@
         <mapping class="br.com.estatistica.modelo.TabelaDistribuicaoNormal"/>
         <mapping class="br.com.estatistica.modelo.Binomial"/>
         <mapping class="br.com.estatistica.modelo.Poisson"/>
+        <mapping class="br.com.estatistica.modelo.Uniforme"/>
     </session-factory>
 </hibernate-configuration>

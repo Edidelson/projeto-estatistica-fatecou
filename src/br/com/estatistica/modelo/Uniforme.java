@@ -20,84 +20,84 @@ import javax.persistence.Table;
  *
  * @author Rodrigo
  */
-  @Entity
-  @Table(name="uniforme")
-  @NamedQueries({
-      @NamedQuery (name = "Uniforme.getAll", query = "SELECT e FROM Uniforme e")
-  })
-  public class Uniforme implements Serializable, IModelo {
-      
-      @Id
-      @GeneratedValue(strategy= GenerationType.AUTO)
-      @Column (name = "cp_uniforme")
-      private int codigo;
-      @Column(name = "vl_constanteA")
-      private double constanteA;
-      @Column(name = "vl_constanteB")
-      private double constanteB;
-      @Column(name = "vl_tentativa")
-      private int tentativa;
-      @Column(name = "tx_condicao")
-      @Enumerated(EnumType.STRING)
-      private Condicao condicao;
-      @Column(name="vl_resultado")
-      private Double resultado;
-      @Column(name="vl_percentual")
-      private Double percentual;
+@Entity
+@Table(name = "uniforme")
+@NamedQueries({
+    @NamedQuery(name = "Uniforme.getAll", query = "SELECT e FROM Uniforme e")
+})
+public class Uniforme implements Serializable, IModelo {
 
-        public Object getCodigo() {
-            return codigo;
-        }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "cp_uniforme")
+    private int codigo;
+    @Column(name = "vl_constanteA")
+    private double constanteA;
+    @Column(name = "vl_constanteB")
+    private double constanteB;
+    @Column(name = "vl_tentativa")
+    private int tentativa;
+    @Column(name = "tx_condicao")
+    @Enumerated(EnumType.STRING)
+    private Condicao condicao;
+    @Column(name = "vl_resultado")
+    private Double resultado;
+    @Column(name = "vl_percentual")
+    private Double percentual;
 
-        public void setCodigo(int codigo) {
-            this.codigo = codigo;
-        }
+    @Override
+    public Object getCodigo() {
+        return codigo;
+    }
 
-        public double getConstanteA() {
-            return constanteA;
-        }
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
 
-        public void setConstanteA(double constanteA) {
-            this.constanteA = constanteA;
-        }
+    public double getConstanteA() {
+        return constanteA;
+    }
 
-        public double getConstanteB() {
-            return constanteB;
-        }
+    public void setConstanteA(double constanteA) {
+        this.constanteA = constanteA;
+    }
 
-        public void setConstanteB(double constanteB) {
-            this.constanteB = constanteB;
-        }
+    public double getConstanteB() {
+        return constanteB;
+    }
 
-        public int getTentativa() {
-            return tentativa;
-        }
+    public void setConstanteB(double constanteB) {
+        this.constanteB = constanteB;
+    }
 
-        public void setTentativa(int tentativa) {
-            this.tentativa = tentativa;
-        }
-        
-        @Override
-        public boolean isInativo() {
+    public int getTentativa() {
+        return tentativa;
+    }
+
+    public void setTentativa(int tentativa) {
+        this.tentativa = tentativa;
+    }
+
+    @Override
+    public boolean isInativo() {
         return false;
     }
 
-     public Condicao getCondicao() {
+    public Condicao getCondicao() {
         return condicao;
     }
 
     public void setCondicao(Condicao condicao) {
         this.condicao = condicao;
     }
-        
-        public static enum Condicao {
+
+    public static enum Condicao {
 
         MAIOR("Maior"),
         MENOR("Menor"),
         MAIOR_E_IGUAL("Maior e igual"),
         MENOR_E_IGUAL("Menor e igual"),
         IGUAL("Igual");
-        
         private String nome;
 
         private Condicao() {
@@ -111,24 +111,21 @@ import javax.persistence.Table;
         public String toString() {
             return nome;
         }
-        
-        }             
-        
-        public Double getResultado() {
-            return resultado;
-        }
+    }
 
-        public void setResultado(Double resultado) {
-            this.resultado = resultado;
-        }
+    public Double getResultado() {
+        return resultado;
+    }
 
-        public Double getPercentual() {
-            return percentual;
-        }
+    public void setResultado(Double resultado) {
+        this.resultado = resultado;
+    }
 
-        public void setPercentual(Double percentual) {
-            this.percentual = percentual;
-        }
-      
-     }
+    public Double getPercentual() {
+        return percentual;
+    }
 
+    public void setPercentual(Double percentual) {
+        this.percentual = percentual;
+    }
+}
