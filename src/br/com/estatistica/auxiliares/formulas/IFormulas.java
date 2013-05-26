@@ -14,16 +14,13 @@ import java.math.BigInteger;
 public interface IFormulas {
 
     BigInteger fatorial(int x);
-
     double Px(int x, double k);
-
     double binomial(int n, int k, double p);
-
+    BigDecimal exponencialMenor(double media, double x);
+    BigDecimal exponencialMaior(double media, double x);
+    BigDecimal exponencialIgual(double media, double x);
     BigDecimal densidade(BigDecimal intervalorInicial, BigDecimal intervalorFinal);
-
     double intervaloUniformeMaior(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao);
-
     double intervaloUniformeMenor(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao);
-
     double intervaloUniformeEntre(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao, BigDecimal densidade);
 }

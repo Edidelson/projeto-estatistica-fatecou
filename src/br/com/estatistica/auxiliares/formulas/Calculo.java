@@ -14,6 +14,8 @@ import java.math.MathContext;
  */
 public class Calculo implements IFormulas {
 
+    double e = StrictMath.E;
+
     @Override
     public BigInteger fatorial(int x) {
         long fat = 1;
@@ -25,7 +27,6 @@ public class Calculo implements IFormulas {
 
     @Override
     public double Px(int x, double k) {
-        double e = StrictMath.E;
         double fatorial = fatorial(x).doubleValue();
         double px = (Math.pow(e, -k) * Math.pow(k, x)) / fatorial;
         return px;
@@ -41,29 +42,48 @@ public class Calculo implements IFormulas {
 
     @Override
     public BigDecimal densidade(BigDecimal intervalorInicial, BigDecimal intervalorFinal) {
-            BigDecimal dens = BigDecimal.ONE.divide(intervalorFinal.subtract(intervalorInicial), MathContext.DECIMAL128);  
-            return dens;
+        BigDecimal dens = BigDecimal.ONE.divide(intervalorFinal.subtract(intervalorInicial), MathContext.DECIMAL128);
+        return dens;
     }
 
     @Override
-    public double intervaloUniformeMaior(BigDecimal intervalorInicial,BigDecimal intervalorFinal, BigDecimal condicao) {
-        BigDecimal inter = intervalorFinal.subtract(condicao) 
+    public double intervaloUniformeMaior(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao) {
+        BigDecimal inter = intervalorFinal.subtract(condicao)
                 .multiply(densidade(intervalorFinal, intervalorInicial), MathContext.DECIMAL64);
         return inter.doubleValue();
     }
 
     @Override
     public double intervaloUniformeMenor(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao) {
-        BigDecimal inter = condicao.subtract(intervalorInicial) 
+        BigDecimal inter = condicao.subtract(intervalorInicial)
                 .multiply(densidade(intervalorFinal, intervalorInicial), MathContext.DECIMAL64);
         return inter.doubleValue();
     }
 
     @Override
-    public double intervaloUniformeEntre(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao,BigDecimal  densidade) {
-        BigDecimal inter = intervalorFinal.subtract(intervalorInicial) 
-                .multiply(densidade, MathContext.DECIMAL64); 
+    public double intervaloUniformeEntre(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao, BigDecimal densidade) {
+        BigDecimal inter = intervalorFinal.subtract(intervalorInicial)
+                .multiply(densidade, MathContext.DECIMAL64);
         return inter.doubleValue();
     }
-    
+
+    @Override
+    public BigDecimal exponencialMenor(double media, double x) {
+        double valor = Math.pow(e, -(x / media));
+        return BigDecimal.ONE.subtract(new BigDecimal(valor), MathContext.DECIMAL128);
+    }
+
+    @Override
+    public BigDecimal exponencialMaior(double media, double x) {
+        double valor = Math.pow(e, -(x / media));
+        return new BigDecimal(valor, MathContext.DECIMAL128);
+    }
+
+    @Override
+    public BigDecimal exponencialIgual(double media, double x) {
+        double valor = Math.pow(e, -(x / media));
+        return BigDecimal.ONE
+                .divide(new BigDecimal(media, MathContext.DECIMAL128))
+                .multiply(new BigDecimal(valor, MathContext.DECIMAL128));
+    }
 }
