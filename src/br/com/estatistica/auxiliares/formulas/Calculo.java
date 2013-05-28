@@ -15,20 +15,21 @@ import java.math.MathContext;
 public class Calculo implements IFormulas {
 
     double e = StrictMath.E;
+    double pi = StrictMath.PI;
 
     @Override
-    public BigInteger fatorial(int x) {
-        long fat = 1;
-        for (int i = 1; i <= x; i++) {
-            fat *= i;
+    public BigInteger fatorial(int num) {
+        BigInteger fact = BigInteger.valueOf(1);
+        for (int i = 1; i <= num; i++) {
+            fact = fact.multiply(BigInteger.valueOf(i));
         }
-        return BigInteger.valueOf(fat);
+        return fact;
     }
 
     @Override
-    public double Px(int x, double k) {
-        double fatorial = fatorial(x).doubleValue();
-        double px = (Math.pow(e, -k) * Math.pow(k, x)) / fatorial;
+    public BigDecimal Px(int x, double media) {
+        BigDecimal fatorial = new BigDecimal(fatorial(x), MathContext.DECIMAL128);
+        BigDecimal px = new BigDecimal(Math.pow(e, -media) * Math.pow(media, x)).divide(fatorial, MathContext.DECIMAL128);
         return px;
     }
 
@@ -85,5 +86,26 @@ public class Calculo implements IFormulas {
         return BigDecimal.ONE
                 .divide(new BigDecimal(media, MathContext.DECIMAL128))
                 .multiply(new BigDecimal(valor, MathContext.DECIMAL128));
+    }
+
+    @Override
+    public BigDecimal normal(BigDecimal x, BigDecimal media, BigDecimal desvioPadrao) {
+        return x.subtract(media, MathContext.DECIMAL128).divide(desvioPadrao, MathContext.DECIMAL128);
+    }
+
+    @Override
+    public BigDecimal valorTabelaDistribuicaoNormal(double x, double ro, double media) {
+        double primeiraParte = 1 / Math.sqrt(2 * pi * Math.pow(ro, 2));
+        double resultado = Math.pow(primeiraParte, -(1 / 2 * Math.pow(ro, 2)) * Math.pow(x - media, 2));
+        return new BigDecimal(resultado);
+    }
+
+    public Double calc(double x) {
+        return Math.pow(e, x);
+    }
+    
+    public static void main(String[] args) {
+        Calculo calculo = new Calculo();
+        System.out.println(calculo.fatorial(10000));
     }
 }

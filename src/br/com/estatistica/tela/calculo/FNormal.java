@@ -1,7 +1,9 @@
 package br.com.estatistica.tela.calculo;
 
+import br.com.estatistica.auxiliares.formulas.Calculo;
 import br.com.estatistica.modelo.IModelo;
 import br.com.estatistica.tela.generico.FrameGenerico;
+import java.math.BigDecimal;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
@@ -12,6 +14,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class FNormal extends FrameGenerico {
 
+    private Calculo calculo;
     public FNormal() {
         initComponents();
         setLocationRelativeTo(null);
@@ -51,23 +54,23 @@ public class FNormal extends FrameGenerico {
         jLabel2 = new javax.swing.JLabel();
         lbCodigo = new javax.swing.JLabel();
         tfCodigo = new com.zap.arca.JATextField();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        rbIgual = new javax.swing.JRadioButton();
+        rbMenor = new javax.swing.JRadioButton();
+        rbMenorEIgual = new javax.swing.JRadioButton();
+        rbMaior = new javax.swing.JRadioButton();
+        rbMaiorEIgual = new javax.swing.JRadioButton();
+        rbEntreValores = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btCalcular = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jADecimalFormatField2 = new com.zap.arca.JADecimalFormatField();
-        jADecimalFormatField3 = new com.zap.arca.JADecimalFormatField();
-        jADecimalFormatField4 = new com.zap.arca.JADecimalFormatField();
-        jADecimalFormatField5 = new com.zap.arca.JADecimalFormatField();
-        jADecimalFormatField1 = new com.zap.arca.JADecimalFormatField();
+        tfMedia = new com.zap.arca.JADecimalFormatField();
+        tfDesvioPadrao = new com.zap.arca.JADecimalFormatField();
+        tfVariavelA = new com.zap.arca.JADecimalFormatField();
+        tfVariavelB = new com.zap.arca.JADecimalFormatField();
+        tfProbabilidade = new com.zap.arca.JADecimalFormatField();
         mbPrincipal = new javax.swing.JMenuBar();
         mnArquivo = new javax.swing.JMenu();
         miArquivoSair = new com.zap.arca.JAMenuItem();
@@ -184,6 +187,8 @@ public class FNormal extends FrameGenerico {
 
         jSplitPane1.setTopComponent(jScrollPane1);
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(750, 300));
+
         btOk.setText("OK");
         btOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,11 +208,11 @@ public class FNormal extends FrameGenerico {
         plBotoesLayout.setHorizontalGroup(
             plBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plBotoesLayout.createSequentialGroup()
-                .addContainerGap(544, Short.MAX_VALUE)
+                .addContainerGap(550, Short.MAX_VALUE)
                 .addComponent(btOk)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btCancelar)
-                .addGap(6, 6, 6))
+                .addGap(0, 0, 0))
         );
 
         plBotoesLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCancelar, btOk});
@@ -225,7 +230,7 @@ public class FNormal extends FrameGenerico {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Fórmula"));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/nornal.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/normal.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -238,69 +243,69 @@ public class FNormal extends FrameGenerico {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 19, Short.MAX_VALUE))
+            .addComponent(jLabel2)
         );
 
         lbCodigo.setText("Código:");
 
         tfCodigo.setEnabled(false);
 
-        btgNormal.add(jRadioButton2);
-        jRadioButton2.setText("P( X = A )");
-        jRadioButton2.addItemListener(new java.awt.event.ItemListener() {
+        rbIgual.setBackground(new java.awt.Color(255, 255, 255));
+        btgNormal.add(rbIgual);
+        rbIgual.setSelected(true);
+        rbIgual.setText("P( X = A )");
+        rbIgual.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton2ItemStateChanged1(evt);
-                jRadioButton2ItemStateChanged(evt);
-            }
-        });
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                rbIgualItemStateChanged1(evt);
+                rbIgualItemStateChanged(evt);
             }
         });
 
-        btgNormal.add(jRadioButton3);
-        jRadioButton3.setText("P( X < A )");
-        jRadioButton3.addItemListener(new java.awt.event.ItemListener() {
+        rbMenor.setBackground(new java.awt.Color(255, 255, 255));
+        btgNormal.add(rbMenor);
+        rbMenor.setText("P( X < A )");
+        rbMenor.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton3ItemStateChanged(evt);
-                jRadioButton3ItemStateChanged1(evt);
+                rbMenorItemStateChanged(evt);
+                rbMenorItemStateChanged1(evt);
             }
         });
 
-        btgNormal.add(jRadioButton1);
-        jRadioButton1.setText("P( X ≤  A )");
-        jRadioButton1.addItemListener(new java.awt.event.ItemListener() {
+        rbMenorEIgual.setBackground(new java.awt.Color(255, 255, 255));
+        btgNormal.add(rbMenorEIgual);
+        rbMenorEIgual.setText("P( X ≤  A )");
+        rbMenorEIgual.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton1ItemStateChanged(evt);
+                rbMenorEIgualItemStateChanged(evt);
             }
         });
 
-        btgNormal.add(jRadioButton4);
-        jRadioButton4.setText("P( X >  A )");
-        jRadioButton4.addItemListener(new java.awt.event.ItemListener() {
+        rbMaior.setBackground(new java.awt.Color(255, 255, 255));
+        btgNormal.add(rbMaior);
+        rbMaior.setText("P( X >  A )");
+        rbMaior.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton4ItemStateChanged(evt);
-                jRadioButton4ItemStateChanged1(evt);
+                rbMaiorItemStateChanged(evt);
+                rbMaiorItemStateChanged1(evt);
             }
         });
 
-        btgNormal.add(jRadioButton5);
-        jRadioButton5.setText("P( X ≥  A )");
-        jRadioButton5.addItemListener(new java.awt.event.ItemListener() {
+        rbMaiorEIgual.setBackground(new java.awt.Color(255, 255, 255));
+        btgNormal.add(rbMaiorEIgual);
+        rbMaiorEIgual.setText("P( X ≥  A )");
+        rbMaiorEIgual.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton5ItemStateChanged(evt);
+                rbMaiorEIgualItemStateChanged(evt);
             }
         });
 
-        btgNormal.add(jRadioButton6);
-        jRadioButton6.setText("P( A ≤ X ≤ B )");
-        jRadioButton6.addItemListener(new java.awt.event.ItemListener() {
+        rbEntreValores.setBackground(new java.awt.Color(255, 255, 255));
+        btgNormal.add(rbEntreValores);
+        rbEntreValores.setText("P( A ≤ X ≤ B )");
+        rbEntreValores.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton6ItemStateChanged(evt);
-                jRadioButton6ItemStateChanged1(evt);
+                rbEntreValoresItemStateChanged(evt);
+                rbEntreValoresItemStateChanged1(evt);
             }
         });
 
@@ -312,12 +317,20 @@ public class FNormal extends FrameGenerico {
 
         jLabel6.setText("Variável ( B ):");
 
-        jButton1.setText("Calcular!");
+        btCalcular.setBackground(new java.awt.Color(255, 255, 255));
+        btCalcular.setText("Calcular!");
+        btCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCalcularActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Probabilidade:");
 
-        jADecimalFormatField1.setBackground(new java.awt.Color(255, 255, 0));
-        jADecimalFormatField1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tfVariavelB.setEnabled(false);
+
+        tfProbabilidade.setBackground(new java.awt.Color(255, 255, 0));
+        tfProbabilidade.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout plCamposLayout = new javax.swing.GroupLayout(plCampos);
         plCampos.setLayout(plCamposLayout);
@@ -331,35 +344,42 @@ public class FNormal extends FrameGenerico {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))
-                    .addComponent(jRadioButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton6, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(126, 126, 126)
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(rbIgual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbMenor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbMenorEIgual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbMaior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbMaiorEIgual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbEntreValores, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plCamposLayout.createSequentialGroup()
+                        .addGap(126, 126, 126)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jADecimalFormatField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(plCamposLayout.createSequentialGroup()
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel1))
+                            .addGroup(plCamposLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(btCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(plCamposLayout.createSequentialGroup()
+                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, plCamposLayout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(jLabel6))
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfMedia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tfDesvioPadrao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tfVariavelA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tfVariavelB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(58, 58, 58)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(80, 80, 80))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jADecimalFormatField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jADecimalFormatField3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jADecimalFormatField4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jADecimalFormatField5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(41, 41, 41)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(259, 259, 259))))
         );
         plCamposLayout.setVerticalGroup(
             plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -371,44 +391,43 @@ public class FNormal extends FrameGenerico {
                 .addGap(24, 24, 24)
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plCamposLayout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 70, Short.MAX_VALUE)
-                        .addComponent(jLabel7)
-                        .addContainerGap())
-                    .addGroup(plCamposLayout.createSequentialGroup()
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton2)
+                            .addComponent(rbIgual)
                             .addComponent(jLabel1)
-                            .addComponent(jADecimalFormatField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(tfMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel4)
-                                .addComponent(jADecimalFormatField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jRadioButton3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(jADecimalFormatField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton4)
-                            .addComponent(jLabel6)
-                            .addComponent(jADecimalFormatField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tfDesvioPadrao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(rbMenor))
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(plCamposLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jRadioButton5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jADecimalFormatField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))))
+                                    .addComponent(tfVariavelA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5))
+                                .addGap(6, 6, 6)
+                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tfVariavelB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btCalcular)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tfProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7)))
+                            .addGroup(plCamposLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(rbMenorEIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbMaior)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbMaiorEIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbEntreValores))))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         tfCodigo.getDocument().addDocumentListener(new DocumentListener() {
@@ -443,19 +462,19 @@ public class FNormal extends FrameGenerico {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(plBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(plBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(plBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(jPanel1);
@@ -562,14 +581,14 @@ public class FNormal extends FrameGenerico {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tbAtalhos, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jSplitPane1)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 757, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tbAtalhos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE))
         );
 
         pack();
@@ -629,10 +648,6 @@ public class FNormal extends FrameGenerico {
         actionMenu(FILTRAR);
     }//GEN-LAST:event_tbFiltrarActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
-
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btCancelarActionPerformed
@@ -645,45 +660,49 @@ public class FNormal extends FrameGenerico {
         actionMenu(INCLUSAO);
     }//GEN-LAST:event_btOkActionPerformed
 
-    private void jRadioButton6ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton6ItemStateChanged
+    private void rbEntreValoresItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbEntreValoresItemStateChanged
 //        jATextField4.setEnabled(true);
-    }//GEN-LAST:event_jRadioButton6ItemStateChanged
+    }//GEN-LAST:event_rbEntreValoresItemStateChanged
 
-    private void jRadioButton2ItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton2ItemStateChanged1
+    private void rbIgualItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbIgualItemStateChanged1
 //        jATextField4.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton2ItemStateChanged1
+    }//GEN-LAST:event_rbIgualItemStateChanged1
 
-    private void jRadioButton3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton3ItemStateChanged
+    private void rbMenorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbMenorItemStateChanged
 //        jATextField4.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton3ItemStateChanged
+    }//GEN-LAST:event_rbMenorItemStateChanged
 
-    private void jRadioButton4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton4ItemStateChanged
-        jADecimalFormatField5.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton4ItemStateChanged
+    private void rbMaiorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbMaiorItemStateChanged
+        tfVariavelB.setEnabled(false);
+    }//GEN-LAST:event_rbMaiorItemStateChanged
 
-    private void jRadioButton2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton2ItemStateChanged
-        jADecimalFormatField5.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton2ItemStateChanged
+    private void rbIgualItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbIgualItemStateChanged
+        tfVariavelB.setEnabled(false);
+    }//GEN-LAST:event_rbIgualItemStateChanged
 
-    private void jRadioButton3ItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton3ItemStateChanged1
-        jADecimalFormatField5.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton3ItemStateChanged1
+    private void rbMenorItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbMenorItemStateChanged1
+        tfVariavelB.setEnabled(false);
+    }//GEN-LAST:event_rbMenorItemStateChanged1
 
-    private void jRadioButton4ItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton4ItemStateChanged1
-        jADecimalFormatField5.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton4ItemStateChanged1
+    private void rbMaiorItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbMaiorItemStateChanged1
+        tfVariavelB.setEnabled(false);
+    }//GEN-LAST:event_rbMaiorItemStateChanged1
 
-    private void jRadioButton5ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton5ItemStateChanged
-        jADecimalFormatField5.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton5ItemStateChanged
+    private void rbMaiorEIgualItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbMaiorEIgualItemStateChanged
+        tfVariavelB.setEnabled(false);
+    }//GEN-LAST:event_rbMaiorEIgualItemStateChanged
 
-    private void jRadioButton6ItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton6ItemStateChanged1
-        jADecimalFormatField5.setEnabled(true);
-    }//GEN-LAST:event_jRadioButton6ItemStateChanged1
+    private void rbEntreValoresItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbEntreValoresItemStateChanged1
+        tfVariavelB.setEnabled(true);
+    }//GEN-LAST:event_rbEntreValoresItemStateChanged1
 
-    private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton1ItemStateChanged
-        jADecimalFormatField5.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton1ItemStateChanged
+    private void rbMenorEIgualItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbMenorEIgualItemStateChanged
+        tfVariavelB.setEnabled(false);
+    }//GEN-LAST:event_rbMenorEIgualItemStateChanged
+
+    private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
+        tfProbabilidade.setValue(calcular()); 
+    }//GEN-LAST:event_btCalcularActionPerformed
 
     /**
      * @param args the command line arguments
@@ -697,17 +716,12 @@ public class FNormal extends FrameGenerico {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgEditar;
+    private javax.swing.JButton btCalcular;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btOk;
     private javax.swing.ButtonGroup btgNormal;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private com.zap.arca.JADecimalFormatField jADecimalFormatField1;
-    private com.zap.arca.JADecimalFormatField jADecimalFormatField2;
-    private com.zap.arca.JADecimalFormatField jADecimalFormatField3;
-    private com.zap.arca.JADecimalFormatField jADecimalFormatField4;
-    private com.zap.arca.JADecimalFormatField jADecimalFormatField5;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -716,12 +730,6 @@ public class FNormal extends FrameGenerico {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
@@ -743,6 +751,12 @@ public class FNormal extends FrameGenerico {
     private javax.swing.JMenu mnExibir;
     private javax.swing.JPanel plBotoes;
     private javax.swing.JPanel plCampos;
+    private javax.swing.JRadioButton rbEntreValores;
+    private javax.swing.JRadioButton rbIgual;
+    private javax.swing.JRadioButton rbMaior;
+    private javax.swing.JRadioButton rbMaiorEIgual;
+    private javax.swing.JRadioButton rbMenor;
+    private javax.swing.JRadioButton rbMenorEIgual;
     private javax.swing.JPopupMenu.Separator spAjuda;
     private javax.swing.JToolBar.Separator spBar;
     private javax.swing.JPopupMenu.Separator spExibir;
@@ -754,6 +768,11 @@ public class FNormal extends FrameGenerico {
     private javax.swing.JToggleButton tbIncluir;
     private javax.swing.JToggleButton tbPesquisar;
     private com.zap.arca.JATextField tfCodigo;
+    private com.zap.arca.JADecimalFormatField tfDesvioPadrao;
+    private com.zap.arca.JADecimalFormatField tfMedia;
+    private com.zap.arca.JADecimalFormatField tfProbabilidade;
+    private com.zap.arca.JADecimalFormatField tfVariavelA;
+    private com.zap.arca.JADecimalFormatField tfVariavelB;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -771,5 +790,20 @@ public class FNormal extends FrameGenerico {
     @Override
     public void preencherTabela(int linha, IModelo i) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public BigDecimal calcular(){
+        calculo = new Calculo();
+        BigDecimal desvioPadrao = tfDesvioPadrao.getValue();
+        BigDecimal media = tfMedia.getValue();
+        BigDecimal valorTabela;
+        BigDecimal variavelA = tfVariavelA.getValue();
+        BigDecimal variavelB = tfVariavelB.getValue();
+        BigDecimal resultado;
+//        if(rbIgual.isSelected()){
+//            resultado = valorTabela.calculo.normal(variavelA, media, desvioPadrao);
+//            return ;
+//        }
+        return null;
     }
 }

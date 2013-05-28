@@ -5,6 +5,7 @@ import br.com.estatistica.auxiliares.IValores;
 import br.com.estatistica.auxiliares.formulas.Calculo;
 import br.com.estatistica.dao.DAOGenerico;
 import br.com.estatistica.dao.DAOPoisson;
+import br.com.estatistica.exceptions.CalculoException;
 import br.com.estatistica.modelo.Binomial;
 import br.com.estatistica.modelo.IModelo;
 import br.com.estatistica.modelo.Poisson;
@@ -14,12 +15,12 @@ import com.zap.arca.LoggerEx;
 import com.zap.arca.util.WindowUtils;
 import java.awt.Component;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import sun.nio.cs.ext.Big5;
 
 /**
  * @author Edidelson
@@ -48,7 +49,7 @@ public class FPoisson extends FrameGenerico implements IValores {
     @Override
     public void limparCampos() {
         super.limparCampos();
-        exibirDados(dao, tbPoisson); 
+        exibirDados(dao, tbPoisson);
     }
 
     /**
@@ -675,7 +676,7 @@ public class FPoisson extends FrameGenerico implements IValores {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         tfResultado.setValue(calcular().doubleValue());
-        tfPercentual.setValue(calcular()*100);
+        tfPercentual.setValue(calcular().multiply(new BigDecimal(100)));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tfResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfResultadoActionPerformed
@@ -805,33 +806,37 @@ public class FPoisson extends FrameGenerico implements IValores {
         }
     }
 
-    public Double calcular() {
-        int tentativas = tfNumeroTentativas.intValue();
-        Calculo c = new Calculo();
-        double media = tfMedia.getValue().doubleValue();
-        double resultado = 0.0;
-        if (cbCondicao.getSelectedIndex() == 0) {
-            for (int i = tentativas; i >= 0; i--) {
-                resultado += c.Px(i, media);
+    public BigDecimal calcular() {
+        try {
+            int tentativas = tfNumeroTentativas.intValue();
+            Calculo c = new Calculo();
+            double media = tfMedia.getValue().doubleValue();
+            BigDecimal resultado = BigDecimal.ZERO;
+            if (cbCondicao.getSelectedIndex() == 0) {
+                for (int i = tentativas; i >= 0; i--) {
+                    resultado = resultado.add(c.Px(i, media));
+                }
+                return BigDecimal.ONE.subtract(resultado, MathContext.DECIMAL128);
+            } else if (cbCondicao.getSelectedIndex() == 1) {
+                for (int i = tentativas - 1; i >= 0; i--) {
+                    resultado = resultado.add(c.Px(i, media));
+                }
+                return resultado;
+            } else if (cbCondicao.getSelectedIndex() == 2) {
+                for (int i = tentativas - 1; i >= 0; i--) {
+                    resultado = resultado.add(c.Px(i, media));
+                }
+                return BigDecimal.ONE.subtract(resultado, MathContext.DECIMAL128);
+            } else if (cbCondicao.getSelectedIndex() == 3) {
+                for (int i = tentativas; i >= 0; i--) {
+                    resultado = resultado.add(c.Px(i, media));
+                }
+                return resultado;
+            } else if (cbCondicao.getSelectedIndex() == 4) {
+                return c.Px(tentativas, media);
             }
-            return 1 - resultado;
-        } else if (cbCondicao.getSelectedIndex() == 1) {
-            for (int i = tentativas - 1; i >= 0; i--) {
-                resultado += c.Px(i, media);
-            }
-            return resultado;
-        } else if (cbCondicao.getSelectedIndex() == 2) {
-            for (int i = tentativas-1; i >= 0; i--) {
-                resultado += c.Px(i, media);
-            }
-            return 1 - resultado;
-        } else if (cbCondicao.getSelectedIndex() == 3) {
-            for (int i = tentativas; i >= 0; i--) {
-                resultado += c.Px(i, media);
-            }
-            return resultado;
-        } else if (cbCondicao.getSelectedIndex() == 4) {
-            return c.Px(tentativas, media);
+        } catch (CalculoException ce) {
+            JOptionPane.showMessageDialog(null, ce.getMessage());
         }
         return null;
     }
@@ -864,14 +869,14 @@ public class FPoisson extends FrameGenerico implements IValores {
         poisson.setResultado(tfResultado.getValue().doubleValue());
         poisson.setCondicao(getCondicao());
         poisson.setPercentual(tfPercentual.getValue().doubleValue());
-        try { 
+        try {
             if (tbAlterar.isSelected()) {
                 poisson.setCodigo(Integer.valueOf(tfCodigo.getText()));
                 dao.alterar(poisson);
                 JOptionPane.showMessageDialog(null, DAOGenerico.M_ALTERAR);
             } else {
                 dao.adicionar(poisson);
-                JOptionPane.showMessageDialog(null, DAOGenerico.M_ADICIONAR); 
+                JOptionPane.showMessageDialog(null, DAOGenerico.M_ADICIONAR);
             }
         } catch (RuntimeException ex) {
             LoggerEx.log(ex);
@@ -885,7 +890,7 @@ public class FPoisson extends FrameGenerico implements IValores {
         tfNumeroTentativas.setText(poisson.getTentativas() + "");
         tfMedia.setValue(poisson.getMedia().doubleValue());
         tfResultado.setValue(poisson.getResultado().doubleValue());
-        tfPercentual.setValue(poisson.getPercentual()!=null?poisson.getPercentual().doubleValue():BigDecimal.ZERO.doubleValue());
+        tfPercentual.setValue(poisson.getPercentual() != null ? poisson.getPercentual().doubleValue() : BigDecimal.ZERO.doubleValue());
         setCondicao(poisson.getCondicao());
     }
 
