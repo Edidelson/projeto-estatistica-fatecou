@@ -14,11 +14,11 @@ import java.util.List;
  * @author Rodrigo
  */
 public class UniformeTableModel extends RowTableModel {
-    
+
     {
-        columns = new String[]{"Código","A", "B", "Tentativas", "Condição", "Resultado", "Percentual"};
+        columns = new String[]{"Código", "A", "B", "Tentativas", "Condição", "Resultado", "Percentual"};
     }
-    
+
     @Override
     public Uniforme getRow(int index) {
         return (Uniforme) cache.get(index);
@@ -46,7 +46,7 @@ public class UniformeTableModel extends RowTableModel {
             case 5:
                 return Util.formatarValores(8, new BigDecimal(uniforme.getResultado()));
             case 6:
-                return uniforme.getPercentual()!=null?uniforme.getPercentual().doubleValue():BigDecimal.ZERO.doubleValue();
+                return uniforme.getPercentual() != null ? uniforme.getPercentual().doubleValue() : BigDecimal.ZERO.doubleValue();
             default:
                 return "";
         }
@@ -73,5 +73,4 @@ public class UniformeTableModel extends RowTableModel {
                 return null;
         }
     }
-    
 }
