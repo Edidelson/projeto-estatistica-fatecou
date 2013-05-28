@@ -240,6 +240,12 @@ public class FUniforme extends FrameGenerico {
 
         jLabel5.setText("Variável (X):");
 
+        cbCondicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCondicaoActionPerformed(evt);
+            }
+        });
+
         jLabel7.setText("Intervalo :");
 
         lbResultado.setText("Resultado:");
@@ -297,6 +303,11 @@ public class FUniforme extends FrameGenerico {
         rbAcumulada.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 rbAcumuladaItemStateChanged(evt);
+            }
+        });
+        rbAcumulada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbAcumuladaActionPerformed(evt);
             }
         });
 
@@ -657,6 +668,14 @@ public class FUniforme extends FrameGenerico {
         tfNumeroTentativas.setEnabled(false);
     }//GEN-LAST:event_rbDensidadeItemStateChanged1
 
+    private void rbAcumuladaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbAcumuladaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbAcumuladaActionPerformed
+
+    private void cbCondicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCondicaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCondicaoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -855,6 +874,11 @@ public class FUniforme extends FrameGenerico {
 
     @Override
     public void preencherTabela(int linha, IModelo i) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setValor(BigDecimal probabilidade) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }
