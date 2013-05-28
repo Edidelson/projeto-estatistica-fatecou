@@ -48,24 +48,24 @@ public class Calculo implements IFormulas {
     }
 
     @Override
-    public double intervaloUniformeMaior(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao) {
+    public BigDecimal intervaloUniformeMaior(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao) {
         BigDecimal inter = intervalorFinal.subtract(condicao)
-                .multiply(densidade(intervalorFinal, intervalorInicial), MathContext.DECIMAL64);
-        return inter.doubleValue();
+                .multiply(densidade(intervalorInicial, intervalorFinal), MathContext.DECIMAL64);
+        return inter;
     }
 
     @Override
-    public double intervaloUniformeMenor(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao) {
+    public BigDecimal intervaloUniformeMenor(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao) {
         BigDecimal inter = condicao.subtract(intervalorInicial)
-                .multiply(densidade(intervalorFinal, intervalorInicial), MathContext.DECIMAL64);
-        return inter.doubleValue();
+                .multiply(densidade(intervalorInicial, intervalorFinal), MathContext.DECIMAL64);
+        return inter;
     }
 
     @Override
-    public double intervaloUniformeEntre(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao, BigDecimal densidade) {
+    public BigDecimal intervaloUniformeEntre(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal densidade) {
         BigDecimal inter = intervalorFinal.subtract(intervalorInicial)
                 .multiply(densidade, MathContext.DECIMAL64);
-        return inter.doubleValue();
+        return inter;
     }
 
     @Override
@@ -99,13 +99,15 @@ public class Calculo implements IFormulas {
         double resultado = Math.pow(primeiraParte, -(1 / 2 * Math.pow(ro, 2)) * Math.pow(x - media, 2));
         return new BigDecimal(resultado);
     }
-
-    public Double calc(double x) {
-        return Math.pow(e, x);
-    }
     
-    public static void main(String[] args) {
-        Calculo calculo = new Calculo();
-        System.out.println(calculo.fatorial(10000));
+    @Override
+    public BigDecimal media(BigDecimal inicial, BigDecimal valorFinal){
+        return inicial.add(valorFinal).divide(new BigDecimal(2), MathContext.DECIMAL64);
+    }
+
+    @Override
+    public BigDecimal variancia(BigDecimal inicial, BigDecimal valorFinal) {
+        BigDecimal var = valorFinal.subtract(inicial);
+        return var.pow(2).divide(new BigDecimal(12), MathContext.DECIMAL64); 
     }
 }

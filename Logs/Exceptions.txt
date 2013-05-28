@@ -413,3 +413,11 @@ org.hibernate.MappingException: Named query not known: Uniforme.getAll
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:113)
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:105)
 	at java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+
+---------28/05/2013 - 09:59:30----------
+org.hibernate.TransactionException: Transaction not successfully started
+	at org.hibernate.transaction.JDBCTransaction.rollback(JDBCTransaction.java:179)
+	at br.com.estatistica.dao.DAOGenerico.consultar(DAOGenerico.java:141)
+	at br.com.estatistica.dao.DAOUsuario.consultar(DAOUsuario.java:50)
+	at br.com.estatistica.tela.principal.FLogin$Conexao.run(FLogin.java:310)
+	at java.lang.Thread.run(Thread.java:722)

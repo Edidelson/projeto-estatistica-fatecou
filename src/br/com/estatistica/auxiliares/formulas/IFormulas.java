@@ -21,8 +21,11 @@ public interface IFormulas {
     BigDecimal exponencialIgual(double media, double x);
     BigDecimal normal(BigDecimal x, BigDecimal media, BigDecimal desvioPadrao);
     BigDecimal densidade(BigDecimal intervalorInicial, BigDecimal intervalorFinal);
-    double intervaloUniformeMaior(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao);
-    double intervaloUniformeMenor(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao);
-    double intervaloUniformeEntre(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao, BigDecimal densidade);
+    BigDecimal intervaloUniformeMaior(BigDecimal intervalorInicial,BigDecimal intervalorFinal, BigDecimal condicao);
+    BigDecimal intervaloUniformeMenor(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal condicao);
+    BigDecimal intervaloUniformeEntre(BigDecimal intervalorInicial, BigDecimal intervalorFinal, BigDecimal densidade);
     BigDecimal valorTabelaDistribuicaoNormal(double x, double ro, double  media);
+    BigDecimal media(BigDecimal inicial, BigDecimal valorFinal);
+    BigDecimal variancia(BigDecimal inicial, BigDecimal valorFinal);
+    
 }

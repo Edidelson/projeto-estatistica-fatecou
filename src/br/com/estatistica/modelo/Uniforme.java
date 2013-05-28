@@ -44,7 +44,67 @@ public class Uniforme implements Serializable, IModelo {
     private Double resultado;
     @Column(name = "vl_percentual")
     private Double percentual;
+    @Column(name="vl_subA")
+    private Double subA;
+    @Column(name="vl_subB")
+    private Double subB;
+    @Column(name="vl_media")
+    private Double media;
+    @Column(name="vl_desvio_padrao")
+    private Double desvioPadrao;
+    @Column(name="vl_variancia")
+    private Double variancia;
+    @Column(name="vl_coeficiente_var")
+    private Double coeficienteVar;
 
+    public Double getSubA() {
+        return subA;
+    }
+
+    public void setSubA(Double subA) {
+        this.subA = subA;
+    }
+
+    public Double getSubB() {
+        return subB;
+    }
+
+    public void setSubB(Double subB) {
+        this.subB = subB;
+    }
+
+    public Double getMedia() {
+        return media;
+    }
+
+    public void setMedia(Double media) {
+        this.media = media;
+    }
+
+    public Double getDesvioPadrao() {
+        return desvioPadrao;
+    }
+
+    public void setDesvioPadrao(Double desvioPadrao) {
+        this.desvioPadrao = desvioPadrao;
+    }
+
+    public Double getVariancia() {
+        return variancia;
+    }
+
+    public void setVariancia(Double variancia) {
+        this.variancia = variancia;
+    }
+
+    public Double getCoeficienteVar() {
+        return coeficienteVar;
+    }
+
+    public void setCoeficienteVar(Double coeficienteVar) {
+        this.coeficienteVar = coeficienteVar;
+    }
+    
     @Override
     public Object getCodigo() {
         return codigo;
@@ -97,7 +157,7 @@ public class Uniforme implements Serializable, IModelo {
         MENOR("Menor"),
         MAIOR_E_IGUAL("Maior e igual"),
         MENOR_E_IGUAL("Menor e igual"),
-        IGUAL("Igual");
+        ENTRE("Entre");
         private String nome;
 
         private Condicao() {
