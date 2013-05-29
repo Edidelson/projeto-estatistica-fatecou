@@ -95,7 +95,6 @@ public class FPrincipal extends javax.swing.JFrame {
         menuNormal = new javax.swing.JMenuItem();
         menuExponencial = new javax.swing.JMenuItem();
         menuUniforme = new javax.swing.JMenuItem();
-        mnMovimentos = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         jMenuItem3.setText("jMenuItem3");
@@ -180,7 +179,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
         mbPrincipal.add(mnArquivo);
 
-        jMenu1.setText("Cadastro");
+        jMenu1.setText("Cálculos");
 
         menuUsuario.setText("Usuário...");
         menuUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -232,10 +231,6 @@ public class FPrincipal extends javax.swing.JFrame {
         jMenu1.add(menuUniforme);
 
         mbPrincipal.add(jMenu1);
-
-        mnMovimentos.setMnemonic('M');
-        mnMovimentos.setText("Movimentos");
-        mbPrincipal.add(mnMovimentos);
 
         jMenu2.setText("Ajuda");
         mbPrincipal.add(jMenu2);
@@ -342,7 +337,6 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem miBackup;
     private javax.swing.JMenuItem miSair;
     private javax.swing.JMenu mnArquivo;
-    private javax.swing.JMenu mnMovimentos;
     private javax.swing.JToolBar tbAtalhos;
     // End of variables declaration//GEN-END:variables
 

@@ -430,14 +430,14 @@ public class FBinomial extends FrameGenerico implements IValores {
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plCamposLayout.createSequentialGroup()
                         .addComponent(lbResultado)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbResultado1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(plCamposLayout.createSequentialGroup()
                         .addComponent(tfResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfPercentual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tfPercentual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbResultado1))
                             .addComponent(jLabel6))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btCalcular)
@@ -890,7 +890,7 @@ public class FBinomial extends FrameGenerico implements IValores {
         tfNumeroTentativas.setText(binomial.getTentativas() + "");
         tfProbabilidade.setValue(binomial.getProbabilidade().doubleValue());
         tfResultado.setValue(binomial.getResultado().doubleValue());
-        tfPercentual.setValue(binomial.getPercentual().doubleValue());
+        tfPercentual.setValue(binomial.getPercentual()!=null?binomial.getPercentual().doubleValue(): BigDecimal.ZERO);
         setCondicao(binomial.getCondicao());
     }
 

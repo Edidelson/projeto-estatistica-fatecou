@@ -23,7 +23,7 @@ import javax.swing.SwingUtilities;
 
 /**
  *
- * @author Everton
+ * @author Edidelson
  */
 public class FBackup extends javax.swing.JFrame {
 
@@ -76,7 +76,7 @@ public class FBackup extends javax.swing.JFrame {
         lbEstado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Orçamentos - Backup");
+        setTitle("Backup");
         setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Backup"));
@@ -278,7 +278,7 @@ public class FBackup extends javax.swing.JFrame {
                 // Preparando a saída
                 out = new FileOutputStream(arquivo);
                 // Preparando o comando a ser executado
-                String comando = "mysqldump --add-drop-database --databases clube -ubackup -pbackup";
+                String comando = "mysqldump --add-drop-database --databases estatistica -uroot -proot";
                 // Executando o comando e recebendo sua saída
                 in = new InputStreamReader(Runtime.getRuntime().exec(comando).getInputStream(), "UTF-8");
                 // Armazenando a saída em uma String
