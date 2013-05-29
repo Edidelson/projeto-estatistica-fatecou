@@ -397,9 +397,9 @@ public class FUniforme extends FrameGenerico {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfDesvioPadrao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbDesvioPadrao))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfCoeficiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbCoeficiente))
@@ -438,7 +438,8 @@ public class FUniforme extends FrameGenerico {
                             .addGroup(plCamposLayout.createSequentialGroup()
                                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(jLabel5))
+                                    .addComponent(jLabel5)
+                                    .addComponent(lbCodigo))
                                 .addGap(14, 14, 14)
                                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tfConstanteB, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -450,18 +451,17 @@ public class FUniforme extends FrameGenerico {
                 .addContainerGap(196, Short.MAX_VALUE))
             .addGroup(plCamposLayout.createSequentialGroup()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbCodigo)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         plCamposLayout.setVerticalGroup(
             plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plCamposLayout.createSequentialGroup()
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbCodigo)
-                            .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbCodigo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -477,9 +477,9 @@ public class FUniforme extends FrameGenerico {
                             .addComponent(tfVariavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(4, 4, 4)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfSubIntervaloA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -488,12 +488,10 @@ public class FUniforme extends FrameGenerico {
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfSubIntervaloB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)))
-                    .addGroup(plCamposLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         tfCodigo.getDocument().addDocumentListener(new DocumentListener() {
@@ -684,7 +682,6 @@ public class FUniforme extends FrameGenerico {
             inserirOuAlterar();
             limparCampos();
         }
-        actionMenu(INCLUSAO);
     }//GEN-LAST:event_btOkActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
@@ -974,8 +971,8 @@ public class FUniforme extends FrameGenerico {
         uniforme.setMedia(tfMedia.getValue().doubleValue());
         uniforme.setVariancia(tfVariancia.getValue().doubleValue());
         uniforme.setDesvioPadrao(tfDesvioPadrao.getValue().doubleValue());
-        uniforme.setCoeficienteVar(tfCoeficiente.getValue().doubleValue()); 
-        
+        uniforme.setCoeficienteVar(tfCoeficiente.getValue().doubleValue());
+
         uniforme.setCondicao(getCondicao());
         try {
             if (tbAlterar.isSelected()) {
@@ -996,14 +993,14 @@ public class FUniforme extends FrameGenerico {
         tfCodigo.setText(uniforme.getCodigo() + "");
         tfConstanteA.setValue(uniforme.getConstanteA());
         tfConstanteB.setValue(uniforme.getConstanteB());
-        tfSubIntervaloA.setValue(uniforme.getSubA()!=null?uniforme.getSubA().doubleValue():BigDecimal.ZERO);
-        tfSubIntervaloB.setValue(uniforme.getSubB()!=null?uniforme.getSubB().doubleValue():BigDecimal.ZERO);
+        tfSubIntervaloA.setValue(uniforme.getSubA() != null ? uniforme.getSubA().doubleValue() : BigDecimal.ZERO);
+        tfSubIntervaloB.setValue(uniforme.getSubB() != null ? uniforme.getSubB().doubleValue() : BigDecimal.ZERO);
         tfResultado.setValue(uniforme.getResultado().doubleValue());
         tfPercentual.setValue(uniforme.getPercentual().doubleValue());
-       tfMedia.setValue(uniforme.getMedia().doubleValue());
-       tfDesvioPadrao.setValue(uniforme.getDesvioPadrao().doubleValue());
-       tfCoeficiente.setValue(uniforme.getCoeficienteVar().doubleValue());
-       tfVariancia.setValue(uniforme.getVariancia().doubleValue());
+        tfMedia.setValue(uniforme.getMedia().doubleValue());
+        tfDesvioPadrao.setValue(uniforme.getDesvioPadrao().doubleValue());
+        tfCoeficiente.setValue(uniforme.getCoeficienteVar().doubleValue());
+        tfVariancia.setValue(uniforme.getVariancia().doubleValue());
         setCondicao(uniforme.getCondicao());
     }
 

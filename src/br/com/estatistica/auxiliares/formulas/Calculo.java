@@ -69,14 +69,14 @@ public class Calculo implements IFormulas {
     }
 
     @Override
-    public BigDecimal exponencialMenor(double media, double x) {
-        double valor = Math.pow(e, -(x / media));
+    public BigDecimal exponencialMenor(BigDecimal media, BigDecimal x) {
+        double valor = Math.pow(e, -(x.divide(media, MathContext.DECIMAL32).doubleValue()));
         return BigDecimal.ONE.subtract(new BigDecimal(valor), MathContext.DECIMAL128);
     }
 
     @Override
-    public BigDecimal exponencialMaior(double media, double x) {
-        double valor = Math.pow(e, -(x / media));
+    public BigDecimal exponencialMaior(BigDecimal media, BigDecimal x) {
+        double valor = Math.pow(e, -(x.divide(media, MathContext.DECIMAL32).doubleValue()));
         return new BigDecimal(valor, MathContext.DECIMAL128);
     }
 

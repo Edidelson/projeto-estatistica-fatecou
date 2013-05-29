@@ -17,5 +17,6 @@
         <mapping class="br.com.estatistica.modelo.Binomial"/>
         <mapping class="br.com.estatistica.modelo.Poisson"/>
         <mapping class="br.com.estatistica.modelo.Uniforme"/>
+        <mapping class="br.com.estatistica.modelo.Exponencial"/>
     </session-factory>
 </hibernate-configuration>

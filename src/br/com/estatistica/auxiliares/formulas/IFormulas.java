@@ -16,8 +16,8 @@ public interface IFormulas {
     BigInteger fatorial(int x);
     BigDecimal Px(int x, double k);
     double binomial(int n, int k, double p);
-    BigDecimal exponencialMenor(double media, double x);
-    BigDecimal exponencialMaior(double media, double x);
+    BigDecimal exponencialMenor(BigDecimal media, BigDecimal x);
+    BigDecimal exponencialMaior(BigDecimal media, BigDecimal x);
     BigDecimal exponencialIgual(double media, double x);
     BigDecimal normal(BigDecimal x, BigDecimal media, BigDecimal desvioPadrao);
     BigDecimal densidade(BigDecimal intervalorInicial, BigDecimal intervalorFinal);

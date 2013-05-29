@@ -1,17 +1,16 @@
 package br.com.estatistica.tela.calculo;
 
-import br.com.estatistica.auxiliares.DProbabilidade;
 import br.com.estatistica.auxiliares.IValores;
-import br.com.estatistica.dao.DAOBinomial;
-import br.com.estatistica.modelo.Binomial;
+import br.com.estatistica.auxiliares.formulas.Calculo;
+import br.com.estatistica.dao.DAOExponencial;
+import br.com.estatistica.modelo.Exponencial;
+import br.com.estatistica.modelo.Exponencial.Condicao;
 import br.com.estatistica.modelo.IModelo;
 import br.com.estatistica.tela.generico.FrameGenerico;
-import br.com.estatistica.tela.tablemodel.BinomialTableModel;
-import com.zap.arca.LoggerEx;
+import br.com.estatistica.tela.tablemodel.ExponencialTableModel;
 import com.zap.arca.util.WindowUtils;
 import java.awt.Component;
 import java.math.BigDecimal;
-import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
@@ -22,18 +21,17 @@ import javax.swing.event.ListSelectionListener;
  */
 public class FExponencial extends FrameGenerico implements IValores {
 
-    private BinomialTableModel binomialTableModel = new BinomialTableModel();
-    private Binomial binomial;
+    private ExponencialTableModel exponencialTableModel = new ExponencialTableModel();
+    private Exponencial exponencial;
+    private Calculo calculo;
 
     public FExponencial() {
         initComponents();
         setLocationRelativeTo(null);
         iniciar();
         actionMenu(INCLUSAO);
- 
-    }
 
-   
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,7 +53,7 @@ public class FExponencial extends FrameGenerico implements IValores {
         tbFiltrar = new javax.swing.JToggleButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbBinomial = new com.zap.arca.JATable();
+        tbExponencial = new com.zap.arca.JATable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         plBotoes = new javax.swing.JPanel();
@@ -63,26 +61,27 @@ public class FExponencial extends FrameGenerico implements IValores {
         btCancelar = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         plCampos = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
         lbCodigo = new javax.swing.JLabel();
         tfCodigo = new com.zap.arca.JATextField();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btCalcular = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jADecimalFormatField1 = new com.zap.arca.JADecimalFormatField();
-        jADecimalFormatField2 = new com.zap.arca.JADecimalFormatField();
+        tfMedia = new com.zap.arca.JADecimalFormatField();
+        tfVariavelA = new com.zap.arca.JADecimalFormatField();
         tfVariavelB = new com.zap.arca.JADecimalFormatField();
-        jADecimalFormatField4 = new com.zap.arca.JADecimalFormatField();
-        jLabel8 = new javax.swing.JLabel();
-        jADecimalFormatField5 = new com.zap.arca.JADecimalFormatField();
+        tfProbabildiade = new com.zap.arca.JADecimalFormatField();
+        cbCondicao = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        lbResultado1 = new javax.swing.JLabel();
+        tfResultado = new com.zap.arca.JADecimalFormatField();
+        lbResultado = new javax.swing.JLabel();
+        tfPercentual = new com.zap.arca.JADecimalFormatField();
+        jLabel3 = new javax.swing.JLabel();
+        tfVariancia = new com.zap.arca.JADecimalFormatField();
+        lbVariancia = new javax.swing.JLabel();
         mbPrincipal = new javax.swing.JMenuBar();
         mnArquivo = new javax.swing.JMenu();
         miArquivoSair = new com.zap.arca.JAMenuItem();
@@ -172,8 +171,8 @@ public class FExponencial extends FrameGenerico implements IValores {
         jSplitPane1.setDividerLocation(110);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        tbBinomial.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tbBinomial.setModel(new javax.swing.table.DefaultTableModel(
+        tbExponencial.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbExponencial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -190,10 +189,10 @@ public class FExponencial extends FrameGenerico implements IValores {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tbBinomial);
-        tbBinomial.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        jScrollPane1.setViewportView(tbExponencial);
+        tbExponencial.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
-                alterar(tbBinomial);
+                alterar(tbExponencial);
             }
         });
 
@@ -220,11 +219,11 @@ public class FExponencial extends FrameGenerico implements IValores {
         plBotoesLayout.setHorizontalGroup(
             plBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plBotoesLayout.createSequentialGroup()
-                .addContainerGap(544, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btOk)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btCancelar)
-                .addGap(6, 6, 6))
+                .addGap(0, 0, 0))
         );
 
         plBotoesLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCancelar, btOk});
@@ -239,82 +238,9 @@ public class FExponencial extends FrameGenerico implements IValores {
         plCampos.setBackground(new java.awt.Color(255, 255, 255));
         plCampos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Fórmula"));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 169, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 126, Short.MAX_VALUE)
-        );
-
         lbCodigo.setText("Código:");
 
         tfCodigo.setEnabled(false);
-
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("P( X = A )");
-        jRadioButton2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton2ItemStateChanged(evt);
-            }
-        });
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
-            }
-        });
-
-        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("P( X < A )");
-        jRadioButton3.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton3ItemStateChanged(evt);
-            }
-        });
-
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("P( X ≤  A )");
-        jRadioButton1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton1ItemStateChanged(evt);
-            }
-        });
-
-        jRadioButton4.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton4);
-        jRadioButton4.setText("P( X >  A )");
-        jRadioButton4.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton4ItemStateChanged(evt);
-            }
-        });
-
-        jRadioButton5.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton5);
-        jRadioButton5.setText("P( X ≥  A )");
-        jRadioButton5.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton5ItemStateChanged(evt);
-            }
-        });
-
-        jRadioButton6.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton6);
-        jRadioButton6.setText("P( A ≤ X ≤ B )");
-        jRadioButton6.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton6ItemStateChanged(evt);
-            }
-        });
 
         jLabel1.setText("Média ( µ ):");
 
@@ -322,12 +248,91 @@ public class FExponencial extends FrameGenerico implements IValores {
 
         jLabel6.setText("Variável ( B ):");
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Calcular!");
+        btCalcular.setBackground(new java.awt.Color(255, 255, 255));
+        btCalcular.setText("Calcular!");
+        btCalcular.setOpaque(false);
+        btCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCalcularActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Probabilidade:");
 
-        jLabel8.setText("Resultado:");
+        tfVariavelB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfVariavelBActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Condição:");
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultados"));
+
+        lbResultado1.setText("Percentual:");
+
+        tfResultado.setEnabled(false);
+        tfResultado.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tfResultado.setName("RESULTADO"); // NOI18N
+        tfResultado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfResultadoActionPerformed(evt);
+            }
+        });
+
+        lbResultado.setText("Resultado:");
+
+        tfPercentual.setEnabled(false);
+        tfPercentual.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        jLabel3.setText("%");
+
+        tfVariancia.setEnabled(false);
+        tfVariancia.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tfVariancia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfVarianciaActionPerformed(evt);
+            }
+        });
+
+        lbVariancia.setText("Variância:");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbResultado)
+                    .addComponent(lbVariancia)
+                    .addComponent(lbResultado1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfPercentual, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                    .addComponent(tfResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tfVariancia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbResultado))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfVariancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbVariancia))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbResultado1)
+                    .addComponent(jLabel3)))
+        );
 
         javax.swing.GroupLayout plCamposLayout = new javax.swing.GroupLayout(plCampos);
         plCampos.setLayout(plCamposLayout);
@@ -335,93 +340,69 @@ public class FExponencial extends FrameGenerico implements IValores {
             plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plCamposLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
-                        .addComponent(lbCodigo)
+                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, plCamposLayout.createSequentialGroup()
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6)
+                            .addComponent(lbCodigo))
+                        .addGap(6, 6, 6)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btCalcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfVariavelA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfMedia, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfVariavelB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, plCamposLayout.createSequentialGroup()
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))
-                    .addComponent(jRadioButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton6, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(126, 126, 126)
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel5))
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jADecimalFormatField5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(plCamposLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                            .addComponent(jADecimalFormatField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jADecimalFormatField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tfVariavelB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jADecimalFormatField4, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
-                .addGap(41, 41, 41)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbCondicao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfProbabildiade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(58, 58, 58)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         plCamposLayout.setVerticalGroup(
             plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
-                .addGap(4, 4, 4)
+                .addContainerGap()
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCodigo)
                     .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(10, 10, 10)
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plCamposLayout.createSequentialGroup()
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(plCamposLayout.createSequentialGroup()
                                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jRadioButton2)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton3))
-                            .addGroup(plCamposLayout.createSequentialGroup()
-                                .addComponent(jADecimalFormatField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jADecimalFormatField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(plCamposLayout.createSequentialGroup()
-                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jRadioButton1)
-                                    .addComponent(jLabel6)
-                                    .addComponent(tfVariavelB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(3, 3, 3)
-                                .addComponent(jRadioButton4))
-                            .addGroup(plCamposLayout.createSequentialGroup()
-                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jADecimalFormatField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(3, 3, 3)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton5)
+                                    .addComponent(jLabel1)
+                                    .addComponent(tfMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27))
                             .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel8)
-                                .addComponent(jADecimalFormatField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(plCamposLayout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(jButton1))
-                            .addGroup(plCamposLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                                .addComponent(jLabel5)
+                                .addComponent(tfVariavelA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfVariavelB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfProbabildiade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
+                    .addGroup(plCamposLayout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(31, 31, 31)
+                .addComponent(btCalcular)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tfCodigo.getDocument().addDocumentListener(new DocumentListener() {
@@ -456,19 +437,19 @@ public class FExponencial extends FrameGenerico implements IValores {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(plBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTabbedPane1)
+                    .addComponent(plBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(plBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(jPanel1);
@@ -642,10 +623,6 @@ public class FExponencial extends FrameGenerico implements IValores {
         actionMenu(FILTRAR);
     }//GEN-LAST:event_tbFiltrarActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
-
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btCancelarActionPerformed
@@ -655,32 +632,24 @@ public class FExponencial extends FrameGenerico implements IValores {
             inserirOuAlterar();
             limparCampos();
         }
-        actionMenu(INCLUSAO);
     }//GEN-LAST:event_btOkActionPerformed
 
-    private void jRadioButton2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton2ItemStateChanged
-        tfVariavelB.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton2ItemStateChanged
+    private void tfVariavelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfVariavelBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfVariavelBActionPerformed
 
-    private void jRadioButton6ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton6ItemStateChanged
-        tfVariavelB.setEnabled(true);
-    }//GEN-LAST:event_jRadioButton6ItemStateChanged
+    private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
+        tfResultado.setValue(calcular());
+        tfPercentual.setValue(calcular().multiply(new BigDecimal(100))); 
+    }//GEN-LAST:event_btCalcularActionPerformed
 
-    private void jRadioButton3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton3ItemStateChanged
-        tfVariavelB.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton3ItemStateChanged
+    private void tfResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfResultadoActionPerformed
 
-    private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton1ItemStateChanged
-        tfVariavelB.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton1ItemStateChanged
+    }//GEN-LAST:event_tfResultadoActionPerformed
 
-    private void jRadioButton4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton4ItemStateChanged
-        tfVariavelB.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton4ItemStateChanged
-
-    private void jRadioButton5ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton5ItemStateChanged
-        tfVariavelB.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton5ItemStateChanged
+    private void tfVarianciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfVarianciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfVarianciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -694,32 +663,27 @@ public class FExponencial extends FrameGenerico implements IValores {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgEditar;
+    private javax.swing.JButton btCalcular;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btOk;
     private javax.swing.ButtonGroup buttonGroup1;
-    private com.zap.arca.JADecimalFormatField jADecimalFormatField1;
-    private com.zap.arca.JADecimalFormatField jADecimalFormatField2;
-    private com.zap.arca.JADecimalFormatField jADecimalFormatField4;
-    private com.zap.arca.JADecimalFormatField jADecimalFormatField5;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox cbCondicao;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbCodigo;
+    private javax.swing.JLabel lbResultado;
+    private javax.swing.JLabel lbResultado1;
+    private javax.swing.JLabel lbVariancia;
     private javax.swing.JMenuBar mbPrincipal;
     private com.zap.arca.JAMenuItem miAjudaConteudo;
     private com.zap.arca.JAMenuItem miAjudaSobre;
@@ -741,46 +705,70 @@ public class FExponencial extends FrameGenerico implements IValores {
     private javax.swing.JPopupMenu.Separator spExibir;
     private javax.swing.JToggleButton tbAlterar;
     private javax.swing.JToolBar tbAtalhos;
-    private com.zap.arca.JATable tbBinomial;
     private javax.swing.JToggleButton tbExcluir;
+    private com.zap.arca.JATable tbExponencial;
     private javax.swing.JToggleButton tbFiltrar;
     private javax.swing.JToggleButton tbIncluir;
     private javax.swing.JToggleButton tbPesquisar;
     private com.zap.arca.JATextField tfCodigo;
+    private com.zap.arca.JADecimalFormatField tfMedia;
+    private com.zap.arca.JADecimalFormatField tfPercentual;
+    private com.zap.arca.JADecimalFormatField tfProbabildiade;
+    private com.zap.arca.JADecimalFormatField tfResultado;
+    private com.zap.arca.JADecimalFormatField tfVariancia;
+    private com.zap.arca.JADecimalFormatField tfVariavelA;
     private com.zap.arca.JADecimalFormatField tfVariavelB;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void iniciar() {
-        dao = new DAOBinomial();
+        dao = new DAOExponencial();
 
-        tbPrincipal = tbBinomial;
+        tbPrincipal = tbExponencial;
         toggleButton = tbIncluir;
         ctChave = tfCodigo;
 
-        tbBinomial.setName("TB_FBINOMIAL");
-        tbBinomial.setModel(binomialTableModel);
+        tbExponencial.setName("TB_FEXPONENCICAL");
+        tbExponencial.setModel(exponencialTableModel);
 
-        camposVerificar = new Component[]{ };
+        camposVerificar = new Component[]{};
         camposLimpar = new Component[]{tfCodigo};
-
+        for (Exponencial.Condicao e : Condicao.values()) {
+            cbCondicao.addItem(e);
+        }
         WindowUtils.nextEnter(plCampos);
         WindowUtils.exitEsc(this);
-        configurarSincronizacao(dao, tbBinomial);
-
+        configurarSincronizacao(dao, tbExponencial);
+        casasDecimais();
     }
 
- 
+    public Exponencial.Condicao getCondicao() {
+        if (cbCondicao.getSelectedIndex() == 0) {
+            return Condicao.MAIOR;
+        } else {
+            return Condicao.MENOR;
+        }
+    }
 
+    public void setExponencial(Exponencial.Condicao condicao) {
+        switch (condicao) {
+            case MAIOR:
+                cbCondicao.setSelectedIndex(0);
+                break;
+            case MENOR:
+                cbCondicao.setSelectedIndex(1);
+                break;
+        }
+    }
 
     @Override
     public void inserirOuAlterar() {
-
+        exponencial = new Exponencial();
+        exponencial.setCondicao(getCondicao());
     }
 
     @Override
     public void preencherCampos(IModelo m) {
-
     }
 
     @Override
@@ -793,4 +781,25 @@ public class FExponencial extends FrameGenerico implements IValores {
 //        tfProbabilidade.setValue(probabilidade.doubleValue());
     }
 
+    public BigDecimal calcular() {
+        BigDecimal media = tfMedia.getValue();
+        BigDecimal variavel = tfVariavelA.getValue();
+        BigDecimal resultado = BigDecimal.ONE;
+        calculo = new Calculo();
+        tfVariancia.setValue(Math.pow(media.doubleValue(), 2));
+        if (cbCondicao.getSelectedIndex() == 0) {
+            resultado = calculo.exponencialMaior(media, variavel);
+            return resultado;
+        } else {
+            resultado = calculo.exponencialMenor(media, variavel);
+            return resultado;
+        }
+    }
+    public void casasDecimais(){
+        tfMedia.setTotalCasas(5, 6);
+        tfVariavelA.setTotalCasas(5, 6);
+        tfPercentual.setTotalCasas(2, 2);
+        tfVariancia.setTotalCasas(7, 4);
+        tfResultado.setTotalCasas(5, 6);
+    }
 }
