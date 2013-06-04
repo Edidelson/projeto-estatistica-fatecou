@@ -89,11 +89,6 @@ public class Calculo implements IFormulas {
     }
 
     @Override
-    public BigDecimal normal(BigDecimal x, BigDecimal media, BigDecimal desvioPadrao) {
-        return x.subtract(media, MathContext.DECIMAL128).divide(desvioPadrao, MathContext.DECIMAL128);
-    }
-
-    @Override
     public BigDecimal valorTabelaDistribuicaoNormal(double x, double ro, double media) {
         double primeiraParte = 1 / Math.sqrt(2 * pi * Math.pow(ro, 2));
         double resultado = Math.pow(primeiraParte, -(1 / 2 * Math.pow(ro, 2)) * Math.pow(x - media, 2));
