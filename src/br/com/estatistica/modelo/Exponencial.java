@@ -37,13 +37,32 @@ public class Exponencial implements Serializable, IModelo{
     private Double variavelA;
     @Column(name="vl_variavelB")
     private Double variavelB;
-    @Column(name="vl_probabilidade")
-    private Double probabilidade;
     @Column(name="tx_condicao")
     @Enumerated(EnumType.STRING)
     private Condicao condicao;
     @Column(name="vl_resultado")
     private Double resultado;
+    @Column(name="vl_variancia")
+    private Double variancia;
+    @Column(name="vl_percentual")
+    private Double percentual;
+
+    public Double getVariancia() {
+        return variancia;
+    }
+
+    public void setVariancia(Double variancia) {
+        this.variancia = variancia;
+    }
+
+    public Double getPercentual() {
+        return percentual;
+    }
+
+    public void setPercentual(Double percentual) {
+        this.percentual = percentual;
+    }
+    
     @Override
     public Object getCodigo() {
         return codigo;
@@ -85,14 +104,6 @@ public class Exponencial implements Serializable, IModelo{
         this.variavelB = variavelB;
     }
 
-    public Double getProbabilidade() {
-        return probabilidade;
-    }
-
-    public void setProbabilidade(Double probabilidade) {
-        this.probabilidade = probabilidade;
-    }
-
     public Condicao getCondicao() {
         return condicao;
     }
@@ -110,10 +121,8 @@ public class Exponencial implements Serializable, IModelo{
     public static enum Condicao {
 
         MAIOR("Maior"),
-        MENOR("Menor");
-//        MAIOR_E_IGUAL("Maior e igual"),
-//        MENOR_E_IGUAL("Menor e igual"),
-//        ENTRE("Entre");
+        MENOR("Menor"),
+        ENTRE("Entre");
         private String nome;
 
         private Condicao() {

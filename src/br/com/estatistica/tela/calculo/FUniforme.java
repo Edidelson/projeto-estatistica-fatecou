@@ -11,6 +11,7 @@ import com.zap.arca.LoggerEx;
 import com.zap.arca.util.WindowUtils;
 import java.awt.Component;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -940,7 +941,7 @@ public class FUniforme extends FrameGenerico {
         tfMedia.setValue(media);
         tfVariancia.setValue(variancia);
         tfDesvioPadrao.setValue(desvioPadrao);
-        tfCoeficiente.setValue(desvioPadrao.divide(media).multiply(new BigDecimal(100)));
+        tfCoeficiente.setValue(desvioPadrao.divide(media, MathContext.DECIMAL32).multiply(new BigDecimal(100), MathContext.DECIMAL32));
         if (cbCondicao.getSelectedIndex() == 0) {
             resultado = resultado.add(calculo.intervaloUniformeMaior(inicial, interFinal, condicao));
             return resultado;
@@ -1022,13 +1023,25 @@ public class FUniforme extends FrameGenerico {
             return false;
         }
 
-
         if (cbCondicao.getSelectedIndex() == 4 && tfSubIntervaloA.getValue().compareTo(tfConstanteA.getValue()) <= 0
                 || tfSubIntervaloB.getValue().compareTo(tfConstanteB.getValue()) >= 0) {
             JOptionPane.showMessageDialog(null, "Valor fora do intervalor.");
             tfSubIntervaloA.requestFocus();
             return false;
         }
+//        
+//        if (Double.parseDouble(tfVariavel.getText()) < tfConstanteA.getValue().doubleValue()) {
+//            JOptionPane.showMessageDialog(null, "O valor de X não pode ser menor que A");
+//            tfVariavel.requestFocus();
+//            return false;
+//        }
+//        
+//        if (Double.parseDouble(tfVariavel.getText()) < tfConstanteB.getValue().doubleValue()) {
+//            JOptionPane.showMessageDialog(null, "O valor de X não pode ser menor que A");
+//            tfVariavel.requestFocus();
+//            return false;
+//        }
+        
         return true;
     }
 }

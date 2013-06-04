@@ -14,7 +14,7 @@ import java.util.List;
 public class ExponencialTableModel extends RowTableModel {
 
     {
-        columns = new String[]{"Código", "Média", "A", "B", "Probabilidade", "Condição", "Resultado"};
+        columns = new String[]{"Código", "Média", "A", "B", "Condição", "Resultado"};
     }
 
     @Override
@@ -40,10 +40,8 @@ public class ExponencialTableModel extends RowTableModel {
             case 3:
                 return exponencial.getVariavelB().doubleValue();
             case 4:
-                return exponencial.getProbabilidade().doubleValue();
-            case 5:
                 return exponencial.getCondicao();
-            case 6:
+            case 5:
                 return exponencial.getResultado().doubleValue();
             default:
                 return "";
@@ -62,10 +60,8 @@ public class ExponencialTableModel extends RowTableModel {
             case 3:
                 return Double.class;
             case 4:
-                return Double.class;
-            case 5:
                 return String.class;
-            case 6:
+            case 5:
                 return Double.class;
             default:
                 return null;

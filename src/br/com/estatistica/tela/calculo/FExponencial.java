@@ -8,9 +8,12 @@ import br.com.estatistica.modelo.Exponencial.Condicao;
 import br.com.estatistica.modelo.IModelo;
 import br.com.estatistica.tela.generico.FrameGenerico;
 import br.com.estatistica.tela.tablemodel.ExponencialTableModel;
+import com.zap.arca.LoggerEx;
 import com.zap.arca.util.WindowUtils;
 import java.awt.Component;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
@@ -64,14 +67,10 @@ public class FExponencial extends FrameGenerico implements IValores {
         lbCodigo = new javax.swing.JLabel();
         tfCodigo = new com.zap.arca.JATextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lbVariavelA = new javax.swing.JLabel();
         btCalcular = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         tfMedia = new com.zap.arca.JADecimalFormatField();
         tfVariavelA = new com.zap.arca.JADecimalFormatField();
-        tfVariavelB = new com.zap.arca.JADecimalFormatField();
-        tfProbabildiade = new com.zap.arca.JADecimalFormatField();
         cbCondicao = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -82,6 +81,9 @@ public class FExponencial extends FrameGenerico implements IValores {
         jLabel3 = new javax.swing.JLabel();
         tfVariancia = new com.zap.arca.JADecimalFormatField();
         lbVariancia = new javax.swing.JLabel();
+        tfVariavelB = new com.zap.arca.JADecimalFormatField();
+        lbVariavelB = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         mbPrincipal = new javax.swing.JMenuBar();
         mnArquivo = new javax.swing.JMenu();
         miArquivoSair = new com.zap.arca.JAMenuItem();
@@ -244,9 +246,7 @@ public class FExponencial extends FrameGenerico implements IValores {
 
         jLabel1.setText("Média ( µ ):");
 
-        jLabel5.setText("Variável ( A ):");
-
-        jLabel6.setText("Variável ( B ):");
+        lbVariavelA.setText("Variável ( A ):");
 
         btCalcular.setBackground(new java.awt.Color(255, 255, 255));
         btCalcular.setText("Calcular!");
@@ -257,11 +257,9 @@ public class FExponencial extends FrameGenerico implements IValores {
             }
         });
 
-        jLabel7.setText("Probabilidade:");
-
-        tfVariavelB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfVariavelBActionPerformed(evt);
+        cbCondicao.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbCondicaoItemStateChanged(evt);
             }
         });
 
@@ -334,37 +332,41 @@ public class FExponencial extends FrameGenerico implements IValores {
                     .addComponent(jLabel3)))
         );
 
+        tfVariavelB.setEnabled(false);
+
+        lbVariavelB.setText("Variável ( B ):");
+
         javax.swing.GroupLayout plCamposLayout = new javax.swing.GroupLayout(plCampos);
         plCampos.setLayout(plCamposLayout);
         plCamposLayout.setHorizontalGroup(
             plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plCamposLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, plCamposLayout.createSequentialGroup()
+                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(plCamposLayout.createSequentialGroup()
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, plCamposLayout.createSequentialGroup()
+                                .addComponent(lbVariavelB)
+                                .addGap(19, 19, 19)
+                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btCalcular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbCondicao, javax.swing.GroupLayout.Alignment.LEADING, 0, 89, Short.MAX_VALUE)
+                                    .addComponent(tfVariavelB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(plCamposLayout.createSequentialGroup()
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
+                            .addComponent(lbVariavelA)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel6)
                             .addComponent(lbCodigo))
-                        .addGap(6, 6, 6)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btCalcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfVariavelA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfMedia, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfVariavelB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, plCamposLayout.createSequentialGroup()
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbCondicao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfProbabildiade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(58, 58, 58)
+                        .addGap(18, 18, 18)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfMedia, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                            .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfVariavelA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(60, 60, 60)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addGap(135, 135, 135))
         );
         plCamposLayout.setVerticalGroup(
             plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,7 +376,7 @@ public class FExponencial extends FrameGenerico implements IValores {
                     .addComponent(lbCodigo)
                     .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(plCamposLayout.createSequentialGroup()
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(plCamposLayout.createSequentialGroup()
@@ -383,26 +385,20 @@ public class FExponencial extends FrameGenerico implements IValores {
                                     .addComponent(tfMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(27, 27, 27))
                             .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel5)
+                                .addComponent(lbVariavelA)
                                 .addComponent(tfVariavelA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(9, 9, 9)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbVariavelB)
+                            .addComponent(tfVariavelB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfVariavelB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfProbabildiade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)))
-                    .addGroup(plCamposLayout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(31, 31, 31)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(btCalcular)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         tfCodigo.getDocument().addDocumentListener(new DocumentListener() {
@@ -431,6 +427,22 @@ public class FExponencial extends FrameGenerico implements IValores {
 
         jTabbedPane1.addTab("Exponencial", plCampos);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 714, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 230, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Fórmula", jPanel2);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -440,7 +452,7 @@ public class FExponencial extends FrameGenerico implements IValores {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTabbedPane1)
                     .addComponent(plBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,7 +461,7 @@ public class FExponencial extends FrameGenerico implements IValores {
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(plBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(jPanel1);
@@ -634,22 +646,28 @@ public class FExponencial extends FrameGenerico implements IValores {
         }
     }//GEN-LAST:event_btOkActionPerformed
 
-    private void tfVariavelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfVariavelBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfVariavelBActionPerformed
-
     private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-        tfResultado.setValue(calcular());
-        tfPercentual.setValue(calcular().multiply(new BigDecimal(100))); 
+        if (verificarCampos()) {
+            tfResultado.setValue(calcular());
+            tfPercentual.setValue(calcular().multiply(new BigDecimal(100)));
+        }
     }//GEN-LAST:event_btCalcularActionPerformed
 
     private void tfResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfResultadoActionPerformed
-
     }//GEN-LAST:event_tfResultadoActionPerformed
 
     private void tfVarianciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfVarianciaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfVarianciaActionPerformed
+
+    private void cbCondicaoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbCondicaoItemStateChanged
+        if (cbCondicao.getSelectedIndex() == 2) {
+            tfVariavelB.setEnabled(true);
+        } else {
+            tfVariavelB.setEnabled(false);
+        }
+
+    }//GEN-LAST:event_cbCondicaoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -671,10 +689,8 @@ public class FExponencial extends FrameGenerico implements IValores {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -684,6 +700,8 @@ public class FExponencial extends FrameGenerico implements IValores {
     private javax.swing.JLabel lbResultado;
     private javax.swing.JLabel lbResultado1;
     private javax.swing.JLabel lbVariancia;
+    private javax.swing.JLabel lbVariavelA;
+    private javax.swing.JLabel lbVariavelB;
     private javax.swing.JMenuBar mbPrincipal;
     private com.zap.arca.JAMenuItem miAjudaConteudo;
     private com.zap.arca.JAMenuItem miAjudaSobre;
@@ -713,7 +731,6 @@ public class FExponencial extends FrameGenerico implements IValores {
     private com.zap.arca.JATextField tfCodigo;
     private com.zap.arca.JADecimalFormatField tfMedia;
     private com.zap.arca.JADecimalFormatField tfPercentual;
-    private com.zap.arca.JADecimalFormatField tfProbabildiade;
     private com.zap.arca.JADecimalFormatField tfResultado;
     private com.zap.arca.JADecimalFormatField tfVariancia;
     private com.zap.arca.JADecimalFormatField tfVariavelA;
@@ -731,8 +748,9 @@ public class FExponencial extends FrameGenerico implements IValores {
         tbExponencial.setName("TB_FEXPONENCICAL");
         tbExponencial.setModel(exponencialTableModel);
 
-        camposVerificar = new Component[]{};
-        camposLimpar = new Component[]{tfCodigo};
+        camposVerificar = new Component[]{tfMedia, tfVariavelA};
+        camposLimpar = new Component[]{tfMedia, tfVariavelA, tfVariavelB, tfCodigo, tfResultado, tfVariancia,
+            tfPercentual};
         for (Exponencial.Condicao e : Condicao.values()) {
             cbCondicao.addItem(e);
         }
@@ -742,11 +760,32 @@ public class FExponencial extends FrameGenerico implements IValores {
         casasDecimais();
     }
 
+    @Override
+    public void limparCampos() {
+        super.limparCampos();
+        exibirDados(dao, tbExponencial);
+    }
+
+    
+    @Override
+    public boolean verificarCampos(Component[] components) {
+        if (!super.verificarCampos(components)) {
+            return false;
+        }
+        if (cbCondicao.getSelectedIndex() == 2 && tfVariavelB.getValue() == BigDecimal.ZERO) {
+            JOptionPane.showMessageDialog(null, "Campo obrigatorio não preenchido");
+            return false;
+        }
+        return true;
+    }
+
     public Exponencial.Condicao getCondicao() {
         if (cbCondicao.getSelectedIndex() == 0) {
             return Condicao.MAIOR;
-        } else {
+        } else if (cbCondicao.getSelectedIndex() == 1) {
             return Condicao.MENOR;
+        } else {
+            return Condicao.ENTRE;
         }
     }
 
@@ -758,6 +797,9 @@ public class FExponencial extends FrameGenerico implements IValores {
             case MENOR:
                 cbCondicao.setSelectedIndex(1);
                 break;
+            case ENTRE:
+                cbCondicao.setSelectedIndex(2);
+                break;
         }
     }
 
@@ -765,10 +807,35 @@ public class FExponencial extends FrameGenerico implements IValores {
     public void inserirOuAlterar() {
         exponencial = new Exponencial();
         exponencial.setCondicao(getCondicao());
+        exponencial.setMedia(tfMedia.getValue().doubleValue());
+        exponencial.setVariavelA(tfVariavelA.getValue().doubleValue());
+        exponencial.setVariavelB(tfVariavelB.getValue().doubleValue());
+        exponencial.setResultado(tfResultado.getValue().doubleValue());
+        exponencial.setPercentual(tfPercentual.getValue().doubleValue());
+        exponencial.setVariancia(tfVariancia.getValue().doubleValue());
+        try {
+            if (tbAlterar.isSelected()) {
+                exponencial.setCodigo(Integer.valueOf(tfCodigo.getText()));
+                dao.alterar(exponencial);
+            } else {
+                dao.adicionar(exponencial);
+            }
+        } catch (RuntimeException ex) {
+            LoggerEx.log(ex);
+        }
     }
 
     @Override
     public void preencherCampos(IModelo m) {
+        exponencial = (Exponencial) m;
+        tfCodigo.setText(String.valueOf(exponencial.getCodigo()));
+        tfMedia.setValue(exponencial.getMedia().doubleValue());
+        tfVariavelA.setValue(exponencial.getVariavelA().doubleValue());
+        tfVariavelB.setValue(exponencial.getVariavelB().doubleValue());
+        setExponencial(exponencial.getCondicao());
+        tfResultado.setValue(exponencial.getResultado().doubleValue());
+        tfPercentual.setValue(exponencial.getPercentual().doubleValue());
+        tfVariancia.setValue(exponencial.getVariancia().doubleValue());
     }
 
     @Override
@@ -783,23 +850,39 @@ public class FExponencial extends FrameGenerico implements IValores {
 
     public BigDecimal calcular() {
         BigDecimal media = tfMedia.getValue();
-        BigDecimal variavel = tfVariavelA.getValue();
+        BigDecimal variavelA = tfVariavelA.getValue();
+        BigDecimal variavelB = tfVariavelB.getValue();
         BigDecimal resultado = BigDecimal.ONE;
         calculo = new Calculo();
         tfVariancia.setValue(Math.pow(media.doubleValue(), 2));
         if (cbCondicao.getSelectedIndex() == 0) {
-            resultado = calculo.exponencialMaior(media, variavel);
+            resultado = calculo.exponencialMaior(media, variavelA);
+            return resultado;
+        } else if (cbCondicao.getSelectedIndex() == 1) {
+            resultado = calculo.exponencialMenor(media, variavelA);
             return resultado;
         } else {
-            resultado = calculo.exponencialMenor(media, variavel);
-            return resultado;
+            BigDecimal valorMaior = calculo.exponencialMenor(media, variavelA);
+            BigDecimal valorMenor = calculo.exponencialMenor(media, variavelB);
+            return valorMenor.subtract(valorMaior, MathContext.DECIMAL64);
         }
     }
-    public void casasDecimais(){
+
+    public void casasDecimais() {
         tfMedia.setTotalCasas(5, 6);
         tfVariavelA.setTotalCasas(5, 6);
+        tfVariavelB.setTotalCasas(5, 6);
         tfPercentual.setTotalCasas(2, 2);
         tfVariancia.setTotalCasas(7, 4);
         tfResultado.setTotalCasas(5, 6);
+    }
+
+    public boolean verificarCampos() {
+        if (cbCondicao.getSelectedIndex() == 2 && tfVariavelB.getValue().compareTo(BigDecimal.ZERO) <= 0) {
+            JOptionPane.showMessageDialog(null, "Campo obrigatório não preenchido.");
+            tfVariavelB.requestFocus();
+            return false;
+        }
+        return true;
     }
 }

@@ -90,6 +90,8 @@ public class FPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         menuUsuario = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        menuCalculadora = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         menuBinomial = new javax.swing.JMenuItem();
         menuPoisson = new javax.swing.JMenuItem();
         menuNormal = new javax.swing.JMenuItem();
@@ -189,6 +191,15 @@ public class FPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(menuUsuario);
         jMenu1.add(jSeparator2);
+
+        menuCalculadora.setText("Calculadora...");
+        menuCalculadora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCalculadoraActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuCalculadora);
+        jMenu1.add(jSeparator3);
 
         menuBinomial.setText("Binomial...");
         menuBinomial.addActionListener(new java.awt.event.ActionListener() {
@@ -300,17 +311,24 @@ public class FPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPoissonActionPerformed
 
     private void menuNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNormalActionPerformed
-        new FNormal().setVisible(true); 
+        new FNormal().setVisible(true);
     }//GEN-LAST:event_menuNormalActionPerformed
 
     private void menuExponencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuExponencialActionPerformed
-        new FExponencial().setVisible(true); 
+        new FExponencial().setVisible(true);
     }//GEN-LAST:event_menuExponencialActionPerformed
 
     private void menuUniformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUniformeActionPerformed
-        new FUniforme().setVisible(true); 
+        new FUniforme().setVisible(true);
     }//GEN-LAST:event_menuUniformeActionPerformed
 
+    private void menuCalculadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCalculadoraActionPerformed
+        try {
+            Runtime.getRuntime().exec("calc.exe");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_menuCalculadoraActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgButtonPrincipal;
     private javax.swing.JButton btSair;
@@ -324,11 +342,13 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JSeparator jSeparator20;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JLabel lbDataAtual;
     private javax.swing.JLabel lbLicenciadoPara;
     private javax.swing.JLabel lbUsuarioLogado;
     private javax.swing.JMenuBar mbPrincipal;
     private javax.swing.JMenuItem menuBinomial;
+    private javax.swing.JMenuItem menuCalculadora;
     private javax.swing.JMenuItem menuExponencial;
     private javax.swing.JMenuItem menuNormal;
     private javax.swing.JMenuItem menuPoisson;

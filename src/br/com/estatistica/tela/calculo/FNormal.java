@@ -8,16 +8,17 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import org.apache.commons.math3.distribution.NormalDistribution;
 
 /**
  * @author Edidelson
  */
 public class FNormal extends FrameGenerico {
 
-    private Calculo calculo;
     public FNormal() {
         initComponents();
         setLocationRelativeTo(null);
+        tfProbabilidade.setTotalCasas(5, 7);
     }
 
     /**
@@ -701,7 +702,7 @@ public class FNormal extends FrameGenerico {
     }//GEN-LAST:event_rbMenorEIgualItemStateChanged
 
     private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-        tfProbabilidade.setValue(calcular()); 
+        tfProbabilidade.setValue(calcular());
     }//GEN-LAST:event_btCalcularActionPerformed
 
     /**
@@ -791,19 +792,18 @@ public class FNormal extends FrameGenerico {
     public void preencherTabela(int linha, IModelo i) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-    public BigDecimal calcular(){
-        calculo = new Calculo();
-        BigDecimal desvioPadrao = tfDesvioPadrao.getValue();
-        BigDecimal media = tfMedia.getValue();
-        BigDecimal valorTabela;
-        BigDecimal variavelA = tfVariavelA.getValue();
-        BigDecimal variavelB = tfVariavelB.getValue();
-        BigDecimal resultado;
-//        if(rbIgual.isSelected()){
-//            resultado = valorTabela.calculo.normal(variavelA, media, desvioPadrao);
-//            return ;
-//        }
+
+    public BigDecimal calcular() {
+        double desvioPadrao = tfDesvioPadrao.getValue().doubleValue();
+        double media = tfMedia.getValue().doubleValue();
+        double variavelA = tfVariavelA.getValue().doubleValue();
+        double variavelB = tfVariavelB.getValue().doubleValue();
+        NormalDistribution distribution = new NormalDistribution(media, desvioPadrao);
+        double resultado = 0.00;
+        if (rbIgual.isSelected()) {
+            resultado = 0.5-distribution.probability(0.00, variavelA);
+            return new BigDecimal(resultado);
+        }
         return null;
     }
 }

@@ -219,8 +219,8 @@ public abstract class FrameGenerico extends javax.swing.JFrame implements IFunci
      * @return true se todos os campos foram preenchidos
      */
     public boolean verificarCampos(Component[] components) {
-         boolean estahPreenchido = true;
          
+        boolean estahPreenchido = true;
          
         // Itera sobre os componentes do array
         for (Component c : components) {
@@ -244,7 +244,7 @@ public abstract class FrameGenerico extends javax.swing.JFrame implements IFunci
             // Verifica se é um JANumberFormatField
             if (c instanceof JADecimalFormatField) {
                 JADecimalFormatField ftf = (JADecimalFormatField) c;
-                if (ftf.getValue().equals(BigDecimal.ZERO)) {
+                if (ftf.getValue().doubleValue()==0.00) {
                     estahPreenchido = false;
                 }
             }
@@ -273,7 +273,7 @@ public abstract class FrameGenerico extends javax.swing.JFrame implements IFunci
             }
         }
         
-        return true;
+        return estahPreenchido;
     }
 
     /**
