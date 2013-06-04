@@ -7,6 +7,8 @@ package br.com.estatistica.modelo;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,13 +35,34 @@ public class Normal implements Serializable, IModelo {
     private Double desvioPadrao;
     @Column(name="vl_media")
     private Double media;
-    @Column(name="vl_variavel")
-    private Double veriavel;
+    @Column(name="vl_variavelA")
+    private Double variavelA;
+    @Column(name="vl_variavelB")
+    private Double variavelB;
     @Column(name="vl_resultado")
     private Double resultado;
+    @Column(name="condicao")
+    @Enumerated(EnumType.STRING)
+    private Condicao condicao;
+
+    public Condicao getCondicao() {
+        return condicao;
+    }
+
+    public void setCondicao(Condicao condicao) {
+        this.condicao = condicao;
+    }
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
+    }
+
+    public Double getVariavelB() {
+        return variavelB;
+    }
+
+    public void setVariavelB(Double variavelB) {
+        this.variavelB = variavelB;
     }
 
     public Double getDesvioPadrao() {
@@ -58,12 +81,12 @@ public class Normal implements Serializable, IModelo {
         this.media = media;
     }
 
-    public Double getVeriavel() {
-        return veriavel;
+    public Double getVariavelA() {
+        return variavelA;
     }
 
-    public void setVeriavel(Double veriavel) {
-        this.veriavel = veriavel;
+    public void setVariavelA(Double veriavel) {
+        this.variavelA = veriavel;
     }
 
     public Double getResultado() {
@@ -82,5 +105,26 @@ public class Normal implements Serializable, IModelo {
     @Override
     public boolean isInativo() {
         return false;
+    }
+    
+      public static enum Condicao {
+
+        MAIOR("Maior"),
+        MENOR("Menor"),
+        ENTRE("Entre");
+        
+        private String nome;
+
+        private Condicao() {
+        }
+
+        private Condicao(String nome) {
+            this.nome = nome;
+        }
+
+        @Override
+        public String toString() {
+            return nome;
+        }
     }
 }

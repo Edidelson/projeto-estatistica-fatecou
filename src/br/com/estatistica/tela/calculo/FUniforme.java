@@ -55,6 +55,7 @@ public class FUniforme extends FrameGenerico {
         spBar = new javax.swing.JToolBar.Separator();
         tbPesquisar = new javax.swing.JToggleButton();
         tbFiltrar = new javax.swing.JToggleButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbUniforme = new com.zap.arca.JATable();
@@ -183,6 +184,17 @@ public class FUniforme extends FrameGenerico {
             }
         });
         tbAtalhos.add(tbFiltrar);
+
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/calculator.png"))); // NOI18N
+        jToggleButton1.setFocusable(false);
+        jToggleButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jToggleButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+        tbAtalhos.add(jToggleButton1);
 
         jSplitPane1.setDividerLocation(120);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -778,6 +790,14 @@ public class FUniforme extends FrameGenerico {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfCoeficienteActionPerformed
 
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        try {
+            Runtime.getRuntime().exec("calc.exe");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -813,6 +833,7 @@ public class FUniforme extends FrameGenerico {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lbCodigo;
     private javax.swing.JLabel lbCoeficiente;
     private javax.swing.JLabel lbDesvioPadrao;

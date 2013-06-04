@@ -82,6 +82,7 @@ public class FBinomial extends FrameGenerico implements IValores {
         spBar = new javax.swing.JToolBar.Separator();
         tbPesquisar = new javax.swing.JToggleButton();
         tbFiltrar = new javax.swing.JToggleButton();
+        tbCalculadora = new javax.swing.JToggleButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbBinomial = new com.zap.arca.JATable();
@@ -197,6 +198,17 @@ public class FBinomial extends FrameGenerico implements IValores {
             }
         });
         tbAtalhos.add(tbFiltrar);
+
+        tbCalculadora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/calculator.png"))); // NOI18N
+        tbCalculadora.setFocusable(false);
+        tbCalculadora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbCalculadora.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbCalculadora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbCalculadoraActionPerformed(evt);
+            }
+        });
+        tbAtalhos.add(tbCalculadora);
 
         jSplitPane1.setDividerLocation(110);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -434,10 +446,9 @@ public class FBinomial extends FrameGenerico implements IValores {
                     .addGroup(plCamposLayout.createSequentialGroup()
                         .addComponent(tfResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(tfPercentual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbResultado1))
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfPercentual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbResultado1)
                             .addComponent(jLabel6))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btCalcular)
@@ -692,6 +703,14 @@ public class FBinomial extends FrameGenerico implements IValores {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfPercentualActionPerformed
 
+    private void tbCalculadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbCalculadoraActionPerformed
+        try {
+            Runtime.getRuntime().exec("calc.exe");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_tbCalculadoraActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -749,6 +768,7 @@ public class FBinomial extends FrameGenerico implements IValores {
     private javax.swing.JToggleButton tbAlterar;
     private javax.swing.JToolBar tbAtalhos;
     private com.zap.arca.JATable tbBinomial;
+    private javax.swing.JToggleButton tbCalculadora;
     private javax.swing.JToggleButton tbExcluir;
     private javax.swing.JToggleButton tbFiltrar;
     private javax.swing.JToggleButton tbIncluir;

@@ -1,9 +1,15 @@
 package br.com.estatistica.tela.calculo;
 
-import br.com.estatistica.auxiliares.formulas.Calculo;
+import br.com.estatistica.dao.DAONormal;
 import br.com.estatistica.modelo.IModelo;
+import br.com.estatistica.modelo.Normal;
 import br.com.estatistica.tela.generico.FrameGenerico;
+import br.com.estatistica.tela.tablemodel.NormalTableModel;
+import com.zap.arca.LoggerEx;
+import com.zap.arca.util.WindowUtils;
+import java.awt.Component;
 import java.math.BigDecimal;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
@@ -15,10 +21,21 @@ import org.apache.commons.math3.distribution.NormalDistribution;
  */
 public class FNormal extends FrameGenerico {
 
+    private NormalTableModel normalTableModel = new NormalTableModel();
+    private Normal normal;
+
     public FNormal() {
         initComponents();
         setLocationRelativeTo(null);
+        iniciar();
+        actionMenu(INCLUSAO);
         tfProbabilidade.setTotalCasas(5, 7);
+    }
+
+    @Override
+    public void limparCampos() {
+        super.limparCampos();
+        exibirDados(dao, tbNormal);
     }
 
     /**
@@ -41,9 +58,10 @@ public class FNormal extends FrameGenerico {
         spBar = new javax.swing.JToolBar.Separator();
         tbPesquisar = new javax.swing.JToggleButton();
         tbFiltrar = new javax.swing.JToggleButton();
+        tbCalculadora = new javax.swing.JToggleButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbBinomial = new com.zap.arca.JATable();
+        tbNormal = new com.zap.arca.JATable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         plBotoes = new javax.swing.JPanel();
@@ -55,12 +73,6 @@ public class FNormal extends FrameGenerico {
         jLabel2 = new javax.swing.JLabel();
         lbCodigo = new javax.swing.JLabel();
         tfCodigo = new com.zap.arca.JATextField();
-        rbIgual = new javax.swing.JRadioButton();
-        rbMenor = new javax.swing.JRadioButton();
-        rbMenorEIgual = new javax.swing.JRadioButton();
-        rbMaior = new javax.swing.JRadioButton();
-        rbMaiorEIgual = new javax.swing.JRadioButton();
-        rbEntreValores = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -72,6 +84,8 @@ public class FNormal extends FrameGenerico {
         tfVariavelA = new com.zap.arca.JADecimalFormatField();
         tfVariavelB = new com.zap.arca.JADecimalFormatField();
         tfProbabilidade = new com.zap.arca.JADecimalFormatField();
+        jLabel3 = new javax.swing.JLabel();
+        cbCondicao = new javax.swing.JComboBox();
         mbPrincipal = new javax.swing.JMenuBar();
         mnArquivo = new javax.swing.JMenu();
         miArquivoSair = new com.zap.arca.JAMenuItem();
@@ -158,11 +172,22 @@ public class FNormal extends FrameGenerico {
         });
         tbAtalhos.add(tbFiltrar);
 
+        tbCalculadora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/calculator.png"))); // NOI18N
+        tbCalculadora.setFocusable(false);
+        tbCalculadora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbCalculadora.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbCalculadora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbCalculadoraActionPerformed(evt);
+            }
+        });
+        tbAtalhos.add(tbCalculadora);
+
         jSplitPane1.setDividerLocation(110);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        tbBinomial.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tbBinomial.setModel(new javax.swing.table.DefaultTableModel(
+        tbNormal.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbNormal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -179,10 +204,10 @@ public class FNormal extends FrameGenerico {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tbBinomial);
-        tbBinomial.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        jScrollPane1.setViewportView(tbNormal);
+        tbNormal.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
-                alterar(tbBinomial);
+                alterar(tbNormal);
             }
         });
 
@@ -251,65 +276,6 @@ public class FNormal extends FrameGenerico {
 
         tfCodigo.setEnabled(false);
 
-        rbIgual.setBackground(new java.awt.Color(255, 255, 255));
-        btgNormal.add(rbIgual);
-        rbIgual.setSelected(true);
-        rbIgual.setText("P( X = A )");
-        rbIgual.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rbIgualItemStateChanged1(evt);
-                rbIgualItemStateChanged(evt);
-            }
-        });
-
-        rbMenor.setBackground(new java.awt.Color(255, 255, 255));
-        btgNormal.add(rbMenor);
-        rbMenor.setText("P( X < A )");
-        rbMenor.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rbMenorItemStateChanged(evt);
-                rbMenorItemStateChanged1(evt);
-            }
-        });
-
-        rbMenorEIgual.setBackground(new java.awt.Color(255, 255, 255));
-        btgNormal.add(rbMenorEIgual);
-        rbMenorEIgual.setText("P( X ≤  A )");
-        rbMenorEIgual.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rbMenorEIgualItemStateChanged(evt);
-            }
-        });
-
-        rbMaior.setBackground(new java.awt.Color(255, 255, 255));
-        btgNormal.add(rbMaior);
-        rbMaior.setText("P( X >  A )");
-        rbMaior.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rbMaiorItemStateChanged(evt);
-                rbMaiorItemStateChanged1(evt);
-            }
-        });
-
-        rbMaiorEIgual.setBackground(new java.awt.Color(255, 255, 255));
-        btgNormal.add(rbMaiorEIgual);
-        rbMaiorEIgual.setText("P( X ≥  A )");
-        rbMaiorEIgual.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rbMaiorEIgualItemStateChanged(evt);
-            }
-        });
-
-        rbEntreValores.setBackground(new java.awt.Color(255, 255, 255));
-        btgNormal.add(rbEntreValores);
-        rbEntreValores.setText("P( A ≤ X ≤ B )");
-        rbEntreValores.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rbEntreValoresItemStateChanged(evt);
-                rbEntreValoresItemStateChanged1(evt);
-            }
-        });
-
         jLabel1.setText("Média ( µ ):");
 
         jLabel4.setText("Desvio Padrão ( s ):");
@@ -330,105 +296,92 @@ public class FNormal extends FrameGenerico {
 
         tfVariavelB.setEnabled(false);
 
-        tfProbabilidade.setBackground(new java.awt.Color(255, 255, 0));
-        tfProbabilidade.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tfProbabilidade.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        jLabel3.setText("Condição:");
+
+        cbCondicao.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbCondicaoItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout plCamposLayout = new javax.swing.GroupLayout(plCampos);
         plCampos.setLayout(plCamposLayout);
         plCamposLayout.setHorizontalGroup(
             plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(plCamposLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
-                        .addComponent(lbCodigo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))
-                    .addComponent(rbIgual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbMenor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbMenorEIgual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbMaior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbMaiorEIgual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbEntreValores, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap()
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plCamposLayout.createSequentialGroup()
-                        .addGap(126, 126, 126)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(plCamposLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(btCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(plCamposLayout.createSequentialGroup()
-                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, plCamposLayout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(jLabel6))
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfMedia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tfDesvioPadrao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tfVariavelA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tfVariavelB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(58, 58, 58)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel1)
+                                    .addComponent(lbCodigo))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(cbCondicao, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tfMedia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tfDesvioPadrao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tfVariavelA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tfVariavelB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 267, Short.MAX_VALUE)))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(259, 259, 259))))
+                    .addGroup(plCamposLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         plCamposLayout.setVerticalGroup(
             plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbCodigo)
-                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plCamposLayout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(plCamposLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rbIgual)
-                            .addComponent(jLabel1)
-                            .addComponent(tfMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel4)
-                                .addComponent(tfDesvioPadrao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(rbMenor))
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(plCamposLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfVariavelA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))
-                                .addGap(6, 6, 6)
-                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(tfVariavelB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btCalcular)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(tfProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7)))
-                            .addGroup(plCamposLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(rbMenorEIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rbMaior)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rbMaiorEIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rbEntreValores))))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                            .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbCodigo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(6, 6, 6)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfDesvioPadrao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(6, 6, 6)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfVariavelA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(6, 6, 6)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfVariavelB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(btCalcular)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(tfProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
         );
 
         tfCodigo.getDocument().addDocumentListener(new DocumentListener() {
@@ -472,10 +425,10 @@ public class FNormal extends FrameGenerico {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(plBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jScrollPane2.setViewportView(jPanel1);
@@ -589,7 +542,7 @@ public class FNormal extends FrameGenerico {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tbAtalhos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
         );
 
         pack();
@@ -658,52 +611,29 @@ public class FNormal extends FrameGenerico {
             inserirOuAlterar();
             limparCampos();
         }
-        actionMenu(INCLUSAO);
     }//GEN-LAST:event_btOkActionPerformed
 
-    private void rbEntreValoresItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbEntreValoresItemStateChanged
-//        jATextField4.setEnabled(true);
-    }//GEN-LAST:event_rbEntreValoresItemStateChanged
-
-    private void rbIgualItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbIgualItemStateChanged1
-//        jATextField4.setEnabled(false);
-    }//GEN-LAST:event_rbIgualItemStateChanged1
-
-    private void rbMenorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbMenorItemStateChanged
-//        jATextField4.setEnabled(false);
-    }//GEN-LAST:event_rbMenorItemStateChanged
-
-    private void rbMaiorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbMaiorItemStateChanged
-        tfVariavelB.setEnabled(false);
-    }//GEN-LAST:event_rbMaiorItemStateChanged
-
-    private void rbIgualItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbIgualItemStateChanged
-        tfVariavelB.setEnabled(false);
-    }//GEN-LAST:event_rbIgualItemStateChanged
-
-    private void rbMenorItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbMenorItemStateChanged1
-        tfVariavelB.setEnabled(false);
-    }//GEN-LAST:event_rbMenorItemStateChanged1
-
-    private void rbMaiorItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbMaiorItemStateChanged1
-        tfVariavelB.setEnabled(false);
-    }//GEN-LAST:event_rbMaiorItemStateChanged1
-
-    private void rbMaiorEIgualItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbMaiorEIgualItemStateChanged
-        tfVariavelB.setEnabled(false);
-    }//GEN-LAST:event_rbMaiorEIgualItemStateChanged
-
-    private void rbEntreValoresItemStateChanged1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbEntreValoresItemStateChanged1
-        tfVariavelB.setEnabled(true);
-    }//GEN-LAST:event_rbEntreValoresItemStateChanged1
-
-    private void rbMenorEIgualItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbMenorEIgualItemStateChanged
-        tfVariavelB.setEnabled(false);
-    }//GEN-LAST:event_rbMenorEIgualItemStateChanged
-
     private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-        tfProbabilidade.setValue(calcular());
+        if (validarCampos()) {
+            tfProbabilidade.setValue(calcular());
+        }
     }//GEN-LAST:event_btCalcularActionPerformed
+
+    private void cbCondicaoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbCondicaoItemStateChanged
+        if (cbCondicao.getSelectedIndex() == 3) {
+            tfVariavelB.setEnabled(true);
+        } else {
+            tfVariavelB.setEnabled(false);
+        }
+    }//GEN-LAST:event_cbCondicaoItemStateChanged
+
+    private void tbCalculadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbCalculadoraActionPerformed
+        try {
+            Runtime.getRuntime().exec("calc.exe");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_tbCalculadoraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -723,8 +653,10 @@ public class FNormal extends FrameGenerico {
     private javax.swing.ButtonGroup btgNormal;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JComboBox cbCondicao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -752,21 +684,16 @@ public class FNormal extends FrameGenerico {
     private javax.swing.JMenu mnExibir;
     private javax.swing.JPanel plBotoes;
     private javax.swing.JPanel plCampos;
-    private javax.swing.JRadioButton rbEntreValores;
-    private javax.swing.JRadioButton rbIgual;
-    private javax.swing.JRadioButton rbMaior;
-    private javax.swing.JRadioButton rbMaiorEIgual;
-    private javax.swing.JRadioButton rbMenor;
-    private javax.swing.JRadioButton rbMenorEIgual;
     private javax.swing.JPopupMenu.Separator spAjuda;
     private javax.swing.JToolBar.Separator spBar;
     private javax.swing.JPopupMenu.Separator spExibir;
     private javax.swing.JToggleButton tbAlterar;
     private javax.swing.JToolBar tbAtalhos;
-    private com.zap.arca.JATable tbBinomial;
+    private javax.swing.JToggleButton tbCalculadora;
     private javax.swing.JToggleButton tbExcluir;
     private javax.swing.JToggleButton tbFiltrar;
     private javax.swing.JToggleButton tbIncluir;
+    private com.zap.arca.JATable tbNormal;
     private javax.swing.JToggleButton tbPesquisar;
     private com.zap.arca.JATextField tfCodigo;
     private com.zap.arca.JADecimalFormatField tfDesvioPadrao;
@@ -778,14 +705,67 @@ public class FNormal extends FrameGenerico {
 
     @Override
     public void iniciar() {
+        dao = new DAONormal();
+
+        tbPrincipal = tbNormal;
+        toggleButton = tbIncluir;
+        ctChave = tfCodigo;
+
+        tbNormal.setName("TB_FPOISSON");
+        tbNormal.setModel(normalTableModel);
+
+        camposVerificar = new Component[]{tfMedia, tfDesvioPadrao, tfVariavelA};
+        camposLimpar = new Component[]{tfMedia, tfCodigo, tfDesvioPadrao,
+            tfVariavelA, tfVariavelB, tfProbabilidade};
+
+        WindowUtils.nextEnter(plCampos);
+        WindowUtils.exitEsc(this);
+        configurarSincronizacao(dao, tbNormal);
+        for (Normal.Condicao condicao : Normal.Condicao.values()) {
+            cbCondicao.addItem(condicao);
+        }
+    }
+
+    public Normal.Condicao getCondicao() {
+        if (cbCondicao.getSelectedIndex() == 0) {
+            return Normal.Condicao.MAIOR;
+        } else if (cbCondicao.getSelectedIndex() == 1) {
+            return Normal.Condicao.MENOR;
+        } else {
+            return Normal.Condicao.ENTRE;
+        }
     }
 
     @Override
     public void inserirOuAlterar() {
+        normal = new Normal();
+        normal.setDesvioPadrao(tfDesvioPadrao.getValue().doubleValue());
+        normal.setMedia(tfMedia.getValue().doubleValue());
+        normal.setResultado(tfProbabilidade.getValue().doubleValue());
+        normal.setVariavelA(tfVariavelA.getValue().doubleValue());
+        normal.setVariavelB(tfVariavelB.getValue().doubleValue());
+        normal.setCondicao(getCondicao());
+        try {
+            if (tbAlterar.isSelected()) {
+                normal.setCodigo(Integer.valueOf(tfCodigo.getText()));
+                dao.alterar(normal);
+            } else {
+                dao.adicionar(normal);
+            }
+        } catch (RuntimeException ex) {
+            LoggerEx.log(ex);
+        }
     }
 
     @Override
     public void preencherCampos(IModelo m) {
+        normal = (Normal) m;
+        tfCodigo.setText(String.valueOf(normal.getCodigo()));
+        tfMedia.setValue(normal.getMedia().doubleValue());
+        tfDesvioPadrao.setValue(normal.getDesvioPadrao().doubleValue());
+        tfVariavelA.setValue(normal.getVariavelA().doubleValue());
+        tfVariavelB.setValue(normal.getVariavelB() != null ? normal.getVariavelB().doubleValue() : BigDecimal.ZERO);
+        tfProbabilidade.setValue(normal.getResultado().doubleValue());
     }
 
     @Override
@@ -800,10 +780,65 @@ public class FNormal extends FrameGenerico {
         double variavelB = tfVariavelB.getValue().doubleValue();
         NormalDistribution distribution = new NormalDistribution(media, desvioPadrao);
         double resultado = 0.00;
-        if (rbIgual.isSelected()) {
-            resultado = 0.5-distribution.probability(0.00, variavelA);
+        if (cbCondicao.getSelectedIndex() == 0) {
+            resultado = 0.5 - distribution.probability(0.00, variavelA);
+            if (resultado < 0) {
+                resultado *= -1;
+            }
+            if (media > variavelA) {
+                resultado += 0.5;
+
+            } else {
+                resultado -= 0.5;
+            }
+            if (resultado < 0) {
+                resultado *= -1;
+            }
+            return new BigDecimal(resultado);
+        } else if (cbCondicao.getSelectedIndex() == 1) {
+            resultado = 0.5 - distribution.probability(0.00, variavelA);
+            if (resultado < 0) {
+                resultado *= -1;
+            }
+            if (variavelA > media) {
+                resultado += 0.5;
+
+            } else if (variavelA < media) {
+                resultado -= 0.5;
+            }
+            if (resultado < 0) {
+                resultado *= -1;
+            }
+            return new BigDecimal(resultado);
+        } else if (cbCondicao.getSelectedIndex() == 2) {
+            resultado = 0.5 - distribution.probability(variavelA, variavelB);
+            if (resultado < 0) {
+                resultado *= -1;
+            }
+            if (variavelA > media && variavelB > media) {
+                resultado -= 0.5;
+            } else {
+                resultado += 0.5;
+            }
+            if (variavelA < media && variavelB < media) {
+                resultado -= 1;
+            }
+            if (resultado < 0) {
+                resultado *= -1;
+            }
             return new BigDecimal(resultado);
         }
         return null;
+    }
+
+    public boolean validarCampos() {
+        if (cbCondicao.getSelectedIndex() == 3) {
+            if (tfVariavelA.getValue().doubleValue() > tfVariavelB.getValue().doubleValue()) {
+                JOptionPane.showMessageDialog(null, "Variavel A maior que a variavel B");
+                tfVariavelA.requestFocus();
+                return false;
+            }
+        }
+        return true;
     }
 }

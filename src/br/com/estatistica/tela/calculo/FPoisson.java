@@ -63,6 +63,7 @@ public class FPoisson extends FrameGenerico implements IValores {
         spBar = new javax.swing.JToolBar.Separator();
         tbPesquisar = new javax.swing.JToggleButton();
         tbFiltrar = new javax.swing.JToggleButton();
+        tbCalculadora = new javax.swing.JToggleButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPoisson = new com.zap.arca.JATable();
@@ -178,6 +179,17 @@ public class FPoisson extends FrameGenerico implements IValores {
             }
         });
         tbAtalhos.add(tbFiltrar);
+
+        tbCalculadora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/calculator.png"))); // NOI18N
+        tbCalculadora.setFocusable(false);
+        tbCalculadora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbCalculadora.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbCalculadora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbCalculadoraActionPerformed(evt);
+            }
+        });
+        tbAtalhos.add(tbCalculadora);
 
         jSplitPane1.setDividerLocation(110);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -699,6 +711,14 @@ public class FPoisson extends FrameGenerico implements IValores {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfPercentualActionPerformed
 
+    private void tbCalculadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbCalculadoraActionPerformed
+        try {
+            Runtime.getRuntime().exec("calc.exe");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_tbCalculadoraActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -756,6 +776,7 @@ public class FPoisson extends FrameGenerico implements IValores {
     private javax.swing.JPopupMenu.Separator spExibir;
     private javax.swing.JToggleButton tbAlterar;
     private javax.swing.JToolBar tbAtalhos;
+    private javax.swing.JToggleButton tbCalculadora;
     private javax.swing.JToggleButton tbExcluir;
     private javax.swing.JToggleButton tbFiltrar;
     private javax.swing.JToggleButton tbIncluir;

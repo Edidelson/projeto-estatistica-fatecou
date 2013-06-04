@@ -13,10 +13,10 @@
     <!-- É aqui que se informa se o banco será criado pelo Hibernate (create-drop) -->
         <property name="hibernate.hbm2ddl.auto">update</property>
         <mapping class="br.com.estatistica.modelo.Usuario"/>
-        <mapping class="br.com.estatistica.modelo.TabelaDistribuicaoNormal"/>
         <mapping class="br.com.estatistica.modelo.Binomial"/>
         <mapping class="br.com.estatistica.modelo.Poisson"/>
         <mapping class="br.com.estatistica.modelo.Uniforme"/>
         <mapping class="br.com.estatistica.modelo.Exponencial"/>
+        <mapping class="br.com.estatistica.modelo.Normal"/>
     </session-factory>
 </hibernate-configuration>

@@ -11,7 +11,6 @@ package br.com.estatistica.tela.principal;
 import br.com.estatistica.modelo.Usuario;
 import br.com.estatistica.tela.cadastro.FUsuarios;
 import br.com.estatistica.tela.calculo.FBinomial;
-import br.com.estatistica.tela.calculo.FCalculo;
 import br.com.estatistica.tela.calculo.FExponencial;
 import br.com.estatistica.tela.calculo.FNormal;
 import br.com.estatistica.tela.calculo.FPoisson;
