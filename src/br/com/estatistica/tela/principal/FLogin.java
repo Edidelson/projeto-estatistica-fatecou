@@ -18,7 +18,7 @@ import org.hibernate.HibernateException;
 
 /**
  *
- * @author Everton
+ * @author Edidelson
  */
 public class FLogin extends javax.swing.JFrame {
 
