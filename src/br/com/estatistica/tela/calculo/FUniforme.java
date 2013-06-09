@@ -937,10 +937,6 @@ public class FUniforme extends FrameGenerico {
             return Uniforme.Condicao.MAIOR;
         } else if (cbCondicao.getSelectedIndex() == 1) {
             return Uniforme.Condicao.MENOR;
-        } else if (cbCondicao.getSelectedIndex() == 2) {
-            return Uniforme.Condicao.MAIOR_E_IGUAL;
-        } else if (cbCondicao.getSelectedIndex() == 3) {
-            return Uniforme.Condicao.MENOR_E_IGUAL;
         } else {
             return Uniforme.Condicao.ENTRE;
         }
@@ -954,14 +950,8 @@ public class FUniforme extends FrameGenerico {
             case MENOR:
                 cbCondicao.setSelectedIndex(1);
                 break;
-            case MAIOR_E_IGUAL:
-                cbCondicao.setSelectedIndex(2);
-                break;
-            case MENOR_E_IGUAL:
-                cbCondicao.setSelectedIndex(3);
-                break;
             case ENTRE:
-                cbCondicao.setSelectedIndex(4);
+                cbCondicao.setSelectedIndex(2);
                 break;
         }
     }
@@ -988,12 +978,6 @@ public class FUniforme extends FrameGenerico {
             resultado = resultado.add(calculo.intervaloUniformeMenor(inicial, interFinal, condicao));
             return resultado;
         } else if (cbCondicao.getSelectedIndex() == 2) {
-            JOptionPane.showMessageDialog(null, "Tipo de condição maior e igual, o resultado será 0");
-            return BigDecimal.ZERO;
-        } else if (cbCondicao.getSelectedIndex() == 3) {
-            JOptionPane.showMessageDialog(null, "Tipo de condição menor e igual, o resultado será 0");
-            return BigDecimal.ZERO;
-        } else if (cbCondicao.getSelectedIndex() == 4) {
             BigDecimal densidade = calculo.densidade(inicial, interFinal);
             return calculo.intervaloUniformeEntre(subInicial, subFinal, densidade);
         }
@@ -1068,18 +1052,6 @@ public class FUniforme extends FrameGenerico {
             tfSubIntervaloA.requestFocus();
             return false;
         }
-//        
-//        if (Double.parseDouble(tfVariavel.getText()) < tfConstanteA.getValue().doubleValue()) {
-//            JOptionPane.showMessageDialog(null, "O valor de X não pode ser menor que A");
-//            tfVariavel.requestFocus();
-//            return false;
-//        }
-//        
-//        if (Double.parseDouble(tfVariavel.getText()) < tfConstanteB.getValue().doubleValue()) {
-//            JOptionPane.showMessageDialog(null, "O valor de X não pode ser menor que A");
-//            tfVariavel.requestFocus();
-//            return false;
-//        }
         
         return true;
     }

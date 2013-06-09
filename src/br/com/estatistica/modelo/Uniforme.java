@@ -155,8 +155,6 @@ public class Uniforme implements Serializable, IModelo {
 
         MAIOR("Maior"),
         MENOR("Menor"),
-        MAIOR_E_IGUAL("Maior e igual"),
-        MENOR_E_IGUAL("Menor e igual"),
         ENTRE("Entre");
         private String nome;
 
