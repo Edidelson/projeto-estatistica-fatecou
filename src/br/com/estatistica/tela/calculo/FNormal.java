@@ -174,6 +174,7 @@ public class FNormal extends FrameGenerico {
         tbAtalhos.add(tbFiltrar);
 
         tbCalculadora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/calculator.png"))); // NOI18N
+        tbCalculadora.setToolTipText("Calculadora");
         tbCalculadora.setFocusable(false);
         tbCalculadora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbCalculadora.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -334,8 +335,7 @@ public class FNormal extends FrameGenerico {
                                 .addComponent(btCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(plCamposLayout.createSequentialGroup()
                                 .addGap(44, 44, 44)
-                                .addComponent(tfPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 47, Short.MAX_VALUE))
+                                .addComponent(tfPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(plCamposLayout.createSequentialGroup()
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -355,7 +355,7 @@ public class FNormal extends FrameGenerico {
                                 .addComponent(tfVariavelA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(tfVariavelB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(tfProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80))
         );

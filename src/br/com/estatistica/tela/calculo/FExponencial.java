@@ -85,7 +85,7 @@ public class FExponencial extends FrameGenerico implements IValores {
         lbVariancia = new javax.swing.JLabel();
         tfVariavelB = new com.zap.arca.JADecimalFormatField();
         lbVariavelB = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         mbPrincipal = new javax.swing.JMenuBar();
         mnArquivo = new javax.swing.JMenu();
         miArquivoSair = new com.zap.arca.JAMenuItem();
@@ -171,6 +171,7 @@ public class FExponencial extends FrameGenerico implements IValores {
         tbAtalhos.add(tbFiltrar);
 
         tbCalculadora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/calculator.png"))); // NOI18N
+        tbCalculadora.setToolTipText("Calculadora");
         tbCalculadora.setFocusable(false);
         tbCalculadora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbCalculadora.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -351,6 +352,8 @@ public class FExponencial extends FrameGenerico implements IValores {
 
         lbVariavelB.setText("Variável ( B ):");
 
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/formula_exponencial.png"))); // NOI18N
+
         javax.swing.GroupLayout plCamposLayout = new javax.swing.GroupLayout(plCampos);
         plCampos.setLayout(plCamposLayout);
         plCamposLayout.setHorizontalGroup(
@@ -359,16 +362,13 @@ public class FExponencial extends FrameGenerico implements IValores {
                 .addContainerGap()
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plCamposLayout.createSequentialGroup()
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, plCamposLayout.createSequentialGroup()
-                                .addComponent(lbVariavelB)
-                                .addGap(19, 19, 19)
-                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btCalcular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbCondicao, javax.swing.GroupLayout.Alignment.LEADING, 0, 89, Short.MAX_VALUE)
-                                    .addComponent(tfVariavelB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(lbVariavelB)
+                        .addGap(19, 19, 19)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btCalcular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbCondicao, javax.swing.GroupLayout.Alignment.LEADING, 0, 89, Short.MAX_VALUE)
+                            .addComponent(tfVariavelB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel2)
                     .addGroup(plCamposLayout.createSequentialGroup()
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbVariavelA)
@@ -378,20 +378,23 @@ public class FExponencial extends FrameGenerico implements IValores {
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfMedia, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                             .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfVariavelA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(60, 60, 60)))
+                            .addComponent(tfVariavelA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(64, 64, 64)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(135, 135, 135))
+                .addGap(50, 50, 50)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         plCamposLayout.setVerticalGroup(
             plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
+            .addGroup(plCamposLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCodigo)
                     .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(plCamposLayout.createSequentialGroup()
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(plCamposLayout.createSequentialGroup()
@@ -410,7 +413,7 @@ public class FExponencial extends FrameGenerico implements IValores {
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(btCalcular)
                 .addContainerGap(43, Short.MAX_VALUE))
@@ -441,22 +444,6 @@ public class FExponencial extends FrameGenerico implements IValores {
         });
 
         jTabbedPane1.addTab("Exponencial", plCampos);
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 714, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Fórmula", jPanel2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -708,8 +695,8 @@ public class FExponencial extends FrameGenerico implements IValores {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

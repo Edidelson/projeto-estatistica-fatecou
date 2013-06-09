@@ -200,6 +200,7 @@ public class FBinomial extends FrameGenerico implements IValores {
         tbAtalhos.add(tbFiltrar);
 
         tbCalculadora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/calculator.png"))); // NOI18N
+        tbCalculadora.setToolTipText("Calculadora");
         tbCalculadora.setFocusable(false);
         tbCalculadora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbCalculadora.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

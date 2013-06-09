@@ -180,6 +180,7 @@ public class FPoisson extends FrameGenerico implements IValores {
         tbAtalhos.add(tbFiltrar);
 
         tbCalculadora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/calculator.png"))); // NOI18N
+        tbCalculadora.setToolTipText("Calculadora");
         tbCalculadora.setFocusable(false);
         tbCalculadora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbCalculadora.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -276,7 +277,7 @@ public class FPoisson extends FrameGenerico implements IValores {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,7 +396,7 @@ public class FPoisson extends FrameGenerico implements IValores {
                                     .addComponent(tfResultado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
                                 .addGap(0, 0, 0)
                                 .addComponent(btProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
         );

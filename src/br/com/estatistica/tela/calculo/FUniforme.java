@@ -187,6 +187,7 @@ public class FUniforme extends FrameGenerico {
         tbAtalhos.add(tbFiltrar);
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/calculator.png"))); // NOI18N
+        jToggleButton1.setToolTipText("Calculadora");
         jToggleButton1.setFocusable(false);
         jToggleButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToggleButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
