@@ -10,6 +10,7 @@ import br.com.estatistica.modelo.Binomial;
 import br.com.estatistica.modelo.IModelo;
 import br.com.estatistica.modelo.Poisson;
 import br.com.estatistica.tela.generico.FrameGenerico;
+import br.com.estatistica.tela.principal.DSobreSistema;
 import br.com.estatistica.tela.tablemodel.PoissonTableModel;
 import com.zap.arca.LoggerEx;
 import com.zap.arca.util.WindowUtils;
@@ -26,10 +27,10 @@ import javax.swing.event.ListSelectionListener;
  * @author Edidelson
  */
 public class FPoisson extends FrameGenerico implements IValores {
-
+    
     private PoissonTableModel poissonTableModel = new PoissonTableModel();
     private Poisson poisson;
-
+    
     public FPoisson() {
         initComponents();
         setLocationRelativeTo(null);
@@ -37,7 +38,7 @@ public class FPoisson extends FrameGenerico implements IValores {
         actionMenu(INCLUSAO);
         formatarCampos();
     }
-
+    
     @Override
     public void limparCampos() {
         super.limparCampos();
@@ -107,8 +108,6 @@ public class FPoisson extends FrameGenerico implements IValores {
         spExibir = new javax.swing.JPopupMenu.Separator();
         miExibirFiltro = new javax.swing.JMenuItem();
         mnAjuda = new javax.swing.JMenu();
-        miAjudaConteudo = new com.zap.arca.JAMenuItem();
-        spAjuda = new javax.swing.JPopupMenu.Separator();
         miAjudaSobre = new com.zap.arca.JAMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -357,14 +356,14 @@ public class FPoisson extends FrameGenerico implements IValores {
             .addGroup(plCamposLayout.createSequentialGroup()
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plCamposLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(plCamposLayout.createSequentialGroup()
-                                .addGap(134, 134, 134)
+                                .addGap(147, 147, 147)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(plCamposLayout.createSequentialGroup()
+                                .addContainerGap()
                                 .addComponent(lbResultado1)
-                                .addGap(79, 79, 79)
+                                .addGap(82, 82, 82)
                                 .addComponent(tfPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, 0)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -588,11 +587,6 @@ public class FPoisson extends FrameGenerico implements IValores {
 
         mnAjuda.setText("Ajuda");
 
-        miAjudaConteudo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        miAjudaConteudo.setText("Conteúdo da Ajuda");
-        mnAjuda.add(miAjudaConteudo);
-        mnAjuda.add(spAjuda);
-
         miAjudaSobre.setText("Sobre...");
         miAjudaSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -632,85 +626,88 @@ public class FPoisson extends FrameGenerico implements IValores {
             limparCampos();
         }
     }//GEN-LAST:event_btOkActionPerformed
-
+    
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btCancelarActionPerformed
-
+    
     private void tbIncluirActionPerformed( java.awt.event.ActionEvent evt ) {//GEN-FIRST:event_tbIncluirActionPerformed
         actionMenu(INCLUSAO);
      }//GEN-LAST:event_tbIncluirActionPerformed
-
+    
     private void tbAlterarActionPerformed( java.awt.event.ActionEvent evt ) {//GEN-FIRST:event_tbAlterarActionPerformed
         actionMenu(ALTERACAO);
      }//GEN-LAST:event_tbAlterarActionPerformed
-
+    
     private void miArquivoSairActionPerformed( java.awt.event.ActionEvent evt ) {//GEN-FIRST:event_miArquivoSairActionPerformed
         this.dispose();
      }//GEN-LAST:event_miArquivoSairActionPerformed
-
+    
     private void miEdiIncluirActionPerformed( java.awt.event.ActionEvent evt ) {//GEN-FIRST:event_miEdiIncluirActionPerformed
         actionMenu(INCLUSAO);
      }//GEN-LAST:event_miEdiIncluirActionPerformed
-
+    
     private void miEdiAlterarActionPerformed( java.awt.event.ActionEvent evt ) {//GEN-FIRST:event_miEdiAlterarActionPerformed
         actionMenu(ALTERACAO);
      }//GEN-LAST:event_miEdiAlterarActionPerformed
-
+    
     private void miEdiExcluirActionPerformed( java.awt.event.ActionEvent evt ) {//GEN-FIRST:event_miEdiExcluirActionPerformed
         actionMenu(EXCLUSAO);
      }//GEN-LAST:event_miEdiExcluirActionPerformed
-
+    
     private void miExibirAtualizarActionPerformed( java.awt.event.ActionEvent evt ) {//GEN-FIRST:event_miExibirAtualizarActionPerformed
         actionMenu(LIMPAR);
      }//GEN-LAST:event_miExibirAtualizarActionPerformed
-
+    
     private void miExibirFiltroActionPerformed( java.awt.event.ActionEvent evt ) {//GEN-FIRST:event_miExibirFiltroActionPerformed
         actionMenu(FILTRAR);
      }//GEN-LAST:event_miExibirFiltroActionPerformed
-
+    
     private void miEditarLimparActionPerformed( java.awt.event.ActionEvent evt ) {//GEN-FIRST:event_miEditarLimparActionPerformed
         actionMenu(LIMPAR);
     }//GEN-LAST:event_miEditarLimparActionPerformed
-
+    
     private void miAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAjudaSobreActionPerformed
+        new DSobreSistema(this, true).setVisible(true); 
     }//GEN-LAST:event_miAjudaSobreActionPerformed
-
+    
     private void tbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbExcluirActionPerformed
         actionMenu(EXCLUSAO);
     }//GEN-LAST:event_tbExcluirActionPerformed
-
+    
     private void tbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbPesquisarActionPerformed
         actionMenu(PESQUISAR);
     }//GEN-LAST:event_tbPesquisarActionPerformed
-
+    
     private void tbFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbFiltrarActionPerformed
         actionMenu(FILTRAR);
     }//GEN-LAST:event_tbFiltrarActionPerformed
-
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        tfResultado.setValue(calcular().doubleValue());
-        tfPercentual.setValue(calcular().multiply(new BigDecimal(100)));
+        if (verificarCampos(camposVerificar)) {
+            tfResultado.setValue(calcular().doubleValue());
+            tfPercentual.setValue(calcular().multiply(new BigDecimal(100)));
+        } 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void tfResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfResultadoActionPerformed
     }//GEN-LAST:event_tfResultadoActionPerformed
-
+    
     private void cbCondicaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbCondicaoFocusLost
     }//GEN-LAST:event_cbCondicaoFocusLost
-
+    
     private void cbCondicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCondicaoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbCondicaoActionPerformed
-
+    
     private void btProbabilidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProbabilidadeActionPerformed
         new DMedia(this, true).setVisible(true);
     }//GEN-LAST:event_btProbabilidadeActionPerformed
-
+    
     private void tfPercentualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPercentualActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfPercentualActionPerformed
-
+    
     private void tbCalculadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbCalculadoraActionPerformed
         try {
             Runtime.getRuntime().exec("calc.exe");
@@ -756,7 +753,6 @@ public class FPoisson extends FrameGenerico implements IValores {
     private javax.swing.JLabel lbResultado;
     private javax.swing.JLabel lbResultado1;
     private javax.swing.JMenuBar mbPrincipal;
-    private com.zap.arca.JAMenuItem miAjudaConteudo;
     private com.zap.arca.JAMenuItem miAjudaSobre;
     private com.zap.arca.JAMenuItem miArquivoSair;
     private javax.swing.JMenuItem miEdiAlterar;
@@ -771,7 +767,6 @@ public class FPoisson extends FrameGenerico implements IValores {
     private javax.swing.JMenu mnExibir;
     private javax.swing.JPanel plBotoes;
     private javax.swing.JPanel plCampos;
-    private javax.swing.JPopupMenu.Separator spAjuda;
     private javax.swing.JToolBar.Separator spBar;
     private javax.swing.JPopupMenu.Separator spExibir;
     private javax.swing.JToggleButton tbAlterar;
@@ -792,29 +787,29 @@ public class FPoisson extends FrameGenerico implements IValores {
     @Override
     public void iniciar() {
         dao = new DAOPoisson();
-
+        
         tbPrincipal = tbPoisson;
         toggleButton = tbIncluir;
         ctChave = tfCodigo;
-
+        
         tbPoisson.setName("TB_FPOISSON");
         tbPoisson.setModel(poissonTableModel);
-
+        
         camposVerificar = new Component[]{tfNumeroTentativas, tfMedia};
         camposLimpar = new Component[]{tfNumeroTentativas, tfMedia, tfCodigo, tfResultado, tfPercentual};
-
+        
         WindowUtils.nextEnter(plCampos);
         WindowUtils.exitEsc(this);
         configurarSincronizacao(dao, tbPoisson);
         carregarCombo();
     }
-
+    
     public void carregarCombo() {
         for (Binomial.Condicao condicao : Binomial.Condicao.values()) {
             cbCondicao.addItem(condicao.toString());
         }
     }
-
+    
     public Poisson.Condicao getCondicao() {
         if (cbCondicao.getSelectedIndex() == 0) {
             return Poisson.Condicao.MAIOR;
@@ -828,7 +823,7 @@ public class FPoisson extends FrameGenerico implements IValores {
             return Poisson.Condicao.IGUAL;
         }
     }
-
+    
     public BigDecimal calcular() {
         try {
             int tentativas = tfNumeroTentativas.intValue();
@@ -863,7 +858,7 @@ public class FPoisson extends FrameGenerico implements IValores {
         }
         return null;
     }
-
+    
     public void setCondicao(Poisson.Condicao condicao) {
         switch (condicao) {
             case MAIOR:
@@ -883,7 +878,7 @@ public class FPoisson extends FrameGenerico implements IValores {
                 break;
         }
     }
-
+    
     @Override
     public void inserirOuAlterar() {
         poisson = new Poisson();
@@ -905,7 +900,7 @@ public class FPoisson extends FrameGenerico implements IValores {
             LoggerEx.log(ex);
         }
     }
-
+    
     @Override
     public void preencherCampos(IModelo m) {
         poisson = (Poisson) m;
@@ -916,17 +911,17 @@ public class FPoisson extends FrameGenerico implements IValores {
         tfPercentual.setValue(poisson.getPercentual() != null ? poisson.getPercentual().doubleValue() : BigDecimal.ZERO.doubleValue());
         setCondicao(poisson.getCondicao());
     }
-
+    
     @Override
     public void preencherTabela(int linha, IModelo i) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
+    
     @Override
     public void setValor(BigDecimal probabilidade) {
         tfMedia.setValue(probabilidade.doubleValue());
     }
-
+    
     public void formatarCampos() {
         tfResultado.setTotalCasas(5, 8);
         tfMedia.setTotalCasas(5, 8);

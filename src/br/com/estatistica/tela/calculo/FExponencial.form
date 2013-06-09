@@ -110,16 +110,6 @@
             <Property name="text" type="java.lang.String" value="Ajuda"/>
           </Properties>
           <SubComponents>
-            <Menu class="com.zap.arca.JAMenuItem" name="miAjudaConteudo">
-              <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="F1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Conte&#xfa;do da Ajuda"/>
-              </Properties>
-            </Menu>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="spAjuda">
-            </MenuItem>
             <Menu class="com.zap.arca.JAMenuItem" name="miAjudaSobre">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sobre..."/>
@@ -550,8 +540,14 @@
                           </Events>
                         </Component>
                         <Component class="com.zap.arca.JADecimalFormatField" name="tfMedia">
+                          <Properties>
+                            <Property name="name" type="java.lang.String" value="M&#xe9;dia" noResource="true"/>
+                          </Properties>
                         </Component>
                         <Component class="com.zap.arca.JADecimalFormatField" name="tfVariavelA">
+                          <Properties>
+                            <Property name="name" type="java.lang.String" value="Vari&#xe1;vel (A)" noResource="true"/>
+                          </Properties>
                         </Component>
                         <Component class="javax.swing.JComboBox" name="cbCondicao">
                           <Properties>

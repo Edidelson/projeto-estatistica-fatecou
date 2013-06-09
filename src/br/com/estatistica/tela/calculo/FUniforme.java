@@ -6,6 +6,7 @@ import br.com.estatistica.exceptions.CalculoException;
 import br.com.estatistica.modelo.IModelo;
 import br.com.estatistica.modelo.Uniforme;
 import br.com.estatistica.tela.generico.FrameGenerico;
+import br.com.estatistica.tela.principal.DSobreSistema;
 import br.com.estatistica.tela.tablemodel.UniformeTableModel;
 import com.zap.arca.LoggerEx;
 import com.zap.arca.util.WindowUtils;
@@ -112,8 +113,6 @@ public class FUniforme extends FrameGenerico {
         spExibir = new javax.swing.JPopupMenu.Separator();
         miExibirFiltro = new javax.swing.JMenuItem();
         mnAjuda = new javax.swing.JMenu();
-        miAjudaConteudo = new com.zap.arca.JAMenuItem();
-        spAjuda = new javax.swing.JPopupMenu.Separator();
         miAjudaSobre = new com.zap.arca.JAMenuItem();
 
         jATextField1.setText("jATextField1");
@@ -283,10 +282,11 @@ public class FUniforme extends FrameGenerico {
         tfCodigo.setEnabled(false);
 
         tfVariavel.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        tfVariavel.setName("Variável (X)"); // NOI18N
 
-        jLabel6.setText("Constante (a):");
+        jLabel6.setText("Constante (A):");
 
-        jLabel8.setText("Constante (b):");
+        jLabel8.setText("Constante (B):");
 
         jButton1.setText("CALCULAR");
         jButton1.setOpaque(false);
@@ -295,6 +295,10 @@ public class FUniforme extends FrameGenerico {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        tfConstanteA.setName("Constante (A)"); // NOI18N
+
+        tfConstanteB.setName("Constante (B)"); // NOI18N
 
         jLabel1.setText("SubIntervalo(A):");
 
@@ -466,7 +470,7 @@ public class FUniforme extends FrameGenerico {
                                 .addGap(18, 18, 18)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel4))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
         plCamposLayout.setVerticalGroup(
             plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -667,11 +671,6 @@ public class FUniforme extends FrameGenerico {
 
         mnAjuda.setText("Ajuda");
 
-        miAjudaConteudo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        miAjudaConteudo.setText("Conteúdo da Ajuda");
-        mnAjuda.add(miAjudaConteudo);
-        mnAjuda.add(spAjuda);
-
         miAjudaSobre.setText("Sobre...");
         miAjudaSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -755,6 +754,7 @@ public class FUniforme extends FrameGenerico {
     }//GEN-LAST:event_miEditarLimparActionPerformed
 
     private void miAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAjudaSobreActionPerformed
+        new DSobreSistema(this, true).setVisible(true); 
     }//GEN-LAST:event_miAjudaSobreActionPerformed
 
     private void tbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbExcluirActionPerformed
@@ -770,7 +770,7 @@ public class FUniforme extends FrameGenerico {
     }//GEN-LAST:event_tbFiltrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (validarCampos()) {
+        if (verificarCampos(camposVerificar) && validarCampos()) { 
             tfResultado.setValue(calcular());
             tfPercentual.setValue(calcular().multiply(new BigDecimal(100)));
         }
@@ -861,7 +861,6 @@ public class FUniforme extends FrameGenerico {
     private javax.swing.JLabel lbResultado1;
     private javax.swing.JLabel lbVariancia;
     private javax.swing.JMenuBar mbPrincipal;
-    private com.zap.arca.JAMenuItem miAjudaConteudo;
     private com.zap.arca.JAMenuItem miAjudaSobre;
     private com.zap.arca.JAMenuItem miArquivoSair;
     private javax.swing.JMenuItem miEdiAlterar;
@@ -876,7 +875,6 @@ public class FUniforme extends FrameGenerico {
     private javax.swing.JMenu mnExibir;
     private javax.swing.JPanel plBotoes;
     private javax.swing.JPanel plCampos;
-    private javax.swing.JPopupMenu.Separator spAjuda;
     private javax.swing.JToolBar.Separator spBar;
     private javax.swing.JPopupMenu.Separator spExibir;
     private javax.swing.JToggleButton tbAlterar;
@@ -911,9 +909,9 @@ public class FUniforme extends FrameGenerico {
         tbUniforme.setName("TB_FUNIFORME");
         tbUniforme.setModel(uniformeTableModel);
 
-        camposVerificar = new Component[]{tfConstanteA, tfVariavel, tfResultado};
+        camposVerificar = new Component[]{tfConstanteA,tfConstanteB,tfVariavel};
         camposLimpar = new Component[]{tfConstanteA, tfVariavel,
-            tfCodigo, tfResultado, tfMedia, tfPercentual, tfSubIntervaloA, tfSubIntervaloB};
+            tfCodigo, tfResultado, tfMedia, tfPercentual, tfSubIntervaloA, tfSubIntervaloB,tfConstanteB};
 
         WindowUtils.nextEnter(plCampos);
         WindowUtils.exitEsc(this);

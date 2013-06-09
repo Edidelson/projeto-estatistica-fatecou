@@ -54,7 +54,7 @@ public class FPrincipal extends javax.swing.JFrame {
     public FPrincipal(Usuario usuario) {
         WindowUtils.setSystemLookAndFeel();
         initComponents();
-        setTitle("Projeto de ESWIV");
+        setTitle("Estatística");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         iniciar();
         this.usuario = usuario;
@@ -97,6 +97,7 @@ public class FPrincipal extends javax.swing.JFrame {
         menuExponencial = new javax.swing.JMenuItem();
         menuUniforme = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        menuSobre = new javax.swing.JMenuItem();
 
         jMenuItem3.setText("jMenuItem3");
 
@@ -243,6 +244,15 @@ public class FPrincipal extends javax.swing.JFrame {
         mbPrincipal.add(jMenu1);
 
         jMenu2.setText("Ajuda");
+
+        menuSobre.setText("Sobre...");
+        menuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSobreActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuSobre);
+
         mbPrincipal.add(jMenu2);
 
         setJMenuBar(mbPrincipal);
@@ -328,6 +338,11 @@ public class FPrincipal extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_menuCalculadoraActionPerformed
+
+    private void menuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreActionPerformed
+        new DSobreSistema(this, true).setVisible(true); 
+    }//GEN-LAST:event_menuSobreActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgButtonPrincipal;
     private javax.swing.JButton btSair;
@@ -351,6 +366,7 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuExponencial;
     private javax.swing.JMenuItem menuNormal;
     private javax.swing.JMenuItem menuPoisson;
+    private javax.swing.JMenuItem menuSobre;
     private javax.swing.JMenuItem menuUniforme;
     private javax.swing.JMenuItem menuUsuario;
     private javax.swing.JMenuItem miBackup;

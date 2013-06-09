@@ -4,6 +4,7 @@ import br.com.estatistica.dao.DAONormal;
 import br.com.estatistica.modelo.IModelo;
 import br.com.estatistica.modelo.Normal;
 import br.com.estatistica.tela.generico.FrameGenerico;
+import br.com.estatistica.tela.principal.DSobreSistema;
 import br.com.estatistica.tela.tablemodel.NormalTableModel;
 import com.zap.arca.LoggerEx;
 import com.zap.arca.util.WindowUtils;
@@ -86,6 +87,8 @@ public class FNormal extends FrameGenerico {
         tfProbabilidade = new com.zap.arca.JADecimalFormatField();
         jLabel3 = new javax.swing.JLabel();
         cbCondicao = new javax.swing.JComboBox();
+        tfPercentual = new com.zap.arca.JADecimalFormatField();
+        jLabel8 = new javax.swing.JLabel();
         mbPrincipal = new javax.swing.JMenuBar();
         mnArquivo = new javax.swing.JMenu();
         miArquivoSair = new com.zap.arca.JAMenuItem();
@@ -99,8 +102,6 @@ public class FNormal extends FrameGenerico {
         spExibir = new javax.swing.JPopupMenu.Separator();
         miExibirFiltro = new javax.swing.JMenuItem();
         mnAjuda = new javax.swing.JMenu();
-        miAjudaConteudo = new com.zap.arca.JAMenuItem();
-        spAjuda = new javax.swing.JPopupMenu.Separator();
         miAjudaSobre = new com.zap.arca.JAMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -294,8 +295,15 @@ public class FNormal extends FrameGenerico {
 
         jLabel7.setText("Probabilidade:");
 
+        tfMedia.setName("Média"); // NOI18N
+
+        tfDesvioPadrao.setName("Desvio Padrão"); // NOI18N
+
+        tfVariavelA.setName("Variável (A)"); // NOI18N
+
         tfVariavelB.setEnabled(false);
 
+        tfProbabilidade.setEnabled(false);
         tfProbabilidade.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jLabel3.setText("Condição:");
@@ -306,6 +314,11 @@ public class FNormal extends FrameGenerico {
             }
         });
 
+        tfPercentual.setEnabled(false);
+        tfPercentual.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        jLabel8.setText("Percentual:");
+
         javax.swing.GroupLayout plCamposLayout = new javax.swing.GroupLayout(plCampos);
         plCampos.setLayout(plCamposLayout);
         plCamposLayout.setHorizontalGroup(
@@ -314,34 +327,37 @@ public class FNormal extends FrameGenerico {
                 .addContainerGap()
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plCamposLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(plCamposLayout.createSequentialGroup()
-                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel1)
-                                    .addComponent(lbCodigo))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
-                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(cbCondicao, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tfMedia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tfDesvioPadrao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tfVariavelA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tfVariavelB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 267, Short.MAX_VALUE)))
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80))
+                                .addGap(46, 46, 46)
+                                .addComponent(btCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(plCamposLayout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(tfPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 47, Short.MAX_VALUE))
                     .addGroup(plCamposLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)
+                            .addComponent(lbCodigo)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cbCondicao, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfMedia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfDesvioPadrao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfVariavelA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfVariavelB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
         );
         plCamposLayout.setVerticalGroup(
             plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,9 +365,10 @@ public class FNormal extends FrameGenerico {
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plCamposLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(plCamposLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
+                        .addGap(0, 18, Short.MAX_VALUE)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbCodigo))
@@ -370,18 +387,21 @@ public class FNormal extends FrameGenerico {
                         .addGap(6, 6, 6)
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfVariavelB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))))
+                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(btCalcular)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(tfProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                .addGap(5, 5, 5))
         );
 
         tfCodigo.getDocument().addDocumentListener(new DocumentListener() {
@@ -511,11 +531,6 @@ public class FNormal extends FrameGenerico {
 
         mnAjuda.setText("Ajuda");
 
-        miAjudaConteudo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        miAjudaConteudo.setText("Conteúdo da Ajuda");
-        mnAjuda.add(miAjudaConteudo);
-        mnAjuda.add(spAjuda);
-
         miAjudaSobre.setText("Sobre...");
         miAjudaSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -588,6 +603,7 @@ public class FNormal extends FrameGenerico {
     }//GEN-LAST:event_miEditarLimparActionPerformed
 
     private void miAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAjudaSobreActionPerformed
+        new DSobreSistema(this, true).setVisible(true); 
     }//GEN-LAST:event_miAjudaSobreActionPerformed
 
     private void tbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbExcluirActionPerformed
@@ -614,8 +630,9 @@ public class FNormal extends FrameGenerico {
     }//GEN-LAST:event_btOkActionPerformed
 
     private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-        if (validarCampos()) {
+        if (validarCampos() && verificarCampos(camposVerificar)) { 
             tfProbabilidade.setValue(calcular());
+            tfPercentual.setValue(calcular().multiply(new BigDecimal(100))); 
         }
     }//GEN-LAST:event_btCalcularActionPerformed
 
@@ -661,6 +678,7 @@ public class FNormal extends FrameGenerico {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -669,7 +687,6 @@ public class FNormal extends FrameGenerico {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbCodigo;
     private javax.swing.JMenuBar mbPrincipal;
-    private com.zap.arca.JAMenuItem miAjudaConteudo;
     private com.zap.arca.JAMenuItem miAjudaSobre;
     private com.zap.arca.JAMenuItem miArquivoSair;
     private javax.swing.JMenuItem miEdiAlterar;
@@ -684,7 +701,6 @@ public class FNormal extends FrameGenerico {
     private javax.swing.JMenu mnExibir;
     private javax.swing.JPanel plBotoes;
     private javax.swing.JPanel plCampos;
-    private javax.swing.JPopupMenu.Separator spAjuda;
     private javax.swing.JToolBar.Separator spBar;
     private javax.swing.JPopupMenu.Separator spExibir;
     private javax.swing.JToggleButton tbAlterar;
@@ -698,6 +714,7 @@ public class FNormal extends FrameGenerico {
     private com.zap.arca.JATextField tfCodigo;
     private com.zap.arca.JADecimalFormatField tfDesvioPadrao;
     private com.zap.arca.JADecimalFormatField tfMedia;
+    private com.zap.arca.JADecimalFormatField tfPercentual;
     private com.zap.arca.JADecimalFormatField tfProbabilidade;
     private com.zap.arca.JADecimalFormatField tfVariavelA;
     private com.zap.arca.JADecimalFormatField tfVariavelB;
@@ -741,7 +758,7 @@ public class FNormal extends FrameGenerico {
         normal = new Normal();
         normal.setDesvioPadrao(tfDesvioPadrao.getValue().doubleValue());
         normal.setMedia(tfMedia.getValue().doubleValue());
-        normal.setResultado(tfProbabilidade.getValue().doubleValue());
+        normal.setResultado(tfProbabilidade.getValue());
         normal.setVariavelA(tfVariavelA.getValue().doubleValue());
         normal.setVariavelB(tfVariavelB.getValue().doubleValue());
         normal.setCondicao(getCondicao());
@@ -766,6 +783,7 @@ public class FNormal extends FrameGenerico {
         tfVariavelA.setValue(normal.getVariavelA().doubleValue());
         tfVariavelB.setValue(normal.getVariavelB() != null ? normal.getVariavelB().doubleValue() : BigDecimal.ZERO);
         tfProbabilidade.setValue(normal.getResultado().doubleValue());
+        tfPercentual.setValue(normal.getResultado().multiply(new BigDecimal(100))); 
     }
 
     @Override

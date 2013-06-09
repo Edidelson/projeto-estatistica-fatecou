@@ -5,6 +5,7 @@
 package br.com.estatistica.modelo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -40,7 +41,7 @@ public class Normal implements Serializable, IModelo {
     @Column(name="vl_variavelB")
     private Double variavelB;
     @Column(name="vl_resultado")
-    private Double resultado;
+    private BigDecimal resultado;
     @Column(name="condicao")
     @Enumerated(EnumType.STRING)
     private Condicao condicao;
@@ -89,11 +90,11 @@ public class Normal implements Serializable, IModelo {
         this.variavelA = veriavel;
     }
 
-    public Double getResultado() {
+    public BigDecimal getResultado() {
         return resultado;
     }
 
-    public void setResultado(Double resultado) {
+    public void setResultado(BigDecimal resultado) {
         this.resultado = resultado;
     }
     

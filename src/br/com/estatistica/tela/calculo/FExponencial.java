@@ -7,6 +7,7 @@ import br.com.estatistica.modelo.Exponencial;
 import br.com.estatistica.modelo.Exponencial.Condicao;
 import br.com.estatistica.modelo.IModelo;
 import br.com.estatistica.tela.generico.FrameGenerico;
+import br.com.estatistica.tela.principal.DSobreSistema;
 import br.com.estatistica.tela.tablemodel.ExponencialTableModel;
 import com.zap.arca.LoggerEx;
 import com.zap.arca.util.WindowUtils;
@@ -98,8 +99,6 @@ public class FExponencial extends FrameGenerico implements IValores {
         spExibir = new javax.swing.JPopupMenu.Separator();
         miExibirFiltro = new javax.swing.JMenuItem();
         mnAjuda = new javax.swing.JMenu();
-        miAjudaConteudo = new com.zap.arca.JAMenuItem();
-        spAjuda = new javax.swing.JPopupMenu.Separator();
         miAjudaSobre = new com.zap.arca.JAMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -268,6 +267,10 @@ public class FExponencial extends FrameGenerico implements IValores {
                 btCalcularActionPerformed(evt);
             }
         });
+
+        tfMedia.setName("Média"); // NOI18N
+
+        tfVariavelA.setName("Variável (A)"); // NOI18N
 
         cbCondicao.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -556,11 +559,6 @@ public class FExponencial extends FrameGenerico implements IValores {
 
         mnAjuda.setText("Ajuda");
 
-        miAjudaConteudo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        miAjudaConteudo.setText("Conteúdo da Ajuda");
-        mnAjuda.add(miAjudaConteudo);
-        mnAjuda.add(spAjuda);
-
         miAjudaSobre.setText("Sobre...");
         miAjudaSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -633,6 +631,7 @@ public class FExponencial extends FrameGenerico implements IValores {
     }//GEN-LAST:event_miEditarLimparActionPerformed
 
     private void miAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAjudaSobreActionPerformed
+        new DSobreSistema(this, true).setVisible(true);
     }//GEN-LAST:event_miAjudaSobreActionPerformed
 
     private void tbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbExcluirActionPerformed
@@ -659,7 +658,7 @@ public class FExponencial extends FrameGenerico implements IValores {
     }//GEN-LAST:event_btOkActionPerformed
 
     private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-        if (verificarCampos()) {
+        if (verificarCampos() && verificarCampos(camposVerificar)) { 
             tfResultado.setValue(calcular());
             tfPercentual.setValue(calcular().multiply(new BigDecimal(100)));
         }
@@ -723,7 +722,6 @@ public class FExponencial extends FrameGenerico implements IValores {
     private javax.swing.JLabel lbVariavelA;
     private javax.swing.JLabel lbVariavelB;
     private javax.swing.JMenuBar mbPrincipal;
-    private com.zap.arca.JAMenuItem miAjudaConteudo;
     private com.zap.arca.JAMenuItem miAjudaSobre;
     private com.zap.arca.JAMenuItem miArquivoSair;
     private javax.swing.JMenuItem miEdiAlterar;
@@ -738,7 +736,6 @@ public class FExponencial extends FrameGenerico implements IValores {
     private javax.swing.JMenu mnExibir;
     private javax.swing.JPanel plBotoes;
     private javax.swing.JPanel plCampos;
-    private javax.swing.JPopupMenu.Separator spAjuda;
     private javax.swing.JToolBar.Separator spBar;
     private javax.swing.JPopupMenu.Separator spExibir;
     private javax.swing.JToggleButton tbAlterar;

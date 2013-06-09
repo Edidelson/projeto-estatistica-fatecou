@@ -7,6 +7,7 @@ import br.com.estatistica.dao.DAOBinomial;
 import br.com.estatistica.modelo.Binomial;
 import br.com.estatistica.modelo.IModelo;
 import br.com.estatistica.tela.generico.FrameGenerico;
+import br.com.estatistica.tela.principal.DSobreSistema;
 import br.com.estatistica.tela.tablemodel.BinomialTableModel;
 import com.zap.arca.LoggerEx;
 import com.zap.arca.util.WindowUtils;
@@ -60,9 +61,9 @@ public class FBinomial extends FrameGenerico implements IValores {
     @Override
     public void limparCampos() {
         super.limparCampos();
-        exibirDados(dao, tbBinomial); 
+        exibirDados(dao, tbBinomial);
     }
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,8 +128,6 @@ public class FBinomial extends FrameGenerico implements IValores {
         spExibir = new javax.swing.JPopupMenu.Separator();
         miExibirFiltro = new javax.swing.JMenuItem();
         mnAjuda = new javax.swing.JMenu();
-        miAjudaConteudo = new com.zap.arca.JAMenuItem();
-        spAjuda = new javax.swing.JPopupMenu.Separator();
         miAjudaSobre = new com.zap.arca.JAMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -262,11 +261,11 @@ public class FBinomial extends FrameGenerico implements IValores {
         plBotoesLayout.setHorizontalGroup(
             plBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plBotoesLayout.createSequentialGroup()
-                .addContainerGap(544, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btOk)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btCancelar)
-                .addGap(6, 6, 6))
+                .addGap(0, 0, 0))
         );
 
         plBotoesLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCancelar, btOk});
@@ -281,7 +280,8 @@ public class FBinomial extends FrameGenerico implements IValores {
         plCampos.setBackground(new java.awt.Color(255, 255, 255));
         plCampos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setText("Probabilidade(P):");
+        jLabel1.setText("Probabilidade (P):");
+        jLabel1.setName("Probabilidade(P)"); // NOI18N
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Fórmula"));
@@ -339,9 +339,12 @@ public class FBinomial extends FrameGenerico implements IValores {
         tfCodigo.setEnabled(false);
 
         tfNumeroElementos.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        tfNumeroElementos.setName("Número de Elementos(N)"); // NOI18N
 
         tfNumeroTentativas.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        tfNumeroTentativas.setName("Número de Tentativas(K)"); // NOI18N
 
+        btCalcular.setBackground(new java.awt.Color(255, 255, 255));
         btCalcular.setText("CALCULAR");
         btCalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -440,17 +443,14 @@ public class FBinomial extends FrameGenerico implements IValores {
                     .addComponent(cbCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(7, 7, 7)
-                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(plCamposLayout.createSequentialGroup()
-                        .addComponent(lbResultado)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(plCamposLayout.createSequentialGroup()
-                        .addComponent(tfResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfPercentual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbResultado1)
-                            .addComponent(jLabel6))))
+                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbResultado))
+                .addGap(18, 18, 18)
+                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfPercentual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbResultado1)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btCalcular)
                 .addGap(34, 34, 34))
@@ -486,11 +486,14 @@ public class FBinomial extends FrameGenerico implements IValores {
 
         jTabbedPane1.addTab("Binomial", plCampos);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 697, Short.MAX_VALUE)
+            .addGap(0, 693, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -505,17 +508,17 @@ public class FBinomial extends FrameGenerico implements IValores {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(plBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(plBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(plBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -600,11 +603,6 @@ public class FBinomial extends FrameGenerico implements IValores {
 
         mnAjuda.setText("Ajuda");
 
-        miAjudaConteudo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        miAjudaConteudo.setText("Conteúdo da Ajuda");
-        mnAjuda.add(miAjudaConteudo);
-        mnAjuda.add(spAjuda);
-
         miAjudaSobre.setText("Sobre...");
         miAjudaSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -686,6 +684,7 @@ public class FBinomial extends FrameGenerico implements IValores {
     }//GEN-LAST:event_miEditarLimparActionPerformed
 
     private void miAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAjudaSobreActionPerformed
+        new DSobreSistema(this, true).setVisible(true); 
     }//GEN-LAST:event_miAjudaSobreActionPerformed
 
     private void tbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbExcluirActionPerformed
@@ -705,8 +704,10 @@ public class FBinomial extends FrameGenerico implements IValores {
     }//GEN-LAST:event_btProbabilidadeActionPerformed
 
     private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-        tfResultado.setValue(calcular().doubleValue());
-        tfPercentual.setValue(calcular()*100);
+        if (verificarCampos(camposVerificar)) {
+            tfResultado.setValue(calcular().doubleValue());
+            tfPercentual.setValue(calcular() * 100);
+        }
     }//GEN-LAST:event_btCalcularActionPerformed
 
     private void tfResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfResultadoActionPerformed
@@ -762,7 +763,6 @@ public class FBinomial extends FrameGenerico implements IValores {
     private javax.swing.JLabel lbResultado;
     private javax.swing.JLabel lbResultado1;
     private javax.swing.JMenuBar mbPrincipal;
-    private com.zap.arca.JAMenuItem miAjudaConteudo;
     private com.zap.arca.JAMenuItem miAjudaSobre;
     private com.zap.arca.JAMenuItem miArquivoSair;
     private javax.swing.JMenuItem miEdiAlterar;
@@ -777,7 +777,6 @@ public class FBinomial extends FrameGenerico implements IValores {
     private javax.swing.JMenu mnExibir;
     private javax.swing.JPanel plBotoes;
     private javax.swing.JPanel plCampos;
-    private javax.swing.JPopupMenu.Separator spAjuda;
     private javax.swing.JToolBar.Separator spBar;
     private javax.swing.JPopupMenu.Separator spExibir;
     private javax.swing.JToggleButton tbAlterar;
@@ -856,9 +855,8 @@ public class FBinomial extends FrameGenerico implements IValores {
                 break;
         }
     }
-    
-    
-      public Double calcular() {
+
+    public Double calcular() {
         int tentativas = tfNumeroTentativas.intValue();
         int elementos = tfNumeroElementos.intValue();
         Calculo c = new Calculo();
@@ -869,28 +867,28 @@ public class FBinomial extends FrameGenerico implements IValores {
             for (int i = tentativas; i >= 0; i--) {
                 resultado += c.binomial(elementos, i, probabilidade);
             }
-            return 1-resultado;
-            
+            return 1 - resultado;
+
 //            MENOR BATEU O RESULTADO
         } else if (cbCondicao.getSelectedIndex() == 1) {
-            for (int i = tentativas-1; i >= 0; i--){
+            for (int i = tentativas - 1; i >= 0; i--) {
                 resultado += c.binomial(elementos, i, probabilidade);
             }
             return resultado;
-            
+
         } else if (cbCondicao.getSelectedIndex() == 2) {
-            for (int i = tentativas-1; i >= 0; i--){
+            for (int i = tentativas - 1; i >= 0; i--) {
                 resultado += c.binomial(elementos, i, probabilidade);
             }
-            return 1-resultado;    
-            
-          
+            return 1 - resultado;
+
+
         } else if (cbCondicao.getSelectedIndex() == 3) {
-            for (int i = tentativas; i >= 0; i--){
+            for (int i = tentativas; i >= 0; i--) {
                 resultado += c.binomial(elementos, i, probabilidade);
             }
-            return resultado; 
-        } else if (cbCondicao.getSelectedIndex() == 4){
+            return resultado;
+        } else if (cbCondicao.getSelectedIndex() == 4) {
             return c.binomial(elementos, tentativas, probabilidade);
         }
         return null;
@@ -925,7 +923,7 @@ public class FBinomial extends FrameGenerico implements IValores {
         tfNumeroTentativas.setText(binomial.getTentativas() + "");
         tfProbabilidade.setValue(binomial.getProbabilidade().doubleValue());
         tfResultado.setValue(binomial.getResultado().doubleValue());
-        tfPercentual.setValue(binomial.getPercentual()!=null?binomial.getPercentual().doubleValue(): BigDecimal.ZERO);
+        tfPercentual.setValue(binomial.getPercentual() != null ? binomial.getPercentual().doubleValue() : BigDecimal.ZERO);
         setCondicao(binomial.getCondicao());
     }
 

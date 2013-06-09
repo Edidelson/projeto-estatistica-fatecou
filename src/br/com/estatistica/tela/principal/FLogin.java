@@ -22,7 +22,7 @@ import org.hibernate.HibernateException;
  */
 public class FLogin extends javax.swing.JFrame {
 
-    private static final Logger logger = Logger.getLogger("br.com.eswiv.tela");
+    private static final Logger logger = Logger.getLogger("br.com.estatistica.tela");
     private Util util = new Util();
     private Criptografia crip;
     // Bloco de inicialização que aplica o ícone da aplicação
@@ -53,17 +53,14 @@ public class FLogin extends javax.swing.JFrame {
                 DAOUsuario.setUsuarioAtual(usuario);
                 dispose();
                 logger.log(Level.INFO, "Usuário {0}, entrou no sistema", usuario.getNome());
-                JOptionPane.showMessageDialog(null, "Seja bem vindo");
-            } 
-            else if (tfUsuario.getText().equals("") && String.valueOf(pfSenha.getPassword()).isEmpty()){
-               JOptionPane.showMessageDialog(null, "Entre com usuário e senha"); 
-            
-            } 
-            else {
+            } else if (tfUsuario.getText().equals("") && String.valueOf(pfSenha.getPassword()).isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Entre com usuário e senha");
+
+            } else {
                 JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
                 tfUsuario.requestFocus();
             }
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
             Util.logException(ex);
@@ -282,7 +279,6 @@ public class FLogin extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             public void run() {
                 new FLogin().setVisible(true);
             }

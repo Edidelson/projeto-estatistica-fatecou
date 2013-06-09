@@ -5,6 +5,7 @@
 package br.com.estatistica.tela.tablemodel;
 
 import br.com.estatistica.modelo.Normal;
+import br.com.util.Util;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class NormalTableModel extends RowTableModel {
             case 4:
                 return normal.getDesvioPadrao().doubleValue();
             case 5:
-                return normal.getResultado();
+                return  Util.formatarValores(8, normal.getResultado());
             case 6:
                 return normal.getCondicao();
             default:
@@ -66,7 +67,7 @@ public class NormalTableModel extends RowTableModel {
             case 4:
                 return Double.class;
             case 5:
-                return Double.class;
+                return Object.class;
             case 6:
                 return String.class;
             default:
