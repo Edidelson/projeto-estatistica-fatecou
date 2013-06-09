@@ -291,7 +291,7 @@ public class Util {
      */
     public void inserirIconeAplicacao(JFrame frame) {
 
-//        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/imagens/ZAP.jpg")));
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/imagens/estatistica.png")));
 
     }
 

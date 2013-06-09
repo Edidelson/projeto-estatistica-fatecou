@@ -13,6 +13,7 @@ import com.zap.arca.LoggerEx;
 import com.zap.arca.util.WindowUtils;
 import java.awt.Component;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -26,6 +27,7 @@ public class FBinomial extends FrameGenerico implements IValores {
 
     private BinomialTableModel binomialTableModel = new BinomialTableModel();
     private Binomial binomial;
+    private Bernoulli bernoulli;
 
     public FBinomial() {
         initComponents();
@@ -115,6 +117,23 @@ public class FBinomial extends FrameGenerico implements IValores {
         lbResultado1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        lbProbabilidade = new javax.swing.JLabel();
+        tfProbabilidadeBernoulli = new com.zap.arca.JADecimalFormatField();
+        tfVariavelAleatoria = new com.zap.arca.JADecimalFormatField();
+        lbVariavelAleatoria = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        tfResultadoBernoulli = new com.zap.arca.JADecimalFormatField();
+        lbResultadoBernoulli = new javax.swing.JLabel();
+        lbPercentualBernoulli = new javax.swing.JLabel();
+        tfPercentualBernoulli = new com.zap.arca.JADecimalFormatField();
+        lbVarianciaBernoulli = new javax.swing.JLabel();
+        tfVarianciaBernoulli = new com.zap.arca.JADecimalFormatField();
+        btCalcularBernoulli = new javax.swing.JButton();
+        tfComplementar = new com.zap.arca.JADecimalFormatField();
+        lbComplementar = new javax.swing.JLabel();
+        tfComplementarPercentual = new com.zap.arca.JADecimalFormatField();
+        lbPercentualComplementar = new javax.swing.JLabel();
         mbPrincipal = new javax.swing.JMenuBar();
         mnArquivo = new javax.swing.JMenu();
         miArquivoSair = new com.zap.arca.JAMenuItem();
@@ -262,7 +281,7 @@ public class FBinomial extends FrameGenerico implements IValores {
         plBotoesLayout.setHorizontalGroup(
             plBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plBotoesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(542, Short.MAX_VALUE)
                 .addComponent(btOk)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btCancelar)
@@ -372,49 +391,39 @@ public class FBinomial extends FrameGenerico implements IValores {
             .addGroup(plCamposLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, plCamposLayout.createSequentialGroup()
+                    .addComponent(btCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
+                            .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7)
+                                .addComponent(lbResultado)
+                                .addComponent(lbResultado1))
+                            .addGap(72, 72, 72)
+                            .addComponent(tfPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(plCamposLayout.createSequentialGroup()
-                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfProbabilidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tfNumeroTentativas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(plCamposLayout.createSequentialGroup()
                                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addComponent(lbCodigo))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(plCamposLayout.createSequentialGroup()
-                                        .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(44, 44, 44))
-                                    .addComponent(tfNumeroElementos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(1, 1, 1)
-                        .addComponent(btProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(plCamposLayout.createSequentialGroup()
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(lbResultado)
-                            .addComponent(lbResultado1))
-                        .addGap(75, 75, 75)
-                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbCondicao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfNumeroElementos, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)))
                             .addGroup(plCamposLayout.createSequentialGroup()
                                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(plCamposLayout.createSequentialGroup()
-                                        .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(plCamposLayout.createSequentialGroup()
-                                                .addGap(17, 17, 17)
-                                                .addComponent(btCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(tfPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(tfResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(89, 89, 89)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel1))
+                                .addGap(3, 3, 3)
+                                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfResultado, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                                    .addComponent(tfNumeroTentativas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tfProbabilidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbCondicao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addGap(0, 0, 0)
+                .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btProbabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
@@ -447,14 +456,14 @@ public class FBinomial extends FrameGenerico implements IValores {
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbResultado))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(plCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfPercentual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbResultado1)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btCalcular)
-                .addGap(34, 34, 34))
+                .addGap(27, 27, 27))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -490,15 +499,157 @@ public class FBinomial extends FrameGenerico implements IValores {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        lbProbabilidade.setText("Probabilidade:");
+
+        lbVariavelAleatoria.setText("Variável aleatória ( X):");
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Fórmula"));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/bernoulli.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 157, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tfResultadoBernoulli.setEnabled(false);
+        tfResultadoBernoulli.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        lbResultadoBernoulli.setText("Resultado:");
+
+        lbPercentualBernoulli.setText("Percentual:");
+
+        tfPercentualBernoulli.setEnabled(false);
+        tfPercentualBernoulli.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        lbVarianciaBernoulli.setText("Variância:");
+
+        tfVarianciaBernoulli.setEnabled(false);
+        tfVarianciaBernoulli.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        btCalcularBernoulli.setBackground(new java.awt.Color(255, 255, 255));
+        btCalcularBernoulli.setText("Calcular");
+        btCalcularBernoulli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCalcularBernoulliActionPerformed(evt);
+            }
+        });
+
+        tfComplementar.setEnabled(false);
+        tfComplementar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        lbComplementar.setText("Complementar:");
+
+        tfComplementarPercentual.setEnabled(false);
+        tfComplementarPercentual.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        lbPercentualComplementar.setText("Complementar:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 693, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbVariavelAleatoria)
+                                            .addComponent(lbProbabilidade))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(tfProbabilidadeBernoulli, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                            .addComponent(tfVariavelAleatoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(lbResultadoBernoulli)
+                                        .addGap(59, 59, 59)
+                                        .addComponent(tfResultadoBernoulli, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(lbComplementar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                                .addComponent(tfComplementar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(143, 143, 143)))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(lbPercentualBernoulli)
+                                    .addGap(56, 56, 56))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(lbVarianciaBernoulli)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lbPercentualComplementar)
+                                .addGap(27, 27, 27)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(tfComplementarPercentual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(452, 452, 452))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfVarianciaBernoulli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tfPercentualBernoulli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btCalcularBernoulli, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 272, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbProbabilidade)
+                            .addComponent(tfProbabilidadeBernoulli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbVariavelAleatoria)
+                            .addComponent(tfVariavelAleatoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbResultadoBernoulli)
+                            .addComponent(tfResultadoBernoulli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfComplementar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbComplementar))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfPercentualBernoulli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbPercentualBernoulli, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbPercentualComplementar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfComplementarPercentual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfVarianciaBernoulli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbVarianciaBernoulli, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(btCalcularBernoulli)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Bernoulli", jPanel2);
@@ -509,19 +660,19 @@ public class FBinomial extends FrameGenerico implements IValores {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(plBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(plBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(plBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(jPanel1);
@@ -685,7 +836,7 @@ public class FBinomial extends FrameGenerico implements IValores {
     }//GEN-LAST:event_miEditarLimparActionPerformed
 
     private void miAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAjudaSobreActionPerformed
-        new DSobreSistema(this, true).setVisible(true); 
+        new DSobreSistema(this, true).setVisible(true);
     }//GEN-LAST:event_miAjudaSobreActionPerformed
 
     private void tbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbExcluirActionPerformed
@@ -727,6 +878,13 @@ public class FBinomial extends FrameGenerico implements IValores {
         }
     }//GEN-LAST:event_tbCalculadoraActionPerformed
 
+    private void btCalcularBernoulliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularBernoulliActionPerformed
+        if (validarCamposBernoulli()) {
+            tfResultadoBernoulli.setValue(calcularBernoulli());
+            tfComplementar.setValue(BigDecimal.ONE.subtract(calcularBernoulli()));
+        }
+    }//GEN-LAST:event_btCalcularBernoulliActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -740,6 +898,7 @@ public class FBinomial extends FrameGenerico implements IValores {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgEditar;
     private javax.swing.JButton btCalcular;
+    private javax.swing.JButton btCalcularBernoulli;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btOk;
     private javax.swing.JButton btProbabilidade;
@@ -747,6 +906,7 @@ public class FBinomial extends FrameGenerico implements IValores {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox cbCondicao;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -756,13 +916,21 @@ public class FBinomial extends FrameGenerico implements IValores {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbCodigo;
+    private javax.swing.JLabel lbComplementar;
+    private javax.swing.JLabel lbPercentualBernoulli;
+    private javax.swing.JLabel lbPercentualComplementar;
+    private javax.swing.JLabel lbProbabilidade;
     private javax.swing.JLabel lbResultado;
     private javax.swing.JLabel lbResultado1;
+    private javax.swing.JLabel lbResultadoBernoulli;
+    private javax.swing.JLabel lbVarianciaBernoulli;
+    private javax.swing.JLabel lbVariavelAleatoria;
     private javax.swing.JMenuBar mbPrincipal;
     private com.zap.arca.JAMenuItem miAjudaSobre;
     private com.zap.arca.JAMenuItem miArquivoSair;
@@ -789,11 +957,18 @@ public class FBinomial extends FrameGenerico implements IValores {
     private javax.swing.JToggleButton tbIncluir;
     private javax.swing.JToggleButton tbPesquisar;
     private com.zap.arca.JATextField tfCodigo;
+    private com.zap.arca.JADecimalFormatField tfComplementar;
+    private com.zap.arca.JADecimalFormatField tfComplementarPercentual;
     private com.zap.arca.JATextField tfNumeroElementos;
     private com.zap.arca.JATextField tfNumeroTentativas;
     private com.zap.arca.JADecimalFormatField tfPercentual;
+    private com.zap.arca.JADecimalFormatField tfPercentualBernoulli;
     private com.zap.arca.JADecimalFormatField tfProbabilidade;
+    private com.zap.arca.JADecimalFormatField tfProbabilidadeBernoulli;
     private com.zap.arca.JADecimalFormatField tfResultado;
+    private com.zap.arca.JADecimalFormatField tfResultadoBernoulli;
+    private com.zap.arca.JADecimalFormatField tfVarianciaBernoulli;
+    private com.zap.arca.JADecimalFormatField tfVariavelAleatoria;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -809,7 +984,9 @@ public class FBinomial extends FrameGenerico implements IValores {
 
         camposVerificar = new Component[]{tfNumeroElementos, tfNumeroTentativas, tfProbabilidade};
         camposLimpar = new Component[]{tfNumeroElementos, tfNumeroTentativas, tfProbabilidade,
-            tfCodigo, tfResultado, tfPercentual};
+            tfCodigo, tfResultado, tfPercentual, tfProbabilidadeBernoulli, tfResultadoBernoulli,
+            tfPercentualBernoulli, tfVariavelAleatoria, tfVarianciaBernoulli, tfComplementar,
+            tfComplementarPercentual};
 
         WindowUtils.nextEnter(plCampos);
         WindowUtils.exitEsc(this);
@@ -904,6 +1081,12 @@ public class FBinomial extends FrameGenerico implements IValores {
         binomial.setResultado(tfResultado.getValue().doubleValue());
         binomial.setPercentual(tfPercentual.getValue().doubleValue());
         binomial.setCondicao(getCondicao());
+        bernoulli = new Bernoulli();
+        bernoulli.setProbBernoulli(tfProbabilidadeBernoulli.getValue().doubleValue());
+        bernoulli.setResBernoulli(tfResultadoBernoulli.getValue().doubleValue());
+        bernoulli.setVaBernoulli(tfVarianciaBernoulli.getValue().doubleValue());
+        bernoulli.setVariavelX(tfVariavelAleatoria.getValue().doubleValue());
+        binomial.setBernoulli(bernoulli);
         try {
             if (tbAlterar.isSelected()) {
                 binomial.setCodigo(Integer.valueOf(tfCodigo.getText()));
@@ -924,8 +1107,20 @@ public class FBinomial extends FrameGenerico implements IValores {
         tfNumeroTentativas.setText(binomial.getTentativas() + "");
         tfProbabilidade.setValue(binomial.getProbabilidade().doubleValue());
         tfResultado.setValue(binomial.getResultado().doubleValue());
-        tfPercentual.setValue(binomial.getPercentual() != null ? binomial.getPercentual().doubleValue() : BigDecimal.ZERO);
+        if (binomial.getPercentual() != null) {
+            tfPercentual.setValue(binomial.getPercentual().doubleValue());
+        }
         setCondicao(binomial.getCondicao());
+        bernoulli = binomial.getBernoulli();
+        if (bernoulli != null) {
+            tfProbabilidadeBernoulli.setValue(bernoulli.getProbBernoulli().doubleValue());
+            tfResultadoBernoulli.setValue(bernoulli.getResBernoulli().doubleValue());
+            tfVariavelAleatoria.setValue(bernoulli.getVariavelX().doubleValue());
+            tfVarianciaBernoulli.setValue(bernoulli.getVaBernoulli().doubleValue());
+            tfComplementar.setValue(1 - bernoulli.getResBernoulli());
+            tfPercentualBernoulli.setValue(bernoulli.getResBernoulli() * 100);
+            tfPercentualBernoulli.setValue((1 - bernoulli.getResBernoulli()) * 100);
+        }
     }
 
     @Override
@@ -941,5 +1136,35 @@ public class FBinomial extends FrameGenerico implements IValores {
     public void formatarCampos() {
         tfResultado.setTotalCasas(5, 8);
         tfProbabilidade.setTotalCasas(5, 8);
+        tfProbabilidadeBernoulli.setTotalCasas(5, 8);
+        tfResultadoBernoulli.setTotalCasas(5, 8);
+        tfVarianciaBernoulli.setTotalCasas(5, 8);
+        tfComplementar.setTotalCasas(5, 8);
+    }
+
+    public BigDecimal calcularBernoulli() {
+        double probabilidade = tfProbabilidadeBernoulli.getValue().doubleValue();
+        double variavel = tfVariavelAleatoria.getValue().doubleValue();
+        double passo1 = Math.pow(probabilidade, variavel);
+        double passo2 = Math.pow(1 - probabilidade, 1 - variavel);
+        BigDecimal resultado = new BigDecimal(passo1 * passo2);
+        tfVarianciaBernoulli.setValue(probabilidade * (1 - probabilidade));
+        tfPercentualBernoulli.setValue(resultado.multiply(new BigDecimal(100)));
+        tfComplementarPercentual.setValue(BigDecimal.ONE.subtract(resultado).multiply(new BigDecimal(100, MathContext.DECIMAL32)));
+        return resultado;
+    }
+
+    public boolean validarCamposBernoulli() {
+        if (tfProbabilidadeBernoulli.getValue().doubleValue() <= 0) {
+            JOptionPane.showMessageDialog(null, "Campo obrigatório não preenchido.");
+            tfProbabilidadeBernoulli.requestFocus();
+            return false;
+        }
+        if (tfVariavelAleatoria.getValue().doubleValue() <= 0) {
+            JOptionPane.showMessageDialog(null, "Campo obrigatório não preenchido.");
+            tfVariavelAleatoria.requestFocus();
+            return false;
+        }
+        return true;
     }
 }

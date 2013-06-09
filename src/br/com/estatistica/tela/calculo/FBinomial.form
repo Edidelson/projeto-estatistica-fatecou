@@ -332,9 +332,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jTabbedPane1" min="-2" pref="702" max="-2" attributes="0"/>
-                              <Component id="plBotoes" max="32767" attributes="1"/>
+                              <Component id="plBotoes" alignment="0" min="-2" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace pref="31" max="32767" attributes="0"/>
                       </Group>
@@ -344,10 +344,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Component id="jTabbedPane1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTabbedPane1" min="-2" pref="280" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="plBotoes" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="29" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -359,7 +359,7 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="542" max="32767" attributes="0"/>
                               <Component id="btOk" linkSize="3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btCancelar" linkSize="3" min="-2" max="-2" attributes="0"/>
@@ -421,22 +421,21 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="tfProbabilidade" max="32767" attributes="0"/>
-                                                      <Component id="tfNumeroTentativas" max="32767" attributes="0"/>
-                                                  </Group>
+                                      <Component id="btCalcular" min="-2" pref="94" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lbResultado" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lbResultado1" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
+                                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                                              <Component id="tfPercentual" min="-2" pref="134" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -444,47 +443,32 @@
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" attributes="0">
-                                                          <Component id="tfCodigo" min="-2" pref="63" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="tfNumeroElementos" alignment="1" min="-2" pref="106" max="-2" attributes="0"/>
+                                                      <Component id="tfCodigo" min="-2" pref="63" max="-2" attributes="0"/>
+                                                      <Component id="tfNumeroElementos" pref="134" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                          <Component id="btProbabilidade" min="-2" pref="26" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbResultado" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbResultado1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="cbCondicao" max="32767" attributes="0"/>
-                                              <Group type="102" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
                                                   <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" attributes="0">
-                                                          <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Group type="102" attributes="0">
-                                                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                                                                  <Component id="btCalcular" min="-2" pref="94" max="-2" attributes="0"/>
-                                                              </Group>
-                                                              <Component id="tfPercentual" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="jLabel6" min="-2" pref="15" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="tfResultado" min="-2" pref="114" max="-2" attributes="0"/>
+                                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="tfResultado" pref="134" max="32767" attributes="0"/>
+                                                      <Component id="tfNumeroTentativas" max="32767" attributes="0"/>
+                                                      <Component id="tfProbabilidade" max="32767" attributes="0"/>
+                                                      <Component id="cbCondicao" alignment="0" max="32767" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="btProbabilidade" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="63" max="32767" attributes="0"/>
                                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               </Group>
@@ -508,7 +492,7 @@
                                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="tfNumeroTentativas" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="btProbabilidade" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -516,7 +500,7 @@
                                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="cbCondicao" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -526,15 +510,15 @@
                                       <Component id="tfResultado" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lbResultado" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="tfPercentual" alignment="3" max="32767" attributes="0"/>
                                       <Component id="lbResultado1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btCalcular" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
@@ -742,15 +726,264 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="693" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Group type="103" groupAlignment="0" attributes="0">
+                                                              <Component id="lbVariavelAleatoria" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="lbProbabilidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                              <Component id="tfProbabilidadeBernoulli" pref="120" max="32767" attributes="0"/>
+                                                              <Component id="tfVariavelAleatoria" max="32767" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="lbResultadoBernoulli" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                                                          <Component id="tfResultadoBernoulli" min="-2" pref="120" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <EmptySpace max="32767" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="lbComplementar" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                                                  <Component id="tfComplementar" min="-2" pref="120" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Component id="lbPercentualBernoulli" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="lbVarianciaBernoulli" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="lbPercentualComplementar" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="tfComplementarPercentual" max="32767" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="452" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="tfVarianciaBernoulli" alignment="1" max="32767" attributes="0"/>
+                                                      <Component id="tfPercentualBernoulli" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="btCalcularBernoulli" alignment="0" pref="120" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="272" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="lbProbabilidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="tfProbabilidadeBernoulli" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="lbVariavelAleatoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="tfVariavelAleatoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="lbResultadoBernoulli" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="tfResultadoBernoulli" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="tfComplementar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbComplementar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="tfPercentualBernoulli" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbPercentualBernoulli" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lbPercentualComplementar" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="tfComplementarPercentual" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="tfVarianciaBernoulli" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbVarianciaBernoulli" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="11" max="32767" attributes="0"/>
+                                  <Component id="btCalcularBernoulli" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="lbProbabilidade">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Probabilidade:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.zap.arca.JADecimalFormatField" name="tfProbabilidadeBernoulli">
+                        </Component>
+                        <Component class="com.zap.arca.JADecimalFormatField" name="tfVariavelAleatoria">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbVariavelAleatoria">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Vari&#xe1;vel aleat&#xf3;ria ( X):"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JPanel" name="jPanel4">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                                <TitledBorder title="F&#xf3;rmula"/>
+                              </Border>
+                            </Property>
+                          </Properties>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jLabel10" pref="157" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jLabel10" min="-2" pref="34" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="javax.swing.JLabel" name="jLabel10">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/resources/imagens/bernoulli.png"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="com.zap.arca.JADecimalFormatField" name="tfResultadoBernoulli">
+                          <Properties>
+                            <Property name="enabled" type="boolean" value="false"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="14" style="1"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbResultadoBernoulli">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Resultado:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbPercentualBernoulli">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Percentual:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.zap.arca.JADecimalFormatField" name="tfPercentualBernoulli">
+                          <Properties>
+                            <Property name="enabled" type="boolean" value="false"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="14" style="1"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbVarianciaBernoulli">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Vari&#xe2;ncia:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.zap.arca.JADecimalFormatField" name="tfVarianciaBernoulli">
+                          <Properties>
+                            <Property name="enabled" type="boolean" value="false"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="14" style="1"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btCalcularBernoulli">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Calcular"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCalcularBernoulliActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="com.zap.arca.JADecimalFormatField" name="tfComplementar">
+                          <Properties>
+                            <Property name="enabled" type="boolean" value="false"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="14" style="1"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbComplementar">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Complementar:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.zap.arca.JADecimalFormatField" name="tfComplementarPercentual">
+                          <Properties>
+                            <Property name="enabled" type="boolean" value="false"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="14" style="1"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lbPercentualComplementar">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Complementar:"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
                     </Container>
                   </SubComponents>
                 </Container>

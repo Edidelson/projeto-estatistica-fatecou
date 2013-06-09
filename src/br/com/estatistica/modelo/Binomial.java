@@ -4,8 +4,10 @@
  */
 package br.com.estatistica.modelo;
 
+import br.com.estatistica.tela.calculo.Bernoulli;
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -41,17 +43,17 @@ public class Binomial implements Serializable, IModelo {
     private Condicao condicao;
     @Column(name="vl_resultado")
     private Double resultado;
-    @Column(name="tx_observação")
-    private String observacao;
     @Column(name="vl_percentual")
     private Double percentual;
+    @Embedded
+    private Bernoulli bernoulli;
 
-    public String getObservacao() {
-        return observacao;
+    public Bernoulli getBernoulli() {
+        return bernoulli;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
+    public void setBernoulli(Bernoulli bernoulli) {
+        this.bernoulli = bernoulli;
     }
     
     @Override

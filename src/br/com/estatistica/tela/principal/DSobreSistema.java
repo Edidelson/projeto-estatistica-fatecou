@@ -54,7 +54,7 @@ public class DSobreSistema extends javax.swing.JDialog {
         });
 
         lbInformacoes.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lbInformacoes.setText("<html>\n<br>FATEC – OURINHOS</br>\n<br>Curso ASTI – 6º ciclo</br>\n<br>Projeto para cálculos estatísticos</br>\n<br> para matéria de Estatísticos.</br>\n<br>Integrantes:</br>\n<br>Fernando Aparecido Paulo                  2100147-2</br>\n<br>Rodrigo Moreira Alexandre                 2100146-4</br>\n<br>Edidelson Aparecido Lucien                 2100103-0</br>\n<br>Professor: Me.Rita Choukaira </br>\n</html>");
+        lbInformacoes.setText("<html>\n<br>FATEC – OURINHOS</br>\n<br>Curso ASTI – 6º ciclo</br>\n<br>Projeto CDP para cálculos estatísticos</br>\n<br> Matéria: Estatísticos II.</br>\n<br>Integrantes:</br>\n<br>Fernando Aparecido Paulo                  2100147-2</br>\n<br>Rodrigo Moreira Alexandre                 2100146-4</br>\n<br>Edidelson Aparecido Lucien                 2100103-0</br>\n<br>Professor: Me.Rita Choukaira </br>\n</html>");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -64,8 +64,8 @@ public class DSobreSistema extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btSair, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 157, Short.MAX_VALUE))
+                    .addComponent(lbInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 38, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -76,6 +76,12 @@ public class FPrincipal extends javax.swing.JFrame {
         lbLicenciadoPara = new javax.swing.JLabel();
         tbAtalhos = new javax.swing.JToolBar();
         btSair = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
+        btPoisson = new javax.swing.JButton();
+        btBernouli = new javax.swing.JButton();
+        btNormal = new javax.swing.JButton();
+        btExponencial = new javax.swing.JButton();
+        btUniforme = new javax.swing.JButton();
         jSeparator20 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         lbUsuarioLogado = new javax.swing.JLabel();
@@ -129,6 +135,72 @@ public class FPrincipal extends javax.swing.JFrame {
             }
         });
         tbAtalhos.add(btSair);
+        tbAtalhos.add(jSeparator4);
+
+        btPoisson.setBackground(new java.awt.Color(213, 220, 226));
+        btPoisson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/icon_poisson.png"))); // NOI18N
+        btPoisson.setToolTipText("Poisson");
+        btPoisson.setFocusable(false);
+        btPoisson.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btPoisson.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btPoisson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPoissonActionPerformed(evt);
+            }
+        });
+        tbAtalhos.add(btPoisson);
+
+        btBernouli.setBackground(new java.awt.Color(213, 220, 226));
+        btBernouli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/icon_binomial - Cópia.png"))); // NOI18N
+        btBernouli.setToolTipText("Binomial/Bernoulli");
+        btBernouli.setFocusable(false);
+        btBernouli.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btBernouli.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btBernouli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBernouliActionPerformed(evt);
+            }
+        });
+        tbAtalhos.add(btBernouli);
+
+        btNormal.setBackground(new java.awt.Color(213, 220, 226));
+        btNormal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/histograma_densidade(3).png"))); // NOI18N
+        btNormal.setToolTipText("Normal");
+        btNormal.setFocusable(false);
+        btNormal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btNormal.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btNormal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNormalActionPerformed(evt);
+            }
+        });
+        tbAtalhos.add(btNormal);
+
+        btExponencial.setBackground(new java.awt.Color(213, 220, 226));
+        btExponencial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/exponencial.png"))); // NOI18N
+        btExponencial.setToolTipText("Exponencial");
+        btExponencial.setFocusable(false);
+        btExponencial.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btExponencial.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btExponencial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExponencialActionPerformed(evt);
+            }
+        });
+        tbAtalhos.add(btExponencial);
+
+        btUniforme.setBackground(new java.awt.Color(213, 220, 226));
+        btUniforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagens/uniforme(2).png"))); // NOI18N
+        btUniforme.setToolTipText("Uniforme");
+        btUniforme.setFocusable(false);
+        btUniforme.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btUniforme.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btUniforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btUniformeActionPerformed(evt);
+            }
+        });
+        tbAtalhos.add(btUniforme);
 
         javax.swing.GroupLayout imPanelLayout = new javax.swing.GroupLayout(imPanel);
         imPanel.setLayout(imPanelLayout);
@@ -340,12 +412,37 @@ public class FPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuCalculadoraActionPerformed
 
     private void menuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreActionPerformed
-        new DSobreSistema(this, true).setVisible(true); 
+        new DSobreSistema(this, true).setVisible(true);
     }//GEN-LAST:event_menuSobreActionPerformed
+
+    private void btPoissonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPoissonActionPerformed
+        new FPoisson().setVisible(true);
+    }//GEN-LAST:event_btPoissonActionPerformed
+
+    private void btBernouliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBernouliActionPerformed
+        new FBinomial().setVisible(true);
+    }//GEN-LAST:event_btBernouliActionPerformed
+
+    private void btNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNormalActionPerformed
+        new FNormal().setVisible(true);
+    }//GEN-LAST:event_btNormalActionPerformed
+
+    private void btExponencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExponencialActionPerformed
+        new FExponencial().setVisible(true);
+    }//GEN-LAST:event_btExponencialActionPerformed
+
+    private void btUniformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUniformeActionPerformed
+        new FUniforme().setVisible(true); 
+    }//GEN-LAST:event_btUniformeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgButtonPrincipal;
+    private javax.swing.JButton btBernouli;
+    private javax.swing.JButton btExponencial;
+    private javax.swing.JButton btNormal;
+    private javax.swing.JButton btPoisson;
     private javax.swing.JButton btSair;
+    private javax.swing.JButton btUniforme;
     private org.jdesktop.swingx.JXImagePanel imPanel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -357,6 +454,7 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JSeparator jSeparator20;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JLabel lbDataAtual;
     private javax.swing.JLabel lbLicenciadoPara;
     private javax.swing.JLabel lbUsuarioLogado;
