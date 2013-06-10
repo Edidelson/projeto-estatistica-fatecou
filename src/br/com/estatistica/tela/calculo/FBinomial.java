@@ -1,5 +1,6 @@
 package br.com.estatistica.tela.calculo;
 
+import br.com.estatistica.modelo.Bernoulli;
 import br.com.estatistica.auxiliares.DProbabilidade;
 import br.com.estatistica.auxiliares.IValores;
 import br.com.estatistica.auxiliares.formulas.Calculo;

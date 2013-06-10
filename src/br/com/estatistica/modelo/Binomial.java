@@ -4,7 +4,6 @@
  */
 package br.com.estatistica.modelo;
 
-import br.com.estatistica.tela.calculo.Bernoulli;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
