@@ -1,0 +1,12 @@
+Execute o arquivo Estatistica.jar.
+Caso o projeto não execute pressione F10 com o cursor sobre o campo Usuário na tela de Login.
+configure o banco de dados conforme o exemplo:
+Tipo de bando de dados: MYSQL
+Servidor do banco de dados: localhost
+Porta TCP do bando de dados: 3306
+Nome do bando de dados: estatistica
+Usuario: root
+Senha: root
+
+Pograma utilizado para o desenvolvimento:
+Netbeans
