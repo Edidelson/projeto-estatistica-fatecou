@@ -10,3 +10,8 @@ Senha: root
 
 Pograma utilizado para o desenvolvimento:
 Netbeans
+
+Integrantes:
+Edidelson Aparecido Lucien 2100103-0
+Fernando Aparecido Paulo   2100147-2
+Rodrigo Moreira Alexandre  2100146-4
