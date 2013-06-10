@@ -30,19 +30,19 @@ public class Normal implements Serializable, IModelo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="cp_normal")
+    @Column(name = "cp_normal")
     private int codigo;
-    @Column(name="vl_desvio_padrao")
+    @Column(name = "vl_desvio_padrao")
     private Double desvioPadrao;
-    @Column(name="vl_media")
+    @Column(name = "vl_media")
     private Double media;
-    @Column(name="vl_variavelA")
+    @Column(name = "vl_variavelA")
     private Double variavelA;
-    @Column(name="vl_variavelB")
+    @Column(name = "vl_variavelB")
     private Double variavelB;
-    @Column(name="vl_resultado")
+    @Column(name = "vl_resultado", columnDefinition = "DECIMAL (19,8)")
     private BigDecimal resultado;
-    @Column(name="condicao")
+    @Column(name = "condicao")
     @Enumerated(EnumType.STRING)
     private Condicao condicao;
 
@@ -97,7 +97,7 @@ public class Normal implements Serializable, IModelo {
     public void setResultado(BigDecimal resultado) {
         this.resultado = resultado;
     }
-    
+
     @Override
     public Object getCodigo() {
         return codigo;
@@ -107,13 +107,12 @@ public class Normal implements Serializable, IModelo {
     public boolean isInativo() {
         return false;
     }
-    
-      public static enum Condicao {
+
+    public static enum Condicao {
 
         MAIOR("Maior"),
         MENOR("Menor"),
         ENTRE("Entre");
-        
         private String nome;
 
         private Condicao() {

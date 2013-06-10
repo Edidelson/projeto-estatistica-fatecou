@@ -892,10 +892,8 @@ public class FPoisson extends FrameGenerico implements IValores {
             if (tbAlterar.isSelected()) {
                 poisson.setCodigo(Integer.valueOf(tfCodigo.getText()));
                 dao.alterar(poisson);
-                JOptionPane.showMessageDialog(null, DAOGenerico.M_ALTERAR);
             } else {
                 dao.adicionar(poisson);
-                JOptionPane.showMessageDialog(null, DAOGenerico.M_ADICIONAR);
             }
         } catch (RuntimeException ex) {
             LoggerEx.log(ex);

@@ -781,9 +781,10 @@ public class FUniforme extends FrameGenerico {
     }//GEN-LAST:event_tfResultadoActionPerformed
 
     private void cbCondicaoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbCondicaoItemStateChanged
-        if (cbCondicao.getSelectedIndex() == 4) {
+        if (cbCondicao.getSelectedIndex() == 2) {
             tfSubIntervaloA.setEnabled(true);
             tfSubIntervaloB.setEnabled(true);
+            tfVariavel.setValue(BigDecimal.ZERO); 
             tfVariavel.setEnabled(false);
         } else {
             tfVariavel.setEnabled(true);
@@ -987,8 +988,8 @@ public class FUniforme extends FrameGenerico {
     @Override
     public void inserirOuAlterar() {
         uniforme = new Uniforme();
-        uniforme.setConstanteA(tfConstanteA.doubleValue());
-        uniforme.setConstanteB(tfConstanteB.doubleValue());
+        uniforme.setConstanteA(tfConstanteA.getValue().doubleValue());
+        uniforme.setConstanteB(tfConstanteB.getValue().doubleValue());
         uniforme.setTentativa(tfVariavel.intValue());
         uniforme.setResultado(tfResultado.getValue().doubleValue());
         uniforme.setPercentual(tfPercentual.getValue().doubleValue());

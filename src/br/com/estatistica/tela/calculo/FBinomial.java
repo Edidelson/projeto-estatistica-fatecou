@@ -365,7 +365,7 @@ public class FBinomial extends FrameGenerico implements IValores {
         tfNumeroTentativas.setName("Número de Tentativas(K)"); // NOI18N
 
         btCalcular.setBackground(new java.awt.Color(255, 255, 255));
-        btCalcular.setText("CALCULAR");
+        btCalcular.setText("Calcular");
         btCalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCalcularActionPerformed(evt);
@@ -461,9 +461,9 @@ public class FBinomial extends FrameGenerico implements IValores {
                     .addComponent(tfPercentual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbResultado1)
                     .addComponent(jLabel6))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btCalcular)
-                .addGap(27, 27, 27))
+                .addGap(39, 39, 39))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plCamposLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
