@@ -42,13 +42,11 @@ public class FBinomial extends FrameGenerico implements IValores {
         if (!super.verificarCampos(components)) {
             return false;
         }
-        if (tfProbabilidade.getValue().equals(BigDecimal.ZERO)) {
-            int resposta = JOptionPane.showConfirmDialog(null, "Probalidade igual 0, deseja calcular a probabilidade?", "Confirmação", JOptionPane.YES_NO_OPTION);
-            if (resposta == JOptionPane.YES_OPTION) {
-                new DProbabilidade(this, true).setVisible(true);
-            } else {
-                return false;
-            }
+
+        if (tfProbabilidade.getValue().compareTo(BigDecimal.ONE) > 0) {
+            JOptionPane.showMessageDialog(null, "O valor da probabilidade tem que estar entre 0 e 1 ");
+            tfProbabilidade.requestFocus();
+            return false;
         }
         Integer numeroEsperado = Integer.parseInt(tfNumeroElementos.getText());
         Integer numeroTentativas = Integer.parseInt(tfNumeroTentativas.getText());
@@ -1117,9 +1115,15 @@ public class FBinomial extends FrameGenerico implements IValores {
             tfResultadoBernoulli.setValue(bernoulli.getResBernoulli().doubleValue());
             tfVariavelAleatoria.setValue(bernoulli.getVariavelX().doubleValue());
             tfVarianciaBernoulli.setValue(bernoulli.getVaBernoulli().doubleValue());
-            tfComplementar.setValue(1 - bernoulli.getResBernoulli());
-            tfPercentualBernoulli.setValue(bernoulli.getResBernoulli() * 100);
-            tfPercentualBernoulli.setValue((1 - bernoulli.getResBernoulli()) * 100);
+            if (bernoulli.getResBernoulli() != 0) {
+                tfComplementar.setValue(1 - bernoulli.getResBernoulli());
+            }
+            if (bernoulli.getResBernoulli() != 0) {
+                tfPercentualBernoulli.setValue(bernoulli.getResBernoulli() * 100);
+            }
+            if (bernoulli.getResBernoulli() != 0) {
+                tfPercentualBernoulli.setValue((1 - bernoulli.getResBernoulli()) * 100);
+            }
         }
     }
 
