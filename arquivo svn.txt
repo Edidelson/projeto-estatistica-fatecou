@@ -1,0 +1,4 @@
+link = https://code.google.com/p/projeto-eswiv-fatecou/source/checkout
+user: delso23@gmail.com
+senha: QC9aa9fY2YK9
+URL: https://projeto-eswiv-fatecou.googlecode.com/svn/trunk
