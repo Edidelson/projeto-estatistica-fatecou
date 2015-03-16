@@ -1,0 +1,1 @@
+Projeto com objetivo de realizar cálculos estatísticos.
